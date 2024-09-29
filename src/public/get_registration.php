@@ -1,85 +1,117 @@
-<form action="handle_registration.php">
-    <div class="container">
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
+<div class="container">
+    <div class="content">
+        <img src="https://res.cloudinary.com/debbsefe/image/upload/f_auto,c_fill,dpr_auto,e_grayscale/image_fz7n7w.webp"
+             alt="header-image" class="cld-responsive">
+        <h1 class="form-title">Register Here</h1>
+        <form action="handle_registration.php">
+            <input type="text" placeholder="Enter NAME" name="name" id="name">
+            <div class="beside">
+                <!--<input type="number" placeholder="PHONE NUMBER">-->
+                <select>
+                    <option>GENDER</option>
+                    <option>MALE</option>
+                    <option>FEMALE</option>
+                </select>
+            </div>
+            <!--<input type="email" placeholder="EMAIL ADDRESS">-->
+            <input type="email" placeholder="Enter EMAIL" name="email" id="email">
+            <input type="password" name="psw" id="psw" placeholder="Enter Password">
 
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" name="name" id="name" required>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">
+            <!--<input type="text" placeholder="CODE">-->
+            <br>
 
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" id="email" required>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-lg float-left">Register</button>
+            </div>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-        <hr>
-
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        <button type="submit" class="registerbtn">Register</button>
+            <!--<button type="button">Submit</button>-->
+        </form>
     </div>
+</div>
 
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
-    </div>
-</form>
 
 
 <style>
-    * {box-sizing: border-box}
-
-    /* Add padding to containers */
-    .container {
-        padding: 16px;
+    /*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}*/
+    html, body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color:#008cba;
+        height:100%;
     }
-
-    /* Full-width input fields */
-    input[type=text], input[type=password] {
+    .container{
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .content{
+        background-color:white;
+        width:500px;
+        height:600px; //длина
+    }
+    img{
         width: 100%;
-        padding: 15px;
-        margin: 5px 0 22px 0;
-        display: inline-block;
+        height: 25%;
+    }
+    .form-title{
+        padding:10px 40px 0px;
+    }
+    form{
+        padding:0px 40px;
+    }
+    input[type=text], [type=email]{
         border: none;
-        background: #f1f1f1;
-    }
-
-    input[type=text]:focus, input[type=password]:focus {
-        background-color: #ddd;
-        outline: none;
-    }
-
-    /* Overwrite default styles of hr */
-    hr {
-        border: 1px solid #f1f1f1;
-        margin-bottom: 25px;
-    }
-
-    /* Set a style for the submit/register button */
-    .registerbtn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 16px 20px;
+        border-bottom: 1px solid black;
+        outline:none;
+        width:100%;
         margin: 8px 0;
+        padding:10px 0;
+    }
+    input[type=password]{
         border: none;
+        border-bottom: 1px solid black;
+        outline:none;
+        width:100%;
+        margin: 8px 0;
+        padding:10px 0;
+    }
+    input :hover {
+        background-color: red;
+    }
+    select{
+        border: none;
+        border-bottom: 1px solid black;
+        outline:none;
+        margin: 8px 0;
+        padding:5px 0;
+        width:50%;
+    }
+    .beside{
+        display:flex;
+        justify-content: space-between;
+    }
+    button{
+        color:#ffffff;
+        background-color: #4caf50;
+        height:40px;
+        width:25%;
+        margin-top:15px;
         cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
+        border:none;
+        border-radius:2%;
+        outline:none;
+        text-align:center;
+        font-size:16px;
+        text-decoration:none;
+        -webkit-transition-duration:0.4s;
+        transition-duration:0.4s;
     }
-
-    .registerbtn:hover {
-        opacity:1;
-    }
-
-    /* Add a blue text color to links */
-    a {
-        color: dodgerblue;
-    }
-
-    /* Set a grey background color and center the text of the "sign in" section */
-    .signin {
-        background-color: #f1f1f1;
-        text-align: center;
+    button:hover{
+        background-color:#333333;
     }
 </style>
