@@ -3,7 +3,7 @@
         <img src="https://res.cloudinary.com/debbsefe/image/upload/f_auto,c_fill,dpr_auto,e_grayscale/image_fz7n7w.webp"
              alt="header-image" class="cld-responsive">
         <h1 class="form-title">Register Here</h1>
-        <form action="handle_registration.php">
+        <form action="handle_registration.php" method="POST">
             <input type="text" placeholder="Enter NAME" name="name" id="name">
             <div class="beside">
                 <!--<input type="number" placeholder="PHONE NUMBER">-->
@@ -15,7 +15,7 @@
             </div>
             <!--<input type="email" placeholder="EMAIL ADDRESS">-->
             <input type="email" placeholder="Enter EMAIL" name="email" id="email">
-            <input type="password" name="psw" id="psw" placeholder="Enter Password">
+            <input type="password" name="password" id="password" placeholder="Enter Password">
 
             <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">
             <!--<input type="text" placeholder="CODE">-->
