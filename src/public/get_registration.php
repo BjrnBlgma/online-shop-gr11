@@ -9,7 +9,7 @@
             <br>
             <input type="text" placeholder="Enter NAME" name="name" id="name">
             <br>
-            <label style="color: red"> <?php if(!empty($errors)){print_r($errors['name']);} /*else { echo "Введите ваше имя";}*/?> </label>
+            <label style="color: red"> <?php if(!empty($errors)){print_r($errors['name']);} if (empty($_POST['name'])) { echo "Введите ваше имя";}?> </label>
             <div class="beside">
                 <!--<input type="number" placeholder="PHONE NUMBER">-->
                 <select>
@@ -21,21 +21,21 @@
             <!--<input type="email" placeholder="EMAIL ADDRESS">-->
 
             <input type="email" placeholder="Enter EMAIL" name="email" id="email">
-            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['email']);} /*else { echo "Введите ваш email";}*/ ?> </label>
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['email']);} if (empty($_POST['email'])) { echo "Введите ваш email";} ?> </label>
             <br>
 
             <input type="password" name="password" id="password" placeholder="Enter Password">
-            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['password']);} /*else { echo "Введите ваш пароль";}*/ ?> </label>
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['password']);} if (empty($_POST['password'])) { echo "Введите ваш пароль";} ?> </label>
             <br>
 
             <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">
-            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['psw-repeat']);} /*else { echo "Повторите ваш пароль";} */?> </label>
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['psw-repeat']);} if (empty($_POST['psw-repeat'])) { echo "Повторите ваш пароль";} ?> </label>
             <!--<input type="text" placeholder="CODE">-->
             <br>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-success btn-lg float-left">Register</button>
-                <label style="color: green"> <?php if (empty($errors)){print_r($result);} ?> </label>
+                <label style="color: green"> <?php if (empty($errors)){if (!empty($result)){print_r($result);}} ?> </label>
             </div>
 
             <!--<button type="button">Submit</button>-->
