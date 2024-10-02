@@ -78,6 +78,8 @@ if (empty($errors)) {
     $stmt->execute(['email' => $email]);
     //print_r($stmt->fetch());
     $result = 'Вы успешно зарегестрировались!';
+
+    header('Location: get_login.php');
 }
 
 require_once "./get_registration.php";
