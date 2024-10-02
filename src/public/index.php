@@ -1,25 +1,13 @@
 <?php
 
-$conn = pg_connect("host=postgres_db dbname=mydb user=user password=pass");
-if ($conn) {
-    echo "Connected to PostgreSQL successfully!";
-} else {
-    echo "Connection failed.";
-} //*/
+$requestUri = $_SERVER['REQUEST_URI'];
+$requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "<br>" . "\n";
+if ($requestUri === '/login'){
+    if ($requestMethod === 'GET'){
+        require_once './get_login.php';
+    } elseif ($requestMethod === 'POST'){
+        require_once './handle_login.php';
+    }
+}
 
-echo "Hello, World!";
-echo "<br>" . "\n";
-echo "I am a super cool junior PHP backend-developer";
-echo "<br>" . "\n";
-echo "I will can everything!!!!!";
-
-echo "<br>" . "\n";
-
-echo " I will do OK!!!";
-echo "<br>" . "\n";
-echo "I finally will be a junior PHP Backend-developer!!! I just need to not give up!";
-echo "<br>" . "\n";
-echo "Я МОЛОДЕЦ!!! Я суперкрута!!! ВАААААУУУУУУ)))))))))";
-?>
