@@ -1,28 +1,41 @@
 <div class="container">
     <div class="content">
-        <img src="https://res.cloudinary.com/debbsefe/image/upload/f_auto,c_fill,dpr_auto,e_grayscale/image_fz7n7w.webp"
-             alt="header-image" class="cld-responsive">
+        <br>
+        <br>
+        <!--<img src="https://res.cloudinary.com/debbsefe/image/upload/f_auto,c_fill,dpr_auto,e_grayscale/image_fz7n7w.webp"
+             alt="header-image" class="cld-responsive">-->
         <h1 class="form-title">Register Here</h1>
         <form action="handle_registration.php" method="POST">
+            <br>
             <input type="text" placeholder="Enter NAME" name="name" id="name">
+            <br>
+            <label style="color: red"> <?php if(!empty($errors)){print_r($errors['name']);} /*else { echo "Введите ваше имя";}*/?> </label>
             <div class="beside">
                 <!--<input type="number" placeholder="PHONE NUMBER">-->
                 <select>
-                    <option>GENDER</option>
+                    <button type="submit" class="btn btn-success btn-lg float-left" name="gender" id="gender"><option>GENDER</option></button>
                     <option>MALE</option>
                     <option>FEMALE</option>
                 </select>
             </div>
             <!--<input type="email" placeholder="EMAIL ADDRESS">-->
+
             <input type="email" placeholder="Enter EMAIL" name="email" id="email">
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['email']);} /*else { echo "Введите ваш email";}*/ ?> </label>
+            <br>
+
             <input type="password" name="password" id="password" placeholder="Enter Password">
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['password']);} /*else { echo "Введите ваш пароль";}*/ ?> </label>
+            <br>
 
             <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">
+            <label style="color: red"> <?php if (!empty($errors)){print_r($errors['psw-repeat']);} /*else { echo "Повторите ваш пароль";} */?> </label>
             <!--<input type="text" placeholder="CODE">-->
             <br>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-success btn-lg float-left">Register</button>
+                <label style="color: green"> <?php if (empty($errors)){print_r($result);} ?> </label>
             </div>
 
             <!--<button type="button">Submit</button>-->
@@ -52,7 +65,7 @@
     .content{
         background-color:white;
         width:500px;
-        height:600px; //длина
+        height:550px; //длина
     }
     img{
         width: 100%;
