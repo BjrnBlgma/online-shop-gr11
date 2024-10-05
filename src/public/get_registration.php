@@ -4,7 +4,7 @@
         <br>
 
         <h1 class="form-title">Register Here</h1>
-        <form action="handle_registration.php" method="POST">
+        <form action="/register" method="POST">
 
             <input type="text" placeholder="Enter NAME" name="name" id="name">
 

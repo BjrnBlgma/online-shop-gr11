@@ -66,10 +66,11 @@ if (empty($errors)) {
 
     try {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         $stmt->execute(['name' => $name, 'email' => $email, 'password' => $hash]);
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+
 
 
         #$stmt = $pdo->prepare("SELECT * FROM users WHERE email =  :email");
@@ -77,7 +78,7 @@ if (empty($errors)) {
         #print_r($stmt->fetch());
         $result = 'Вы успешно зарегестрировались!';
 
-        header('Location: get_login.php');
+        header('Location: /login');
     } catch (PDOException $e) {
             print "Error!: " . $e->getMessage();
             //die();

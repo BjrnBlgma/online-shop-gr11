@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card" >
         <h2>Login</h2>
-        <form action="handle_login.php" method="POST">
+        <form action="/login" method="POST">
             <!--<label for="username">Username</label>-->
             <input type="text" placeholder="Enter EMAIL or LOGIN" id="login" name="login" required>
 

@@ -31,7 +31,7 @@ if  (empty($errors)){
                 //setcookie('user_id', $data['id']);
                 session_start();
                 $_SESSION['user_id'] = $data['id'];
-                header('Location: catalog.php');
+                header('Location: /catalog');
             } else{
                 $errors['login'] = 'Incorrect email or password';
             }
