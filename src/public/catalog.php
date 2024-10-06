@@ -3,15 +3,27 @@ session_start();
 if (!isset($_SESSION['user_id'])){
     header('Location: /login');
 }
+$user_id = $_SESSION['user_id'];
 //echo 'here is Catalog';
 $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
 $stmt = $pdo->prepare("SELECT * FROM products");
 $stmt->execute();
 $products = $stmt->fetchAll();
+
+$stmt = $pdo->prepare("SELECT products.name as product_name, products.image as product_image, products.price as product_price, user_products.amount as user_products_amount FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id");
+$stmt->execute(['user_id' => $user_id]);
+
+$user_products = $stmt->fetchAll();
+$count = count($user_products);
+
 ?>
 
 <h1>Catalog</h1>
+<div class="back">
+    <a href="/cart " >&#128722;Cart</a>
+</div>
+
 <div class="container">
     <?php foreach ($products as $product): ?>
         <div class="product">
@@ -23,18 +35,30 @@ $products = $stmt->fetchAll();
 
             </div>
             <span class="title">
+                <!--<a href="/add" >  якорь для клика </a>-->
                 <?php echo $product['name']; ?>
                 <span> <?php echo "{$product['price']}$" ?> </span>
-                <span> <?php echo $product['description'] ?> </span>
             </span>
         </div>
     <?php endforeach; ?>
 
 </div>
-<div class="twitter"><i class="fab fa-twitter"></i><a href="https://twitter.com/fitriirl">@FITRIIRL</a></div>
+
+
+<div class="twitter"><i class="fab fa-twitter"></i><a href="/logout">Logout</a></div>
+
 
 
 <style>
+    .back {
+        position: fixed;
+        top: 30px;
+        font-size: 19px;
+        margin: 10px 10px 3px 15px;
+
+        right: 20px;
+    }
+
     body {
         background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
         font-family: "Josefin Slab";
@@ -46,6 +70,7 @@ $products = $stmt->fetchAll();
         margin-top: 80px;
         text-align: center;
     }
+
 
     .container {
         display: flex;
@@ -193,3 +218,6 @@ $products = $stmt->fetchAll();
         text-decoration: none;
     }
 </style>
+
+
+

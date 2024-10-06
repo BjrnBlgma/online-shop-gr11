@@ -1,19 +1,21 @@
+
+
 <div class="container">
     <div class="card" >
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-            <!--<label for="username">Username</label>-->
-            <input type="text" placeholder="Enter EMAIL or LOGIN" id="login" name="login" required>
+        <h2>ADD to cart</h2>
+        <form action="/add" method="POST">
+            <label for="Product-id">Product-id</label>
+            <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id" required>
 
-            <!--<label for="password">Password</label>-->
-            <input type="password" placeholder="Enter PASSWORD" id="password" name="password" required>
-            <label style="color: red"> <?php echo $errors['login'] ?? '';?> </label>
+            <label for="Amount">Amount</label>
+            <input type="text" placeholder="Enter Amount" id="amount" name="amount" required>
+            <label style="color: red"> <?php print_r($errors['amount'] ?? null);?> </label>
 
 
-            <button type="submit">Login</button>
+            <button type="submit">ADD to cart</button>
             <div class="links">
+                <a href="/cart" >Go to look cart</a>
                 <!--<a href="#">Forgot Password?</a>-->
-                <a href="/register" >Register</a>
             </div>
         </form>
     </div>
@@ -39,8 +41,8 @@
     .card {
         background-color:white;
         width:400px;
-        height:330px; //длина
-        padding: 20px;
+        height:370px; //длина
+    padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         color: #1d5b12;
@@ -52,8 +54,8 @@
     }
 
     form {
-       /* display: flex;
-        flex-direction: column;*/
+        /* display: flex;
+         flex-direction: column;*/
         padding:0px 20px;
     }
 

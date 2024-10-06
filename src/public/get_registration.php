@@ -35,6 +35,10 @@
                 <button type="submit" class="btn btn-success btn-lg float-left">Register</button>
                 <label style="color: green" > <?php if (empty($errors)){if (!empty($result)){print_r($result);}} ?> </label>
             </div>
+            <div class="links">
+                <!--<a href="#">Forgot Password?</a>-->
+                <a href="/login" >Sign Up</a>
+            </div>
 
             <!--<button type="button">Submit</button>-->
         </form>
@@ -122,5 +126,28 @@
     }
     button:hover{
         background-color:#333333;
+    }
+    .links{
+        display: flex;
+        /*justify-content: space-between;*/
+        align-items: center;
+        justify-content: right;
+        padding:10px 20px 0px;
+    }
+
+    .links a{
+        margin: 25px 0;
+        font-size: 1em;
+        color: #8f8f8f;
+        text-decoration: none;
+    }
+
+    .links a:hover,
+    .links a:nth-child(2){
+        color: #45f3ff;
+    }
+
+    .links a:nth-child(2):hover{
+        color: #d9138a;
     }
 </style>
