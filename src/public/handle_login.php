@@ -30,7 +30,6 @@ if  (empty($errors)){
             if (password_verify($password, $passFromDb)) {
                 //setcookie('user_id', $data['id']);
                 session_start();
-/*                $_SESSION['user']['login_message'] = "Успешная авторизация!";*/
                 $_SESSION['user_id'] = $data['id'];
                 header('Location: /catalog');
             } else{
@@ -42,7 +41,6 @@ if  (empty($errors)){
         //die();
     }
 }
-
 
 require_once  './get_login.php';
 ?>

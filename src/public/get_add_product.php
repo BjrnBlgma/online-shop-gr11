@@ -3,12 +3,13 @@
         <h2>ADD to cart</h2>
         <form action="/add" method="POST">
             <label for="Product-id">Product ID</label>
-            <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id" required>
+            <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id">
             <label style="color: red"> <?php print_r($errors['product'] ?? '');?> </label>
             <br>
+            <!--required-->
 
             <label for="Amount">Amount</label>
-            <input type="text" placeholder="Enter Amount" id="amount" name="amount" required>
+            <input type="text" placeholder="Enter Amount" id="amount" name="amount">
             <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
 
 

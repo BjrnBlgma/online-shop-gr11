@@ -27,13 +27,13 @@ if ($requestUri === '/login'){
     } elseif ($requestMethod === 'POST'){
         require_once './handle_add_product.php';
     }
-} elseif ($requestUri === '/logout') {
+} /*elseif ($requestUri === '/logout') {
     if ($requestMethod === 'GET') {
         require_once './logout.php';
     } else {
         echo "$requestMethod не поддерживается адресом $requestUri";
     }
-} elseif ($requestUri === '/cart') {
+}*/ elseif ($requestUri === '/cart') {
     require_once './cart.php';
 }
 else{
