@@ -4,13 +4,13 @@ $errors = [];
 if (isset($_POST['login'])) {
     $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
 } else {
-    $errors['login'] = 'Login is required';
+    $errors['login'] = 'Incorrect email or password';
 }
 
 if (isset($_POST['password'])) {
     $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
 } else {
-    $errors['password'] = 'Password is required';
+    $errors['login'] = 'Incorrect email or password';
 }
 
 

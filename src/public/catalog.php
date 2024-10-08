@@ -21,7 +21,7 @@ $count = count($user_products);
 
 <h1>Catalog</h1>
 <div class="back">
-    <a href="/cart " >&#128722;Cart</a>
+    <a href="/cart " >&#128722;</a>
 </div>
 
 <div class="container">

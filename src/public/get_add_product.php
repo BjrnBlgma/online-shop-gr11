@@ -1,18 +1,19 @@
-
-
 <div class="container">
     <div class="card" >
         <h2>ADD to cart</h2>
         <form action="/add" method="POST">
-            <label for="Product-id">Product-id</label>
+            <label for="Product-id">Product ID</label>
             <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id" required>
+            <label style="color: red"> <?php print_r($errors['product'] ?? '');?> </label>
+            <br>
 
             <label for="Amount">Amount</label>
             <input type="text" placeholder="Enter Amount" id="amount" name="amount" required>
-            <label style="color: red"> <?php print_r($errors['amount'] ?? null);?> </label>
+            <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
 
 
             <button type="submit">ADD to cart</button>
+
             <div class="links">
                 <a href="/cart" >Go to look cart</a>
                 <!--<a href="#">Forgot Password?</a>-->
@@ -41,7 +42,7 @@
     .card {
         background-color:white;
         width:400px;
-        height:370px; //длина
+        height:390px; //длина
     padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

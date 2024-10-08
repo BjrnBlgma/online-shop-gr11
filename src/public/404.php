@@ -18,9 +18,9 @@
         <p class="p-a">
             . The page you were looking for could not be found</p>
         <p class="p-b">
-            ... Back to previous page
+            ... Back to catalog
         </p>
-        <a href='#' class="back">... Back to previous page</a>
+        <a href='/catalog' class="back">... Back to catalog</a>
     </div>
 </div>
 
