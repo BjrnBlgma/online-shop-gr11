@@ -4,7 +4,7 @@
         <form action="/add" method="POST">
             <label for="Product-id">Product ID</label>
             <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id" required>
-            <label style="color: red"> <?php print_r($errors['product'] ?? '');?> </label>
+            <label style="color: #e7e4e4"> <?php print_r($errors['product'] ?? '');?> </label>
             <br>
 
             <label for="Amount">Amount</label>
