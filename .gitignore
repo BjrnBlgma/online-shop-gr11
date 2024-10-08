@@ -1,2 +1,3 @@
 .idea/
 /src/public/images/
+docker/postgres
