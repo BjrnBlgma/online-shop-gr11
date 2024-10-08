@@ -1,5 +1,4 @@
 <?php
-
 $errors = [];
 if (isset($_POST['login'])) {
     $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
@@ -30,8 +29,8 @@ if  (empty($errors)){
             if (password_verify($password, $passFromDb)) {
                 //setcookie('user_id', $data['id']);
                 session_start();
-/*                $_SESSION['user']['login_message'] = "Успешная авторизация!";*/
                 $_SESSION['user_id'] = $data['id'];
+
                 header('Location: /catalog');
             } else{
                 $errors['login'] = 'Incorrect email or password';

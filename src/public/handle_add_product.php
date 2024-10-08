@@ -1,9 +1,7 @@
 <?php
+session_start();
 if (!isset($_SESSION['user_id'])){
     header('Location: /login');
-} else {
-    session_start();
-    $userId = $_SESSION['user_id'];
 }
 
 $errors = [];
