@@ -1,8 +1,8 @@
 <?php
-session_start();
 if (!isset($_SESSION['user_id'])){
     header('Location: /login');
 }
+session_start();
 $userId = $_SESSION['user_id'];
 //echo 'here is Catalog';
 $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');

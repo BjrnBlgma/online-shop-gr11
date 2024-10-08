@@ -28,7 +28,6 @@ if  (empty($errors)){
         } else{
             $passFromDb = $data['password'];
             if (password_verify($password, $passFromDb)) {
-                //setcookie('user_id', $data['id']);
                 session_start();
                 $_SESSION['user_id'] = $data['id'];
                 header('Location: /catalog');
