@@ -14,7 +14,7 @@ if (isset($_POST['product_id'])) {
         $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
     }
 } /*else {
-    $errors['product_id'] = 'Выберите продкут';
+    $errors['product'] = 'Выберите продкут';
 }*/
 
 if (isset($_POST['amount'])) {

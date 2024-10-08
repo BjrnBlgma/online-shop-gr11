@@ -3,18 +3,18 @@ session_start();
 if (!isset($_SESSION['user_id'])){
     header('Location: /login');
 }
-$user_id = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 
 //echo 'here is Catalog';
 $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
 $stmt = $pdo->prepare("SELECT products.name as product_name, products.image as product_image, products.price as product_price, user_products.amount as user_products_amount FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id");
-$stmt->execute(['user_id' => $user_id]);
+$stmt->execute(['user_id' => $userId]);
 
-$user_products = $stmt->fetchAll();
+$userProducts = $stmt->fetchAll();
 
 $allSum=0;
-foreach($user_products as $product){
+foreach($userProducts as $product){
     $sum = $product['product_price'] * $product['user_products_amount'];
     $allSum += $sum;
 }
@@ -29,7 +29,7 @@ foreach($user_products as $product){
         <div class="row align-items-start">
             <div class="col-12 col-sm-8 items">
                 <!--1-->
-                <?php foreach($user_products as $product): ?>
+                <?php foreach($userProducts as $product): ?>
                 <div class="cartItem row align-items-start">
                     <div class="col-3 mb-2">
                         <img class="w-100" src="<?php echo $product['product_image']; ?>" alt="art image">
