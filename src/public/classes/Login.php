@@ -1,12 +1,14 @@
 <?php
 class Login
 {
-    public function loginUser ()
+    public function loginUser()
     {
         $errors = $this->validateLogin();
 
-        if  (empty($errors)){
+        if  (empty($errors)) {
             try {
+                $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
+                $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
                 $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
                 $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :login');
@@ -16,7 +18,7 @@ class Login
 
                 if ($data === false) {
                     $errors['login'] = 'Incorrect email or password';
-                } else{
+                } else {
                     $passFromDb = $data['password'];
                     if (password_verify($password, $passFromDb)) {
                         //setcookie('user_id', $data['id']);
@@ -24,16 +26,19 @@ class Login
                         $_SESSION['user_id'] = $data['id'];
 
                         header('Location: /catalog');
-                    } else{
+                    } else {
                         $errors['login'] = 'Incorrect email or password';
                     }
                 }
+                return $errors;
+
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage();
                 //die();
             }
+        } else {
+            return $errors;
         }
-
     }
 
     private function validateLogin(): array
