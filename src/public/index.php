@@ -35,9 +35,13 @@ if ($requestUri === '/login'){
     }
 } elseif ($requestUri === '/cart') { //правильно ли я написала корзину??
     require_once './cart.php';
-} elseif ($requestUri === '/product') { //страница на продукт
-    require_once './product_page.php';
-}
+} /*elseif ($requestUri === '/product') { //страница на продукт
+    if ($requestMethod === 'GET'){
+        require_once './get_product_page.php';
+    } elseif ($requestMethod === 'POST'){
+        require_once './handle_product_page.php';
+    }
+}*/
 else{
     http_response_code(404);
     require_once '404.php';

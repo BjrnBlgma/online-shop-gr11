@@ -11,7 +11,7 @@ $products = $catalog->getCatalog();
 
 <h1>Catalog</h1>
 <div class="back">
-    <a href="/cart " >&#128722;</a>
+    <a href="/cart">&#128722;</a>
 </div>
 
 <div class="container">
@@ -20,24 +20,22 @@ $products = $catalog->getCatalog();
             <div class="effect-1"></div>
             <div class="effect-2"></div>
             <div class="content">
-                <img class="card-img-top" src="<?php echo $product['image']; ?>">
-                <!--<div class="exercise"  ></div>-->
-
+                <img class="card-img-top" src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
             </div>
             <span class="title">
-                <!--<a href="/add" >  якорь для клика </a>-->
-                <?php echo $product['name']; ?>
-                <span> <?php echo "{$product['price']}$" ?> </span>
+                <form action="/product" method="GET">
+                    <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>" id="product_id">
+                    <button type="submit" style="background: none; border: none; font-size: 20px; padding: 0; cursor: pointer;">
+                        <?php echo $product['name']; ?>
+                    </button>
+                </form>
+                <span><?php echo "{$product['price']}$" ?></span>
             </span>
         </div>
     <?php endforeach; ?>
-
 </div>
 
-
 <div class="twitter"><i class="fab fa-twitter"></i><a href="/logout">Logout</a></div>
-
-
 
 <style>
     .back {
@@ -45,7 +43,6 @@ $products = $catalog->getCatalog();
         top: 30px;
         font-size: 19px;
         margin: 10px 10px 3px 15px;
-
         right: 20px;
     }
 
@@ -61,22 +58,21 @@ $products = $catalog->getCatalog();
         text-align: center;
     }
 
-
     .container {
         display: flex;
         flex-wrap: wrap;
-        max-width: 600px;
-        margin: 1vw auto;
+        max-width: 1200px;
+        margin: 3vw auto;
         position: relative;
         text-align: center;
-        width: 94vw;
+        width: 100vw;
     }
 
     .product {
         flex: auto;
-        font-size: 1.5rem;
-        margin: 0 1vw calc(1vw + 50px) 1vw;
-        min-width: calc(33% - 2vw);
+        font-size: 1rem;
+        margin: 0 1vw calc(1vw + 6%) 1vw;
+        min-width: calc(34% - 8vw);
         position: relative;
     }
 
@@ -149,32 +145,24 @@ $products = $catalog->getCatalog();
 
     .title {
         position: relative;
-        top: calc(100% + 16px);
+        top: calc(100% + 0px);
     }
 
     .title span {
         display: block;
         font-family: Helvetica, Arial, Sans-Serif;
-        font-size: 0.6rem;
+        font-size: 1.2rem;
         letter-spacing: 0.1rem;
-        margin-top: 8px;
+        margin-top: 0;
         text-transform: uppercase;
     }
 
-    .card-img-top{
+    .card-img-top {
         border-radius: 5px;
         height: 70%;
         margin: 15%;
         width: 70%;
     }
-
-    /*.exercise {
-        !*background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);*!
-        border-radius: 5px;
-        height: 50%;
-        margin: 25%;
-        width: 50%;
-    }*/
 
     .twitter {
         background-image: linear-gradient(
