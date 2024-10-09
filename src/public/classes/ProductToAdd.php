@@ -1,12 +1,14 @@
 <?php
 class ProductToAdd
 {
-    public function addProductToCart($product)
+    public function addProductToCart()
     {
         $errors = $this->validateProduct();
 
         if (empty($errors)) {
             $userId = $_SESSION['user_id'];
+            $productId = $_POST['product_id'];
+            $amount = $_POST['amount'];
             $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
             $stmt = $pdo->prepare('SELECT id FROM products WHERE id = :product_id');
@@ -27,6 +29,8 @@ class ProductToAdd
                     $this->plusAmount($userId, $productId, $newAmount);
                 }
             }
+            return $errors;
+        } else{
             return $errors;
         }
     }
@@ -53,12 +57,20 @@ class ProductToAdd
 
         if (isset($_POST['product_id'])) {
             $productId = $_POST['product_id'];
+
+            $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+            $stmt = $pdo->prepare('SELECT id FROM products WHERE id = :product_id');
+            $stmt->execute(['product_id' => $productId]);
+            $isCorrectIdProduct = $stmt->fetch(); //есть ли такой товар к продуктах
+
             if (empty($productId)) {
                 $errors['product'] = "ID товара не должно быть пустым";
             } elseif (!ctype_digit($productId)) {
                 $errors['product'] = "Поле ID товара должно содержать только цифры!";
             } elseif ($productId <= 0) {
                 $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
+            } elseif ($isCorrectIdProduct === false) {
+                $errors['product'] = "Введите корректный ID товара";
             }
         } else {
             $errors['product'] = 'Выберите продукт';

@@ -10,5 +10,10 @@ require_once __DIR__ . "/classes/ProductToAdd.php";
 
 $product = new ProductToAdd();
 $product->addProductToCart();
+
+$errors = $product->addProductToCart();
+/*foreach ($error as $key => $el) {
+    echo $key . "<br>" . "\n";
+}*/
 require_once 'get_add_product.php';
 ?>
