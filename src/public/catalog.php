@@ -3,20 +3,10 @@ session_start();
 if (!isset($_SESSION['user_id'])){
     header('Location: /login');
 }
-$userId = $_SESSION['user_id'];
-//echo 'here is Catalog';
-$pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
-$stmt = $pdo->prepare("SELECT * FROM products");
-$stmt->execute();
-$products = $stmt->fetchAll();
-
-/*$stmt = $pdo->prepare("SELECT products.name as product_name, products.image as product_image, products.price as product_price, user_products.amount as user_products_amount FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id");
-$stmt->execute(['user_id' => $userId]);
-
-$countProductsUnderCart = $stmt->fetchAll();
-$count = count($countProductsUnderCart);*/
-
+require_once __DIR__ . "/classes/Catalog.php";
+$catalog = new Catalog();
+$products = $catalog->getCatalog();
 ?>
 
 <h1>Catalog</h1>
