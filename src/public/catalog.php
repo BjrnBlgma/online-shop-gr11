@@ -208,6 +208,3 @@ $products = $catalog->getCatalog();
         text-decoration: none;
     }
 </style>
-
-
-

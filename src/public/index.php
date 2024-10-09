@@ -33,8 +33,10 @@ if ($requestUri === '/login'){
     } else {
         echo "$requestMethod не поддерживается адресом $requestUri";
     }
-} elseif ($requestUri === '/cart') {
+} elseif ($requestUri === '/cart') { //правильно ли я написала корзину??
     require_once './cart.php';
+} elseif ($requestUri === '/product') { //страница на продукт
+    require_once './product_page.php';
 }
 else{
     http_response_code(404);
