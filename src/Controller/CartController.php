@@ -1,33 +1,26 @@
 <?php
+require_once "./../Model/UserProduct.php";
 class CartController
 {
+    private UserProduct $userProduct;
+
+    public function __construct()
+    {
+        $this->userProduct = new UserProduct();
+    }
     public function lookCart()
     {
-
         session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-
         $userId = $_SESSION['user_id'];
-        require_once "./../Model/UserProduct.php";
-        $userProduct = new UserProduct();
-        $productInCart = $userProduct->getByUserId($userId);
 
-        $allSum = $this->sumCart();
+        $productsInCart = $this->userProduct->getByUserId($userId);
 
-        require_once "./../View/cart.php";
-    }
-
-
-    private function sumCart(): int
-    {
         $allSum=0;
-        $userProducts = $this->lookCart();
-        foreach($userProducts as $product){
+        foreach($productsInCart as $product){
             $sum = $product['product_price'] * $product['user_products_amount'];
             $allSum += $sum;
         }
-        return $allSum;
+
+        require_once "./../View/cart.php";
     }
 }

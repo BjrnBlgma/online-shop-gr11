@@ -6,7 +6,7 @@
         <div class="row align-items-start">
             <div class="col-12 col-sm-8 items">
                 <!--1-->
-                <?php foreach($productInCart as $product): ?>
+                <?php foreach($productsInCart as $product): ?>
                     <div class="cartItem row align-items-start">
                         <div class="col-3 mb-2">
                             <img class="w-100" src="<?php echo $product['product_image']; ?>" alt="art image">

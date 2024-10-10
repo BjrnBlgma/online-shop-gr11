@@ -1,15 +1,25 @@
 <?php
+require_once "./../Model/Product.php";
+require_once "./../Model/UserProduct.php";
+
 class ProductController
 {
+    private Product $product;
+    private UserProduct $userProduct;
+
+    public function __construct()
+    {
+        $this->product = new Product();
+        $this->userProduct = new UserProduct();
+    }
+
     public function getCatalog()
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         }
-        require_once "./../Model/Product.php";
-        $prod = new Product();
-        $catalog = $prod->getProductsForCatalog();
+        $catalog = $this->product->getProducts();
 
         require_once "./../View/catalog.php";
     }
@@ -24,7 +34,6 @@ class ProductController
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         }
-
         $userId = $_SESSION['user_id'];
         $errors = $this->validateProduct();
 
@@ -32,38 +41,20 @@ class ProductController
             $productId = $_POST['product_id'];
             $amount = $_POST['amount'];
 
-            require_once "./../Model/UserProduct.php"; //есть ли продукт в козрине или нет
-            $userProducts = new UserProduct();
-            $isProductInCart = $userProducts->getByUserIdAndProductId($userId, $productId);
-
+            $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
             if ($isProductInCart === false) {
-                $this->addProduct($userId, $productId, $amount); // Добавляем товар
+                $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
+                header('Location: /cart');
+                exit;
             } else {
                 $newAmount = $amount + $isProductInCart['amount'];
-                $this->plusAmount($userId, $productId, $newAmount);
+                $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
+                exit;
             }
         }
 
         require_once "./../View/add_product.php";
     }
-
-
-    private function addProduct($user, $product, $amount) {
-        require_once "./../Model/UserProduct.php";
-        $userProducts = new UserProduct();
-        $userProducts->addProductToCart($user, $product, $amount);
-        header('Location: /cart');
-        exit;
-    }
-
-    private function plusAmount($user, $product, $amount) {
-        require_once "./../Model/UserProduct.php";
-        $userProducts = new UserProduct();
-        $userProducts->plusProductAmountInCart($user, $product, $amount);
-        header('Location: /cart');
-        exit;
-    }
-
 
     private function validateProduct(): array
     {
@@ -71,9 +62,8 @@ class ProductController
 
         if (isset($_POST['product_id'])) {
             $productId = $_POST['product_id'];
-            require_once "./../Model/Product.php";
-            $product =  new Product();
-            $isCorrectIdProduct = $product->getByProductId($productId);  //есть ли такой товар к продуктах
+            $isCorrectIdProduct = $this->product->getByProductId($productId);  //есть ли такой товар к продуктах
+
             if (empty($productId)) {
                 $errors['product'] = "ID товара не должно быть пустым";
             } elseif (!ctype_digit($productId)) {

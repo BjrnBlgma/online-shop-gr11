@@ -1,7 +1,7 @@
 <?php
 class Product
 {
-    public function getByProductId(int $productId): int|false
+    public function getByProductId(int $productId)
     {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
         $stmt = $pdo->prepare('SELECT id FROM products WHERE id = :product_id');
@@ -11,7 +11,7 @@ class Product
         return $isCorrectIdProduct;
     }
 
-    public function getProductsForCatalog(): array
+    public function getProducts(): array
     {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 

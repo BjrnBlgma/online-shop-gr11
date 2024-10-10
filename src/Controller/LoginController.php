@@ -1,6 +1,13 @@
 <?php
+require_once "./../Model/User.php";
 class LoginController
 {
+    private User $user;
+
+    public function __construct()
+    {
+        $this->user = new User();
+    }
     public function getLoginForm()
     {
         require_once "./../View/login.php";
@@ -13,9 +20,9 @@ class LoginController
             try {
                 $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
                 $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
-                require_once "./../Model/User.php";
-                $user = new User();
-                $data = $user->getByLogin($login);
+
+
+                $data = $this->user->getByEmail($login);
 
                 if ($data === false) {
                     $errors['login'] = 'Incorrect email or password';

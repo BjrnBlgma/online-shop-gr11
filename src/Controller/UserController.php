@@ -53,10 +53,9 @@ class UserController
         if (isset($_POST['email'])) {
             $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 
-            $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-            $stmt = $pdo->prepare('SELECT email FROM users WHERE email = :email');
-            $stmt->execute(['email' => $email]);
-            $isCorrectEmail = $stmt->fetch(); //свободна ли почта или уже занята
+            require_once "./../Model/User.php";
+            $user = new User();
+            $isCorrectEmail = $user->getByEmail($email); //свободна ли почта или уже занята
             if (empty($email)) {
                 $errors ['email'] = "Почта не должна быть пустой";
             }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
