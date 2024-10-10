@@ -3,6 +3,10 @@ class ProductController
 {
     public function getCatalog()
     {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+        }
         require_once "./../Model/Product.php";
         $prod = new Product();
         $catalog = $prod->getProductsForCatalog();
@@ -17,6 +21,10 @@ class ProductController
     public function addProductToCart()
     {
         session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+        }
+
         $userId = $_SESSION['user_id'];
         $errors = $this->validateProduct();
 
