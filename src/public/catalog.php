@@ -23,7 +23,7 @@ $products = $catalog->getCatalog();
                 <img class="card-img-top" src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
             </div>
             <span class="title">
-                <form action="/product" method="GET">
+                <form action="/product" method="POST">
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>" id="product_id">
                     <button type="submit" style="background: none; border: none; font-size: 20px; padding: 0; cursor: pointer;">
                         <?php echo $product['name']; ?>
@@ -35,7 +35,7 @@ $products = $catalog->getCatalog();
     <?php endforeach; ?>
 </div>
 
-<div class="twitter"><i class="fab fa-twitter"></i><a href="/logout">Logout</a></div>
+<div class="twitter"><i class="fab fa-twitter"></i><a href="/catalo">Logout</a></div>
 
 <style>
     .back {

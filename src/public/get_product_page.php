@@ -4,39 +4,19 @@ if (!isset($_SESSION['user_id'])){
     header('Location: /login');
     exit;
 }
-
+$productId = $_POST['product_id'];
 $userId = $_SESSION['user_id'];
 $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
-$stmt = $pdo->prepare("SELECT * FROM products");
-$stmt->execute();
+$stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+$stmt->execute(['id' => $productId]);
 $products = $stmt->fetchAll();
+
 ?>
 
-<h1>Catalog</h1>
-<div class="back">
-    <a href="/cart">&#128722;</a>
-</div>
 
-<div class="container">
-    <?php foreach ($products as $product): ?>
-        <div class="product">
-            <div class="effect-1"></div>
-            <div class="effect-2"></div>
-            <div class="content">
-                <img class="card-img-top" src="<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image">
-            </div>
-            <span class="title">
-                <a href="/product.php?id=<?php echo $product['id']; ?>">
-                    <?php echo htmlspecialchars($product['name']); ?>
-                </a>
-                <span><?php echo htmlspecialchars($product['price']) . "$"; ?></span>
-            </span>
-        </div>
-    <?php endforeach; ?>
-</div>
 
-<!--<div class="twitter"><i class="fab fa-twitter"></i><a href="/logout">Logout</a></div>
+<div class="twitter"><i class="fab fa-twitter"></i><a href="/cart">Cart</a></div>
 <div class="card">
     <nav>
         <a href="/catalog">
@@ -45,13 +25,15 @@ $products = $stmt->fetchAll();
         <svg class="heart" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" stroke="#727272" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M340.8,98.4c50.7,0,91.9,41.3,91.9,92.3c0,26.2-10.9,49.8-28.3,66.6L256,407.1L105,254.6c-15.8-16.6-25.6-39.1-25.6-63.9  c0-51,41.1-92.3,91.9-92.3c38.2,0,70.9,23.4,84.8,56.8C269.8,121.9,302.6,98.4,340.8,98.4 M340.8,83C307,83,276,98.8,256,124.8  c-20-26-51-41.8-84.8-41.8C112.1,83,64,131.3,64,190.7c0,27.9,10.6,54.4,29.9,74.6L245.1,418l10.9,11l10.9-11l148.3-149.8  c21-20.3,32.8-47.9,32.8-77.5C448,131.3,399.9,83,340.8,83L340.8,83z" stroke="#727272"/></svg>
     </nav>
     <div class="photo">
-        <img src="<?php /*echo $product['image']; */?>" alt="<?php /*echo $product['name']; */?>">
+        <?php foreach ($products as $product): ?>
+        <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>">
     </div>
     <div class="description">
-        <h2><?php /*echo $product['name']; */?></h2>
+        <h2><?php echo $product['name']; ?></h2>
         <!--<h4>Popular House Plant</h4>-->
-        <h1><?php /*echo "{$product['price']}$" */?></h1>
-        <p><?php /*echo $product['description']; */?></p>
+        <h1><?php echo "{$product['price']}$" ?></h1>
+        <p><?php echo $product['description']; ?></p>
+        <?php endforeach;?>
         <button>Add to Cart</button>
         <button>Wishlist</button>
     </div>
