@@ -1,6 +1,14 @@
 <?php
+require_once "./../Model/User.php";
+
 class UserController
 {
+    private User $user;
+    public function __construct()
+    {
+        $this->user = new User();
+    }
+
     public function getRegistrateForm()
     {
         require_once "./../View/registrate.php";
@@ -53,9 +61,7 @@ class UserController
         if (isset($_POST['email'])) {
             $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 
-            require_once "./../Model/User.php";
-            $user = new User();
-            $isCorrectEmail = $user->getByEmail($email); //свободна ли почта или уже занята
+            $isCorrectEmail = $this->user->getByEmail($email); //свободна ли почта или уже занята
             if (empty($email)) {
                 $errors ['email'] = "Почта не должна быть пустой";
             }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

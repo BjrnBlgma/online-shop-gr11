@@ -21,7 +21,7 @@ switch ($requestUri){
 
 
 
-    case '/registrate':
+    case '/register':
         $userController = new UserController();
         if ($requestMethod === 'GET'){
             $userController->getRegistrateForm();
@@ -43,6 +43,13 @@ switch ($requestUri){
         break;
 
 
+    case '/order':
+        if ($requestMethod === 'GET'){
+            require_once "./../View/product_order.php";
+        } else{
+            echo "$requestMethod не поддерживается адресом $requestUri";
+        }
+        break;
 
 
     case '/add':

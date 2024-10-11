@@ -26,7 +26,12 @@ class ProductController
 
     public function getAddProductForm()
     {
-        require_once "./../View/add_product.php";
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+        } else{
+            require_once "./../View/add_product.php";
+        }
     }
     public function addProductToCart()
     {

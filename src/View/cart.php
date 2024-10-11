@@ -30,18 +30,18 @@
 
             </div>
             <div class="col-12 col-sm-4 p-3 proceed form">
-                <div class="row m-0">
+                <!--<div class="row m-0">
                     <div class="col-sm-8 p-0">
 
                         <h6>Subtotal</h6>
                     </div>
 
                     <div class="col-sm-4 p-0">
-                        <p id="subtotal"> <?php echo $allSum . "$" ?></p>
+                        <p id="subtotal"> <?php /*echo $allSum . "$" */?></p>
                     </div>
 
 
-                </div>
+                </div>-->
                 <!--<div class="row m-0">
                     <div class="col-sm-8 p-0 ">
                         <h6>Tax</h6>
@@ -53,13 +53,13 @@
                 <hr>
                 <div class="row mx-0 mb-2">
                     <div class="col-sm-8 p-0 d-inline">
-                        <h5>Total</h5>
+                        <h5>Итого</h5>
                     </div>
                     <div class="col-sm-4 p-0">
                         <p id="total"> <?php echo $allSum . "$" ?> </p>
                     </div>
                 </div>
-                <a href="#"><button id="btn-checkout" class="shopnow"><span>Checkout</span></button></a>
+                <a href="order"><button id="btn-checkout" class="shopnow"><span>Оформить</span></button></a>
             </div>
         </div>
     </div>

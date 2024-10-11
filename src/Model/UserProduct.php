@@ -30,7 +30,13 @@ class UserProduct
     {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
-        $stmt = $pdo->prepare("SELECT products.name as product_name, products.image as product_image, products.price as product_price, user_products.amount as user_products_amount FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id");
+        $stmt = $pdo->prepare("SELECT 
+            products.name as product_name, 
+            products.image as product_image, 
+            products.price as product_price, 
+            user_products.amount as user_products_amount 
+            FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id
+            ");
         $stmt->execute(['user_id' => $user]);
 
         $userID = $stmt->fetchAll();
