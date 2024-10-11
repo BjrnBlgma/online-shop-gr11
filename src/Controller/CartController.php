@@ -11,6 +11,9 @@ class CartController
     public function lookCart()
     {
         session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+        }
         $userId = $_SESSION['user_id'];
 
         $productsInCart = $this->userProduct->getByUserId($userId);
