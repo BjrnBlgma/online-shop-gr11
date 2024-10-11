@@ -25,9 +25,7 @@ class UserController
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             try {
-                require_once "./../Model/User.php";
-                $user = new User();
-                $user->createUser($name, $email, $hash);
+                $this->user->createUser($name, $email, $hash);
 
                 header('Location: /login');
             } catch (PDOException $e) {

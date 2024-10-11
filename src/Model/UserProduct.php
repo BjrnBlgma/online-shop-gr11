@@ -42,4 +42,12 @@ class UserProduct
         $userID = $stmt->fetchAll();
         return $userID;
     }
+
+    public function deleteProduct(int $user, int $product)
+    {
+        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+
+        $stmt = $pdo->prepare( "DELETE FROM author WHERE user_id = :user_id AND product_id = :product_id");
+        $stmt->execute(['user_id' => $user, 'product_id' => $product]);
+    }
 }
