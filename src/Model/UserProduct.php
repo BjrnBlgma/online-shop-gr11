@@ -48,7 +48,7 @@ class UserProduct
     {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
-        $stmt = $pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_i");
+        $stmt = $pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
     }
 }
