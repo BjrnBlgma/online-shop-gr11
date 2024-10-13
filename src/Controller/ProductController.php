@@ -54,8 +54,10 @@ class ProductController
             } else {
                 $newAmount = $amount + $isProductInCart['amount'];
                 $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
+                header('Location: /cart');
                 exit;
             }
+
         }
 
         require_once "./../View/add_product.php";
