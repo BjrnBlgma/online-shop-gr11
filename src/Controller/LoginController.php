@@ -38,8 +38,6 @@ class LoginController
                         $errors['login'] = 'Incorrect email or password';
                     }
                 }
-                return $errors;
-
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage();
                 //die();
