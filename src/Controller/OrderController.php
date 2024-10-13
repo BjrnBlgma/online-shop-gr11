@@ -14,23 +14,36 @@ id пользователя;
  */
 require_once "./../Model/UserProduct.php";
 require_once "./../Model/Order.php";
+require_once "./../Model/User.php";
 class OrderController
 {
     private UserProduct $userProduct;
     private Order $order;
+    private User $user;
     public function __construct()
     {
         $this->userProduct = new UserProduct();
         $this->order = new Order();
+        $this->user = new User();
     }
 
     public function getOrderForm()
     {
         session_start();
+        $userId = $_SESSION['user_id'];
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         } else{
-            require_once "./../View/product_order.php";
+            $productsInCart = $this->userProduct->getByUserId($userId);
+            $allSum=0;
+            $countProducts = 0;
+            foreach($productsInCart as $product){
+                $sum = $product['product_price'] * $product['user_products_amount'];
+                $allSum += $sum;
+                $countProducts += 1 * $product['user_products_amount'];
+            }
+            $allSum .="$";
+            require_once "./../View/order.php";
         }
     }
 
@@ -44,83 +57,164 @@ class OrderController
         $errors = $this->validateOrder();
 
         if (empty($errors)) {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
+            $name = $_POST['firstName'];
             $family = $_POST['family'];
+            /*$selection = $_POST['selection'];*/
+            $address = $_POST['address'];
+            $city = $_POST['city'];
+            /*$region = $_POST['region'];
+            $index = $_POST['index'];*/
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
 
-            $this->order->createOrder($userId, $name, $family, $email); //добавить переменные для добавления информации в табицу Order
-            $isProductInOrder = $this->order->getByUserIdAndProductId($userId, $productId); //есть ли продукт в заказе или нет
-            if ($isProductInOrder) {
-                $this->userProduct->deleteProduct($userId, $productId); // Удаляем товар из корзины, п.ч. сделали заказ
-                header('Location: /cart');
-                exit;
+            $productsInCart = $this->userProduct->getByUserId($userId);
+            //print_r($productsInCart);
+            $allSum=0;
+            $countProducts = 0;
+            $res =[];
+            foreach($productsInCart as $product){
+                $sum = $product['product_price'] * $product['user_products_amount'];
+                $allSum += $sum;
+                $countProducts += 1 * $product['user_products_amount'];
+                $this->order->createOrder($userId, $product['product_id'], $product['user_products_amount'], $name, $family, $city, $address, $phone, $email);
+
             }
 
-
+            $this->userProduct->deleteProduct($userId); // Удаляем товар из корзины, п.ч. сделали заказ
+            header('Location: /cart');
 
         }
-        require_once "./../View/product_order.php";
+        require_once "./../View/order.php";
     }
 
     private function validateOrder(): array //переделать валидацию, после создания таблицы в бд
     {
         $errors = [];
 
-        if (isset($_POST['name'])) {
-            $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
+        if (isset($_POST['firstName'])) {
+            $name = htmlspecialchars($_POST['firstName'], ENT_QUOTES, 'UTF-8');
             if (empty($name)){
-                $errors['name'] = "Имя не должно быть пустым";
+                $errors['firstName'] = "Имя не должно быть пустым";
             } elseif (strlen($name) < 3 || strlen($name) > 20) {
-                $errors['name'] = "Имя должно содержать не меньше 3 символов и не больше 20 символов";
+                $errors['firstName'] = "Имя должно содержать не меньше 3 символов и не больше 20 символов";
             } elseif (!preg_match("/^[a-zA-Zа-яА-Я]+$/u", $name)) {
-                $errors['name'] = "Имя может содержать только буквы";
+                $errors['firstName'] = "Имя может содержать только буквы";
             }
         }else{
-            $errors ['name'] = "Поле name должно быть заполнено";
+            $errors ['firstName'] = "Поле name должно быть заполнено";
+        }
+
+
+        if (isset($_POST['family'])) {
+            $family = htmlspecialchars($_POST['family'], ENT_QUOTES, 'UTF-8');
+            if (empty($family)){
+                $errors['family'] = "Поле Фамилия не должно быть пустым";
+            } elseif (strlen($family) < 3 || strlen($family) > 20) {
+                $errors['family'] = "Фамилия должна содержать не меньше 3 символов и не больше 20 символов";
+            } elseif (!preg_match("/^[a-zA-Zа-яА-Я]+$/u", $family)) {
+                $errors['family'] = "Фамилия может содержать только буквы";
+            }
+        }else {
+            $errors ['family'] = "Поле family должно быть заполнено";
+        }
+
+
+        /*if (isset($_POST['selection'])) {
+            $selection = $_POST['selection'];
+            if (empty($selection)){
+                $errors['selection'] = "Поле не должно быть пустым";
+            }
+        }else {
+                $errors ['selection'] = "Поле должно быть заполнено";
+        }*/
+
+
+        if (isset($_POST['address'])) {
+            $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
+            if (empty($address)){
+                $errors['address'] = "Поле Адресс не должно быть пустым";
+            } elseif (strlen($address) < 3 || strlen($address) > 60) {
+                $errors['address'] = "Адресс должен содержать не меньше 3 символов и не больше 20 символов";
+            } elseif (!preg_match("/^[a-zA-Zа-яА-Я0-9 ,.-]+$/u", $address)) {
+                $errors['address'] = "Адресс может содержать только буквы и цифры";
+            }
+        }else {
+            $errors ['address'] = "Поле family должно быть заполнено";
+        }
+
+
+        if (isset($_POST['city'])) {
+            $city = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8');
+            if (empty($city)){
+                $errors['city'] = "Поле Город не должно быть пустым";
+            } elseif (strlen($city) < 3 || strlen($city) > 20) {
+                $errors['city'] = "Поле Город должен содержать не меньше 3 символов и не больше 20 символов";
+            } elseif (!preg_match("/^[a-zA-Zа-яА-Я -]+$/u", $city)) {
+                $errors['city'] = "Поле Город может содержать только буквы и цифры";
+            }
+        }else {
+            $errors ['city'] = "Поле должно быть заполнено";
+        }
+
+
+        /*if (isset($_POST['region'])) {
+            $region = htmlspecialchars($_POST['region'], ENT_QUOTES, 'UTF-8');
+            if (empty($region)){
+                $errors['region'] = "Поле Регион не должно быть пустым";
+            } elseif (strlen($region) < 3 || strlen($region) > 60) {
+                $errors['region'] = "Поле Регион должен содержать не меньше 3 символов и не больше 20 символов";
+            } elseif (!preg_match("/^[a-zA-Zа-яА-Я]+$/u", $region)) {
+                $errors['region'] = "Поле Регион может содержать только буквы и цифры";
+            }
+        }else {
+            $errors ['region'] = "Поле family должно быть заполнено";
+        }
+
+
+        if (isset($_POST['index'])) {
+            $index = htmlspecialchars($_POST['index'], ENT_QUOTES, 'UTF-8');
+            if (empty($index)){
+                $errors['index'] = "Почтовый индекс не должен быть пустым";
+            } elseif (!preg_match("/^\d{6}$/", $index)) {
+                $errors['index'] = "Почтовый индекс может содержать только цифры";
+            }
+        }else {
+            $errors ['index'] = "Поле Почтовый индекс должно быть заполнено";
+        }*/
+
+
+        if (isset($_POST['phone'])) {
+            $phone = htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8');
+            if (empty($phone)){
+                $errors['phone'] = "Номер телефона не должен быть пустым";
+            } elseif (!preg_match("/^[0-9]+$/u", $phone)) {
+                $errors['phone'] = "Номер телефона может содержать только цифры";
+            } elseif (strlen($phone) < 3 || strlen($phone) > 15) {
+                $errors['phone'] = "Номер телефона должен содержать не меньше 3 символов и не больше 15 символов";
+            }
+        }else {
+            $errors ['phone'] = "Поле Почтовый индекс должно быть заполнено";
         }
 
 
         if (isset($_POST['email'])) {
             $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 
-            $isCorrectEmail = $this->user->getByEmail($email); //свободна ли почта или уже занята
+            //$isCorrectEmail = $this->user->getByEmail($email); //свободна ли почта или уже занята
             if (empty($email)) {
                 $errors ['email'] = "Почта не должна быть пустой";
             }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors ['email'] = "Введите корректный email-адрес!";
             }elseif ( (strlen($email) < 3)||(strlen($email) > 60) ){
                 $errors ['email'] = "email-адрес должен содержать не меньше 3 символов и не больше 60 символов";
-            }elseif ($isCorrectEmail) {
-                $errors['email'] = "email уже занят!";
-            }
+            }/*elseif ($isCorrectEmail['email'] === $email) {
+                $errors['email'] = "Повторите email!";
+            }*/
         }else{
             $errors ['email'] = "Поле email должно быть заполнено";
         }
 
 
-        if (isset($_POST['password'])) {
-            $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
-            if (empty($password)) {
-                $errors ['password'] = "Пароль не должен быть пустым";
-            }elseif (strlen($password) < 8 || strlen($password) > 20) {
-                $errors ['password'] = "Пароль должен быть не менее 8 символов и не более 20 символов";
-            }
-        }else{
-            $errors ['password'] = "Поле password должно быть заполнено";
-        }
-
-
-        if (isset($_POST['psw-repeat'])) {
-            $passRepeat = htmlspecialchars($_POST['psw-repeat'], ENT_QUOTES, 'UTF-8');
-            $password = $_POST['password'];
-            if (empty($passRepeat)) {
-                $errors ['psw-repeat'] = "Поле не должно быть пустым";
-            }elseif ($passRepeat != $password) {
-                $errors ['psw-repeat'] = "Пароли не совпадают"; //Passwords do not match"
-            }
-        }else {
-            $errors ['psw-repeat'] = "Поле repeat password должно быть заполнено";
-        }
 
         return $errors;
     }
