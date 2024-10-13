@@ -3,18 +3,20 @@
         <h2>Форма заказа</h2>
     </div>
     <div class="d-flex">
-        <form action="" method="">
+        <form action="/order" method="POST">
             <label>
                 <span class="fname">Имя <span class="required">*</span></span>
-                <input type="text" name="fname">
+                <input type="text" name="firstName" id="firstName">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span class="lname">Фамилия <span class="required">*</span></span>
-                <input type="text" name="lname">
+                <input type="text" name="family" id="family">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Страна <span class="required">*</span></span>
-                <select name="selection">
+                <select name="selection" id="selection">
                     <option value="select">Выберите страну...</option>
                     <option value="AFG">Afghanistan</option>
                     <option value="ALA">Åland Islands</option>
@@ -265,33 +267,39 @@
                     <option value="YEM">Yemen</option>
                     <option value="ZMB">Zambia</option>
                     <option value="ZWE">Zimbabwe</option>
-                </select>
+                </select><label style="color: red"> <?php echo $errors['selection'] ?? '';?> </label>
+            </label>
+            <label>
+                <span>Город <span class="required">*</span></span>
+                <input type="text" name="city" id="city" placeholder="Населенный пункт">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Улица <span class="required">*</span></span>
-                <input type="text" name="houseadd" placeholder="Название улицы, номер дома/подъезда/квартиры" required>
-            </label>
-
-            <label>
-                <span>Город <span class="required">*</span></span>
-                <input type="text" name="city" placeholder="Населенный пункт">
+                <input type="text" name="address" id="address" placeholder="Название улицы, номер дома/подъезда/квартиры" required>
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Регион<span class="required">*</span></span>
-                <input type="text" name="city">
+                <input type="text" name="region" id="region">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Почтовый индекс<span class="required">*</span></span>
-                <input type="text" name="city">
+                <input type="text" name="index" id="index">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Телефон <span class="required">*</span></span>
-                <input type="tel" name="city">
+                <input type="tel" name="phone" id="phone">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
             <label>
                 <span>Email <span class="required">*</span></span>
-                <input type="email" name="city">
+                <input type="email" name="email" id="email">
+                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
             </label>
+            <button type="button">Оформить заказ</button>
         </form>
         <div class="Yorder">
             <table>
@@ -299,12 +307,12 @@
                     <th colspan="2">Ваш заказ</th>
                 </tr>
                 <tr>
-                    <td>Товары (Кол-во)</td>
-                    <td>$88.00</td>
+                    <td>Кол-во товаров (<?php echo $countProducts ?>)</td>
+                    <td><?php echo $allSum . "$" ?></td>
                 </tr>
                 <tr>
                     <td>Итого</td>
-                    <td>$88.00</td>
+                    <td><?php echo $allSum . "$" ?></td>
                 </tr>
                 <tr>
                     <td>Доставка</td>
@@ -325,7 +333,7 @@
       <img src="https://static.insales-cdn.com/files/1/7794/31440498/original/sbp_a52c8b8265219e3fd9a2cdf049f2da35.png" alt="" width="50">
       </span>
             </div>
-            <button type="button">Оформить заказ</button>
+          <!--  <button type="button">Оформить заказ</button>-->
         </div><!-- Yorder -->
     </div>
 </div>
@@ -447,14 +455,14 @@
     }
 
     button{
-        width: 100%;
+        width: 150%;
         margin-top: 40px;
         padding: 20px;
         border: none;
         border-radius: 30px;
         background: #52ad9c;
         color: #fff;
-        font-size: 15px;
+        font-size: 20px;
         font-weight: bold;
     }
     button:hover{
