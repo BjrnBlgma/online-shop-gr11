@@ -22,7 +22,7 @@
             </label>
 
             <input type="password" name="password" id="password" placeholder="Enter Password">
-            <label style="color: red"> <?php echo $errors['password'] ?? ''; /*if (empty($_POST['password'])) { echo "Введите ваш пароль";}*/ ?> </label>
+            <label style="color: red"> <?php echo $errors['password'] ?? '';?> </label>
 
 
             <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">

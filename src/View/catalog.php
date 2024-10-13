@@ -9,13 +9,16 @@
             <div class="effect-1"></div>
             <div class="effect-2"></div>
             <div class="content">
+                <a href="/add" >
                 <img class="card-img-top" src="<?php echo $product['image']; ?>">
+                </a>
                 <!--<div class="exercise"  ></div>-->
 
             </div>
             <span class="title">
-                <!--<a href="/add" >  якорь для клика </a>-->
-                <?php echo $product['name']; ?>
+                <a href="/add" >
+                <?php echo $product['id'] . ') '; echo $product['name']; ?>
+                    </a>
                 <span> <?php echo "{$product['price']}$" ?> </span>
             </span>
         </div>
@@ -54,7 +57,7 @@
     .container {
         display: flex;
         flex-wrap: wrap;
-        max-width: 600px;
+        max-width: 1000px;
         margin: 1vw auto;
         position: relative;
         text-align: center;
@@ -144,9 +147,9 @@
     .title span {
         display: block;
         font-family: Helvetica, Arial, Sans-Serif;
-        font-size: 0.6rem;
+        font-size: 1.2rem;
         letter-spacing: 0.1rem;
-        margin-top: 8px;
+        margin-top: 4px;
         text-transform: uppercase;
     }
 

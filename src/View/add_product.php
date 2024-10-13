@@ -15,6 +15,7 @@
             <button type="submit">ADD to cart</button>
 
             <div class="links">
+                <a href="/catalog" >Go to Catalog</a>
                 <a href="/cart" >Go to look cart</a>
                 <!--<a href="#">Forgot Password?</a>-->
             </div>
@@ -105,7 +106,7 @@
         display: flex;
         /*justify-content: space-between;*/
         align-items: center;
-        justify-content: right;
+        justify-content: space-between;
         padding:10px 20px 0px;
     }
 

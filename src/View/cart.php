@@ -56,7 +56,7 @@
                         <h5>Итого</h5>
                     </div>
                     <div class="col-sm-4 p-0">
-                        <p id="total"> <?php echo $allSum . "$" ?> </p>
+                        <p id="total"> <?php echo $allSum . "$";?> </p>
                     </div>
                 </div>
                 <a href="order"><button id="btn-checkout" class="shopnow"><span>Оформить</span></button></a>

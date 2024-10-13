@@ -3,6 +3,7 @@ require_once "./../Controller/UserController.php";
 require_once "./../Controller/CartController.php";
 require_once "./../Controller/ProductController.php";
 require_once "./../Controller/LoginController.php";
+require_once './../Controller/OrderController.php';
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -44,8 +45,11 @@ switch ($requestUri){
 
 
     case '/order':
+        $orderController = new OrderController();
         if ($requestMethod === 'GET'){
-            require_once "./../View/product_order.php";
+            $orderController->getOrderForm();
+        } elseif ($requestMethod === 'POST'){
+            $orderController->createOrder();
         } else{
             echo "$requestMethod не поддерживается адресом $requestUri";
         }
