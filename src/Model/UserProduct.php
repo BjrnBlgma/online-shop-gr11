@@ -31,6 +31,7 @@ class UserProduct
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
         $stmt = $pdo->prepare("SELECT 
+            products.id as product_id, 
             products.name as product_name, 
             products.image as product_image, 
             products.price as product_price, 
@@ -43,11 +44,11 @@ class UserProduct
         return $userID;
     }
 
-    public function deleteProduct(int $user, int $product)
+    public function deleteProduct(int $user)
     {
         $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
 
-        $stmt = $pdo->prepare( "DELETE FROM author WHERE user_id = :user_id AND product_id = :product_id");
-        $stmt->execute(['user_id' => $user, 'product_id' => $product]);
+        $stmt = $pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_i");
+        $stmt->execute(['user_id' => $user]);
     }
 }
