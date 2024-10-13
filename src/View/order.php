@@ -21,19 +21,19 @@
             <input type="text" placeholder="Введите email" id="email" name="email" required>
             <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
 
-                <tr>
+                <!--<tr>
                     <th colspan="2">Ваш заказ</th>
                 </tr>
                 <br>
                 <tr>
-                    <td>Кол-во товаров: <?php echo $countProducts ?? '';?> шт.</td>
+                    <td>Кол-во товаров: <?php /*echo $countProducts ?? '';*/?> шт.</td>
                 </tr>
                 <br>
                 <tr>
                     <td>Итого</td>
-                    <td><?php echo $allSum ?? ''; ?></td>
+                    <td><?php /*echo $allSum ?? ''; */?></td>
                 </tr>
-
+-->
 
             <button type="submit">Оформить заказ</button>
             <div class="links">

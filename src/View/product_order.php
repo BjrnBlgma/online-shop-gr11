@@ -7,12 +7,12 @@
             <label>
                 <span class="fname">Имя <span class="required">*</span></span>
                 <input type="text" name="firstName" id="firstName">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['firstName'] ?? '';?> </label>
             </label>
             <label>
                 <span class="lname">Фамилия <span class="required">*</span></span>
                 <input type="text" name="family" id="family">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['family'] ?? '';?> </label>
             </label>
             <label>
                 <span>Страна <span class="required">*</span></span>
@@ -272,27 +272,27 @@
             <label>
                 <span>Город <span class="required">*</span></span>
                 <input type="text" name="city" id="city" placeholder="Населенный пункт">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['city'] ?? '';?> </label>
             </label>
             <label>
                 <span>Улица <span class="required">*</span></span>
                 <input type="text" name="address" id="address" placeholder="Название улицы, номер дома/подъезда/квартиры" required>
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['address'] ?? '';?> </label>
             </label>
             <label>
                 <span>Регион<span class="required">*</span></span>
                 <input type="text" name="region" id="region">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['region'] ?? '';?> </label>
             </label>
             <label>
                 <span>Почтовый индекс<span class="required">*</span></span>
                 <input type="text" name="index" id="index">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['index'] ?? '';?> </label>
             </label>
             <label>
                 <span>Телефон <span class="required">*</span></span>
                 <input type="tel" name="phone" id="phone">
-                <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+                <label style="color: red"> <?php echo $errors['phone'] ?? '';?> </label>
             </label>
             <label>
                 <span>Email <span class="required">*</span></span>
@@ -307,12 +307,12 @@
                     <th colspan="2">Ваш заказ</th>
                 </tr>
                 <tr>
-                    <td>Кол-во товаров (<?php echo $countProducts ?>)</td>
-                    <td><?php echo $allSum . "$" ?></td>
+                    <td>Кол-во товаров (<?php echo $countProducts ?? ''?>)</td>
+                    <td><?php echo $allSum ?? '' ?></td>
                 </tr>
                 <tr>
                     <td>Итого</td>
-                    <td><?php echo $allSum . "$" ?></td>
+                    <td><?php echo $allSum ?? ''?></td>
                 </tr>
                 <tr>
                     <td>Доставка</td>

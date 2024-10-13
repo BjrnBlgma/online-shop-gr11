@@ -15,16 +15,19 @@ id пользователя;
 require_once "./../Model/UserProduct.php";
 require_once "./../Model/Order.php";
 require_once "./../Model/User.php";
+require_once './../Model/OrderProduct.php';
 class OrderController
 {
     private UserProduct $userProduct;
     private Order $order;
     private User $user;
+    private OrderProduct $orderProduct;
     public function __construct()
     {
         $this->userProduct = new UserProduct();
         $this->order = new Order();
         $this->user = new User();
+        $this->orderProduct = new OrderProduct();
     }
 
     public function getOrderForm()
@@ -34,15 +37,6 @@ class OrderController
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         } else{
-            $productsInCart = $this->userProduct->getByUserId($userId);
-            $allSum=0;
-            $countProducts = 0;
-            foreach($productsInCart as $product){
-                $sum = $product['product_price'] * $product['user_products_amount'];
-                $allSum += $sum;
-                $countProducts += 1 * $product['user_products_amount'];
-            }
-            $allSum .="$";
             require_once "./../View/order.php";
         }
     }
@@ -59,26 +53,19 @@ class OrderController
         if (empty($errors)) {
             $name = $_POST['firstName'];
             $family = $_POST['family'];
-            /*$selection = $_POST['selection'];*/
             $address = $_POST['address'];
             $city = $_POST['city'];
-            /*$region = $_POST['region'];
-            $index = $_POST['index'];*/
             $phone = $_POST['phone'];
             $email = $_POST['email'];
 
-            $productsInCart = $this->userProduct->getByUserId($userId);
-            //print_r($productsInCart);
-            $allSum=0;
-            $countProducts = 0;
-            $res =[];
-            foreach($productsInCart as $product){
-                $sum = $product['product_price'] * $product['user_products_amount'];
-                $allSum += $sum;
-                $countProducts += 1 * $product['user_products_amount'];
-                $this->order->createOrder($userId, $product['product_id'], $product['user_products_amount'], $name, $family, $city, $address, $phone, $email);
+            $this->order->createOrderId($name, $family, $city, $address, $phone, $email, $userId);
+            $orderId = $this->order->getByUserIdToTakeOrderId($userId);
 
+            $productsInCart = $this->userProduct->getByUserId($userId);
+            foreach($productsInCart as $product){
+                $this->orderProduct->sendProductToOrder($orderId['id'], $product['product_id'], $product['user_products_amount'], $product['product_price']);
             }
+
 
             $this->userProduct->deleteProduct($userId); // Удаляем товар из корзины, п.ч. сделали заказ
             header('Location: /cart');
@@ -86,6 +73,9 @@ class OrderController
         }
         require_once "./../View/order.php";
     }
+
+
+
 
     private function validateOrder(): array //переделать валидацию, после создания таблицы в бд
     {
