@@ -1,11 +1,19 @@
 <?php
+require_once "./../Database/Database.php";
+
 class UserProduct
 {
+    private $pdo;
+    private Database $db;
+
+    public function __construct()
+    {
+        $this->db = new Database();
+        $this->pdo = $this->db->getConnectPdo();
+    }
     public function getByUserIdAndProductId(int $userId, int $productId)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-
-        $stmt = $pdo->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
         $isProductInCart = $stmt->fetch();
 
@@ -14,23 +22,19 @@ class UserProduct
 
     public function addProductToCart(int $user, int $product, int $amount)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-        $stmt = $pdo->prepare("INSERT INTO user_products (user_id, product_id, amount) VALUES (:user_id, :product_id, :amount)");
+        $stmt = $this->pdo->prepare("INSERT INTO user_products (user_id, product_id, amount) VALUES (:user_id, :product_id, :amount)");
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
     public function plusProductAmountInCart(int $user, int $product, int $amount)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-        $stmt = $pdo->prepare("UPDATE user_products SET amount = :amount WHERE user_id = :user_id AND product_id = :product_id");
+        $stmt = $this->pdo->prepare("UPDATE user_products SET amount = :amount WHERE user_id = :user_id AND product_id = :product_id");
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
-    public function getByUserId($user)
+    public function getByUserId(int $user)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-
-        $stmt = $pdo->prepare("SELECT 
+        $stmt = $this->pdo->prepare("SELECT 
             products.id as product_id, 
             products.name as product_name, 
             products.image as product_image, 
@@ -46,9 +50,7 @@ class UserProduct
 
     public function deleteProduct(int $user)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-
-        $stmt = $pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
+        $stmt = $this->pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
     }
 }

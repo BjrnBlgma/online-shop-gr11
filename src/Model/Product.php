@@ -1,10 +1,20 @@
 <?php
+require_once "./../Database/Database.php";
+
 class Product
 {
+    private $pdo;
+    private Database $db;
+
+    public function __construct()
+    {
+        $this->db = new Database();
+        $this->pdo = $this->db->getConnectPdo();
+    }
+
     public function getByProductId(int $productId)
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-        $stmt = $pdo->prepare('SELECT id FROM products WHERE id = :product_id');
+        $stmt = $this->pdo->prepare('SELECT id FROM products WHERE id = :product_id');
         $stmt->execute(['product_id' => $productId]);
         $isCorrectIdProduct = $stmt->fetch();
 
@@ -13,9 +23,7 @@ class Product
 
     public function getProducts(): array
     {
-        $pdo = new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
-
-        $stmt = $pdo->prepare("SELECT * FROM products");
+        $stmt = $this->pdo->prepare("SELECT * FROM products");
         $stmt->execute();
         $products = $stmt->fetchAll();
         return $products;
