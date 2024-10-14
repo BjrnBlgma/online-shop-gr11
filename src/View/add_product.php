@@ -3,7 +3,7 @@
         <h2>ADD to cart</h2>
         <form action="/add" method="POST">
             <label for="Product-id">Product ID</label>
-            <input type="text" placeholder="Enter Product-id" id="product_id" name="product_id" required>
+            <input placeholder="Enter Product-id" id="product_id" name="product_id" required>
             <label style="color: red"> <?php print_r($errors['product'] ?? '');?> </label>
             <br>
 
@@ -23,6 +23,31 @@
     </div>
 </div>
 
+
+
+
+<div class="container">
+    <h3>Catalog</h3>
+    <div class="card-deck">
+        <?php foreach ($catalog as $product): ?>
+        <div class="card text-center">
+            <a href="#">
+                <div class="card-header">
+                    Hit!
+                </div>
+                <img class="card-img-top" src="<?php echo $product['image']; ?>">
+                <div class="card-body">
+                    <p class="card-text text-muted"></p>
+                    <a href="#"><h5 class="card-title"><?php echo $product['name']; ?></h5></a>
+                    <div class="card-footer">
+                        <?php echo "{$product['price']}$" ?>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
 
 <style>
     body {
