@@ -1,27 +1,38 @@
 <h1>Catalog</h1>
 <div class="back">
-    <a href="/cart " >&#128722;</a>
+    <h1><a href="/cart " >&#128722;</a></h1>
 </div>
 
 <div class="container">
     <?php foreach ($catalog as $product): ?>
         <div class="product">
+
             <div class="effect-1"></div>
             <div class="effect-2"></div>
             <div class="content">
-                <a href="/add" >
                 <img class="card-img-top" src="<?php echo $product['image']; ?>">
-                </a>
+
                 <!--<div class="exercise"  ></div>-->
 
             </div>
             <span class="title">
-                <a href="/add" >
-                <?php echo $product['id'] . ') '; echo $product['name']; ?>
-                    </a>
+                <?php echo $product['name']; ?>
+
                 <span> <?php echo "{$product['price']}$" ?> </span>
+                        <form action="/add" method="POST">
+            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+            <input type="text" placeholder="Введите кол-во" id="amount" name="amount" required>
+            <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
+
+
+            <button type="submit">ADD to cart</button>
+
+        </form>
+
             </span>
+
         </div>
+
     <?php endforeach; ?>
 
 </div>
@@ -34,7 +45,7 @@
 <style>
     .back {
         position: fixed;
-        top: 30px;
+        top: 1px;
         font-size: 19px;
         margin: 10px 10px 3px 15px;
 
@@ -58,18 +69,19 @@
         display: flex;
         flex-wrap: wrap;
         max-width: 1000px;
-        margin: 1vw auto;
+        margin: 2vw auto;
         position: relative;
         text-align: center;
-        width: 94vw;
+        width: 90vw;
     }
 
     .product {
         flex: auto;
         font-size: 1.5rem;
-        margin: 0 1vw calc(1vw + 50px) 1vw;
-        min-width: calc(33% - 2vw);
+        margin: 0 1vw calc(3vw + 100px) 1vw; /*расстояние между продуктами*/
+        /*min-width: calc(33% - 2vw);*/
         position: relative;
+
     }
 
     .product:before {
@@ -80,11 +92,11 @@
 
     .content {
         background: white;
-        border-radius: 30%;
-        height: 84%;
+        border-radius: 20%;
+        height:80%;
         margin: 8%;
         position: absolute;
-        width: 84%;
+        width: 80%;
         vertical-align: middle;
         z-index: 5000;
     }
@@ -99,10 +111,10 @@
         border-radius: 30%;
         display: none;
         mix-blend-mode: multiply;
-        height: 84%;
+        height: 80%;
         opacity: 1;
         position: absolute;
-        width: 84%;
+        width: 80%;
         z-index: 3000;
     }
 
@@ -141,7 +153,7 @@
 
     .title {
         position: relative;
-        top: calc(100% + 16px);
+        top: calc(90% + 20px); /*расстояние текста от картинки*/
     }
 
     .title span {
@@ -198,5 +210,11 @@
         font-family: Helvetica, Arial, Sans-Serif;
         font-size: 0.7rem;
         text-decoration: none;
+    }
+
+    input {
+        width:35%;
+        margin: 8px 4;
+        padding:2px 3;
     }
 </style>
