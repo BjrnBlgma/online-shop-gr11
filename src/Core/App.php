@@ -1,11 +1,44 @@
 <?php
-require_once "./../Controller/UserController.php";
+/*require_once "./../Controller/UserController.php";
 require_once "./../Controller/CartController.php";
 require_once "./../Controller/ProductController.php";
 require_once "./../Controller/LoginController.php";
-require_once './../Controller/OrderController.php';
+require_once './../Controller/OrderController.php';*/
 
+$autoloadController = function(string $className) {
+    $path = "./../Controller/$className.php";
+    if (file_exists($path)) {
+        require_once $path;
+        return true;
+    }
+    return false;
+};
 
+$autoloadModel = function(string $modelName) {
+    $path = "./../Model/$modelName.php";
+    if (file_exists($path)) {
+        require_once $path;
+        return true;
+    }
+    return false;
+};
+
+$autoloadDatabase = function(string $dbName) {
+    $path = "./../Database/$dbName.php";
+    if (file_exists($path)) {
+        require_once $path;
+        return true;
+    }
+    return false;
+};
+
+//$autoloadCommon = function(string $className) {
+//
+//}
+
+spl_autoload_register($autoloadController);
+spl_autoload_register($autoloadModel);
+spl_autoload_register($autoloadDatabase);
 class App
 {
     private array $routes = [

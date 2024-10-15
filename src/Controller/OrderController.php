@@ -1,8 +1,5 @@
 <?php
-require_once "./../Model/UserProduct.php";
-require_once "./../Model/Order.php";
-require_once "./../Model/User.php";
-require_once './../Model/OrderProduct.php';
+
 class OrderController
 {
     private UserProduct $userProduct;

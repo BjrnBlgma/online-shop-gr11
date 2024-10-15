@@ -1,5 +1,5 @@
 <?php
-require_once "./../Model/User.php";
+
 class LoginController
 {
     private User $user;

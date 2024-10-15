@@ -1,5 +1,5 @@
 <?php
-require_once "./../Model/UserProduct.php";
+
 class CartController
 {
     private UserProduct $userProduct;
@@ -24,6 +24,6 @@ class CartController
             $allSum += $sum;
         }
 
-        require_once "./../View/cart.php";
+            require_once "./../View/cart.php";
     }
 }
