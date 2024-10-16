@@ -1,9 +1,11 @@
 <?php
-
+namespace Model;
+use Database\Database;
+use PDO;
 
 class Order
 {
-    private $pdo;
+    private PDO $pdo;
     private Database $db;
 
     public function __construct()

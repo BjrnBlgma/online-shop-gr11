@@ -1,4 +1,10 @@
 <?php
+namespace Controller;
+use Model\UserProduct;
+use Model\Order;
+use Model\User;
+use Model\OrderProduct;
+
 
 class OrderController
 {
@@ -42,8 +48,10 @@ class OrderController
             $phone = $_POST['phone'];
             $email = $_POST['email'];
 
-            $this->order->createOrderId($name, $family, $city, $address, $phone, $email, $userId);
             $orderId = $this->order->getByUserIdToTakeOrderId($userId);
+            if (empty($orderId)) {
+                $this->order->createOrderId($name, $family, $city, $address, $phone, $email, $userId);
+            }
 
             $productsInCart = $this->userProduct->getByUserId($userId);
             foreach($productsInCart as $product){

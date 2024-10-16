@@ -5,40 +5,9 @@ require_once "./../Controller/ProductController.php";
 require_once "./../Controller/LoginController.php";
 require_once './../Controller/OrderController.php';*/
 
-$autoloadController = function(string $className) {
-    $path = "./../Controller/$className.php";
-    if (file_exists($path)) {
-        require_once $path;
-        return true;
-    }
-    return false;
-};
+namespace Core;
 
-$autoloadModel = function(string $modelName) {
-    $path = "./../Model/$modelName.php";
-    if (file_exists($path)) {
-        require_once $path;
-        return true;
-    }
-    return false;
-};
 
-$autoloadDatabase = function(string $dbName) {
-    $path = "./../Database/$dbName.php";
-    if (file_exists($path)) {
-        require_once $path;
-        return true;
-    }
-    return false;
-};
-
-//$autoloadCommon = function(string $className) {
-//
-//}
-
-spl_autoload_register($autoloadController);
-spl_autoload_register($autoloadModel);
-spl_autoload_register($autoloadDatabase);
 class App
 {
     private array $routes = [
@@ -46,12 +15,12 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'LoginController',
+                'class' => '\Controller\LoginController',
                 'method' => 'getLoginForm'
                 ],
             'POST' =>
                 [
-                'class' => 'LoginController',
+                'class' => '\Controller\LoginController',
                 'method' => 'loginUser'
                 ]
             ],
@@ -60,12 +29,12 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'UserController',
+                'class' => '\Controller\UserController',
                 'method' => 'getRegistrateForm'
                 ],
             'POST' =>
                 [
-                'class' => 'UserController',
+                'class' => '\Controller\UserController',
                 'method' => 'registrate'
                 ]
             ],
@@ -74,7 +43,7 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'ProductController',
+                'class' => '\Controller\ProductController',
                 'method' => 'getCatalog'
                 ]
             ],
@@ -83,12 +52,12 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'OrderController',
+                'class' => 'Controller\OrderController',
                 'method' => 'getOrderForm'
                 ],
             'POST' =>
                 [
-                'class' => 'OrderController',
+                'class' => '\Controller\OrderController',
                 'method' => 'createOrder'
                 ]
             ],
@@ -102,7 +71,7 @@ class App
                 ],*/
             'POST' =>
                 [
-                'class' => 'ProductController',
+                'class' => '\Controller\ProductController',
                 'method' => 'addProductToCart'
                 ]
             ],
@@ -111,7 +80,7 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'LoginController',
+                'class' => '\Controller\LoginController',
                 'method' => 'logoutUser'
                 ]
             ],
@@ -120,7 +89,7 @@ class App
             [
             'GET' =>
                 [
-                'class' => 'CartController',
+                'class' => '\Controller\CartController',
                 'method' => 'lookCart'
                 ]
             ],
