@@ -18,8 +18,7 @@
             <input type="text" placeholder="Введите номер телефона" id="phone" name="phone" required>
             <label style="color: red"> <?php echo $errors['phone'] ?? '';?> </label>
 
-            <input type="text" placeholder="Введите email" id="email" name="email" required>
-            <label style="color: red"> <?php echo $errors['email'] ?? '';?> </label>
+            <input type="hidden" id="all_sum" name="all_sum" value="<?php echo $allSum ?>" required>
 
                 <!--<tr>
                     <th colspan="2">Ваш заказ</th>
@@ -29,11 +28,13 @@
                     <td>Кол-во товаров: <?php /*echo $countProducts ?? '';*/?> шт.</td>
                 </tr>
                 <br>
+                -->
+            <h3>
                 <tr>
                     <td>Итого</td>
-                    <td><?php /*echo $allSum ?? ''; */?></td>
+                    <td><?php echo $allSum . '$'; ?></td>
                 </tr>
--->
+            <h3>
 
             <button type="submit">Оформить заказ</button>
             <div class="links">
@@ -176,6 +177,7 @@
         padding: 10px 0;
     }
     tr>td:nth-child(1){
+
         text-align: left;
         color: #2d2d2a;
     }
@@ -193,6 +195,11 @@
         color: #888;
         margin: 0;
         padding-left: 10px;
+    }
+
+    h3 {
+        text-align: left;
+        font-size: 30px;
     }
 
 </style>

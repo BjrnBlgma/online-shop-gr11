@@ -30,32 +30,13 @@
 
             </div>
             <div class="col-12 col-sm-4 p-3 proceed form">
-                <!--<div class="row m-0">
-                    <div class="col-sm-8 p-0">
-
-                        <h6>Subtotal</h6>
-                    </div>
-
-                    <div class="col-sm-4 p-0">
-                        <p id="subtotal"> <?php /*echo $allSum . "$" */?></p>
-                    </div>
-
-
-                </div>-->
-                <!--<div class="row m-0">
-                    <div class="col-sm-8 p-0 ">
-                        <h6>Tax</h6>
-                    </div>
-                    <div class="col-sm-4 p-0">
-                        <p id="tax">$6.40</p>
-                    </div>
-                </div>-->
                 <hr>
                 <div class="row mx-0 mb-2">
                     <div class="col-sm-8 p-0 d-inline">
                         <h5>Итого</h5>
                     </div>
                     <div class="col-sm-4 p-0">
+                        <input type="hidden" id="sum" name="sum" value="<?php echo $allSum ?? null ?>" required>
                         <p id="total"> <?php echo $allSum . "$";?> </p>
                     </div>
                 </div>

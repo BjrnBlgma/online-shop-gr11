@@ -6,8 +6,8 @@ class Model
 {
     protected PDO $pdo;
 
-    public function getConnectPdo()
+    public function __construct()
     {
-        return $this->pdo =  new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+        $this->pdo =  new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
     }
 }

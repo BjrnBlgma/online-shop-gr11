@@ -6,7 +6,7 @@
         <h1 class="form-title">Register Here</h1>
         <form action="/register" method="POST">
 
-            <input type="text" placeholder="Enter NAME" name="name" id="name">
+            <input type="text" placeholder="Enter NAME" name="name" id="name" required>
 
 
             <label style="color: red">
@@ -16,16 +16,16 @@
             </label>
 
 
-            <input type="email" placeholder="Enter EMAIL" name="email" id="email">
+            <input type="email" placeholder="Enter EMAIL" name="email" id="email" required>
             <label style="color: red">
                 <?php echo $errors['email'] ?? ''; /*if (empty($_POST['email'])) { echo "Введите ваш email";}*/ ?>
             </label>
 
-            <input type="password" name="password" id="password" placeholder="Enter Password">
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
             <label style="color: red"> <?php echo $errors['password'] ?? '';?> </label>
 
 
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat">
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
             <label style="color: red"> <?php echo $errors['psw-repeat'] ?? '';/*if (empty($_POST['psw-repeat'])) { echo "Повторите ваш пароль";}*/ ?> </label>
             <!--<input type="text" placeholder="CODE">-->
             <br>
