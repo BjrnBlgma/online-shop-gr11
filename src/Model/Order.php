@@ -1,23 +1,12 @@
 <?php
 namespace Model;
-use Database\Database;
-use PDO;
 
-class Order
+class Order extends Model
 {
-    private PDO $pdo;
-    private Database $db;
-
-    public function __construct()
+    public function createOrderId($name, $family, $city, $address, $phone, $sum, $userId) //добавить переменные для добавления информации в табицу Order
     {
-        $this->db = new Database();
-        $this->pdo = $this->db->getConnectPdo();
-    }
-
-    public function createOrderId($name, $family, $city, $address, $phone, $email, $userId) //добавить переменные для добавления информации в табицу Order
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO orders (name, family, city, address, phone, email, user_id) VALUES (:name, :family, :city, :address, :phone, :email, :user_id)"); //добавить переменные для добавления информации в табицу Order
-        $stmt->execute(['name' => $name, 'family' => $family, 'city'=> $city, 'address'=> $address, 'phone'=> $phone, 'email' => $email, 'user_id'=> $userId]);
+        $stmt = $this->pdo->prepare("INSERT INTO orders (name, family, city, address, phone, sum, user_id) VALUES (:name, :family, :city, :address, :phone, :sum, :user_id)"); //добавить переменные для добавления информации в табицу Order
+        $stmt->execute(['name' => $name, 'family' => $family, 'city'=> $city, 'address'=> $address, 'phone'=> $phone, 'sum' => $sum, 'user_id'=> $userId]);
     }
 
 

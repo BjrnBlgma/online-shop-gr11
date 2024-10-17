@@ -1,19 +1,9 @@
 <?php
 namespace Model;
-use Database\Database;
-use PDO;
 
-class UserProduct
+class UserProduct extends Model
 {
-    private PDO $pdo;
-    private Database $db;
-
-    public function __construct()
-    {
-        $this->db = new Database();
-        $this->pdo = $this->db->getConnectPdo();
-    }
-    public function getByUserIdAndProductId(int $userId, int $productId)
+     public function getByUserIdAndProductId(int $userId, int $productId)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);

@@ -1,18 +1,8 @@
 <?php
 namespace Model;
-use Database\Database;
-use PDO;
 
-class User
+class User extends Model
 {
-    private PDO $pdo;
-    private Database $db;
-
-    public function __construct()
-    {
-        $this->db = new Database();
-        $this->pdo = $this->db->getConnectPdo();
-    }
     public function createUser(string $name, string $email, string $hash)
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");

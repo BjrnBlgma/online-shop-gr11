@@ -1,19 +1,8 @@
 <?php
 namespace Model;
-use Database\Database;
-use PDO;
 
-class Product
+class Product extends Model
 {
-    private PDO $pdo;
-    private Database $db;
-
-    public function __construct()
-    {
-        $this->db = new Database();
-        $this->pdo = $this->db->getConnectPdo();
-    }
-
     public function getByProductId(int $productId)
     {
         $stmt = $this->pdo->prepare('SELECT id FROM products WHERE id = :product_id');
