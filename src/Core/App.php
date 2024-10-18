@@ -31,14 +31,10 @@ class App
 
     public function createRoute($route, $method, $className, $methodName)
     {
-        if ($route === $route) {
-            $this->routes[$route][$method]['class'] = $className;
-            $this->routes[$route][$method]['method'] = $methodName;
-        } else {
-            $this->routes[$route][$method]['class'] = $className;
-            $this->routes[$route][$method]['method'] = $methodName;
-        }
-
+        $this->routes[$route][$method] = [
+            'class' => $className,
+            'method' => $methodName
+        ];
     }
 
 }

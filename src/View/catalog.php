@@ -17,17 +17,35 @@
             </div>
             <span class="title">
                 <?php echo $product['name']; ?>
-
+                <nav>
                 <span> <?php echo "{$product['price']}$" ?> </span>
                         <form action="/add" method="POST">
-            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
-            <input type="text" placeholder="Введите кол-во" id="amount" name="amount" required>
-            <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+
+                                <input type="text" placeholder="Введите кол-во" id="amount" name="amount" required>
+                                <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
+
+                            <button type="submit">ADD to cart</button>
+                        </form>
 
 
-            <button type="submit">ADD to cart</button>
+                <form action="/addToWishlist" method="POST">
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                    <input type="hidden" id="amount" name="amount" value="1" required>
 
-        </form>
+                    <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
+
+                    <button type="submit">Добавить в Избранное
+    <svg class="heart" version="1.1" viewBox="0 0 512 512" width="16px" xml:space="preserve" id="wishlist"
+         stroke="#727272" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path
+                d="M340.8,98.4c50.7,0,91.9,41.3,91.9,92.3c0,26.2-10.9,49.8-28.3,66.6L256,407.1L105,254.6c-15.8-16.6-25.6-39.1-25.6-63.9
+                c0-51,41.1-92.3,91.9-92.3c38.2,0,70.9,23.4,84.8,56.8C269.8,121.9,302.6,98.4,340.8,98.4 M340.8,83C307,83,276,98.8,256,124.8
+                c-20-26-51-41.8-84.8-41.8C112.1,83,64,131.3,64,190.7c0,27.9,10.6,54.4,29.9,74.6L245.1,418l10.9,11l10.9-11l148.3-149.8
+                c21-20.3,32.8-47.9,32.8-77.5C448,131.3,399.9,83,340.8,83L340.8,83z" stroke="#727272"/></svg>
+                    </button>
+                </form>
+                </nav>
+
 
             </span>
 
@@ -68,18 +86,18 @@
     .container {
         display: flex;
         flex-wrap: wrap;
-        max-width: 1000px;
+        max-width: 1200px; /*размер каталога*/
         margin: 2vw auto;
         position: relative;
         text-align: center;
-        width: 90vw;
+        width: 100%; /*сколько использовать места от всего доступного размера каталога*/
     }
 
     .product {
         flex: auto;
-        font-size: 1.5rem;
-        margin: 0 1vw calc(3vw + 100px) 1vw; /*расстояние между продуктами*/
-        /*min-width: calc(33% - 2vw);*/
+        font-size: 1rem;
+        margin: 0 1vw calc(2vw + 80px) 1vw; /*расстояние между продуктами*/
+        min-width: calc(30% - 10vw);
         position: relative;
 
     }
@@ -161,7 +179,7 @@
         font-family: Helvetica, Arial, Sans-Serif;
         font-size: 1.2rem;
         letter-spacing: 0.1rem;
-        margin-top: 4px;
+        margin-top: 3px;
         text-transform: uppercase;
     }
 
@@ -214,7 +232,36 @@
 
     input {
         width:35%;
-        margin: 8px 4;
-        padding:2px 3;
+        margin: 2px 6px;
+        padding:2px 2px;
+    }
+    button {
+        text-align: center;
+        font-size: 14px;
+
+    }
+
+    nav {
+        width: 100%;
+        color: #727272;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 0;
+        border-bottom: 3px solid #efefef;
+        font-size: 10px;
+
+        svg.heart {
+
+            height: 20px;
+            width: 20px;
+            float: right;
+            margin-top: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &:hover {
+                fill: red;
+            }
+        }
     }
 </style>

@@ -1,47 +1,36 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <main id="cart" style="max-width:960px">
     <div class="back"><a href="/catalog " >&#11178; shop</a></div>
-    <h1>Your Cart</h1>
+    <h1>My Wishlist</h1>
     <div class="container-fluid">
         <div class="row align-items-start">
             <div class="col-12 col-sm-8 items">
                 <!--1-->
-                <?php foreach($productsInCart as $product): ?>
+                <?php foreach($productsInWishlist as $product): ?>
                     <div class="cartItem row align-items-start">
                         <div class="col-3 mb-2">
-                            <img class="w-100" src="<?php echo $product['product_image']; ?>" alt="art image">
+                            <img class="w-100" src="<?php echo $product['image']; ?>" alt="art image">
                         </div>
                         <div class="col-5 mb-2">
-                            <h6 class=""><?php echo $product['product_name']; ?></h6>
-<!--                            <p class="pl-1 mb-0">20 x 24</p>-->
-                            <p class="pl-1 mb-0">Matte Print</p>
+                            <h6 class=""><?php echo $product['name']; ?></h6>
+                            <!--<p class="pl-1 mb-0"><?php /*echo $product['id']; */?></p>-->
+                            <p class="pl-1 mb-0"><?php echo $product['description']; ?></p>
                         </div>
                         <div class="col-2">
-                            <p class="cartItemQuantity p-1 text-center"><?php echo $product['user_products_amount']; ?></p>
+                            <p class="cartItemQuantity p-1 text-center"><?php echo $product['amount']; ?></p>
                         </div>
                         <div class="col-2">
-                            <p id="cartItem1Price"> <?php echo "{$product['product_price']}$" ?> </p>
+                            <p id="cartItem1Price"> <?php echo "{$product['price']}$" ?> </p>
                         </div>
+
+                        <form action="/deleteFromWishlist" method="POST">
+                            <button type="submit">Удалить из Избранного
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                            </button>
+                        </form>
                     </div>
                     <hr>
                 <?php endforeach; ?>
-
-
-
-            </div>
-            <div class="col-12 col-sm-4 p-3 proceed form">
-                <hr>
-                <div class="row mx-0 mb-2">
-                    <div class="col-sm-8 p-0 d-inline">
-                        <h5>Итого</h5>
-                    </div>
-                    <div class="col-sm-4 p-0">
-                        <input type="hidden" id="sum" name="sum" value="<?php echo $allSum ?? null ?>" required>
-                        <p id="total"> <?php echo $allSum . "$";?> </p>
-                    </div>
-                </div>
-                <a href="order"><button id="btn-checkout" class="shopnow"><span>Оформить</span></button></a>
-            </div>
         </div>
     </div>
     </div>
@@ -200,23 +189,18 @@
         top: 2px;
         right: -6px;
     }
-    .ma {
-        margin: auto;
-    }
-    .price {
-        color: slategrey;
-        font-size: 2em;
-    }
-    #mycart {
-        min-width: 90px;
-    }
-    #cartItems {
-        font-size: 17px;
-    }
+
     #product .container .row .pr4 {
         padding-right: 15px;
     }
     #product .container .row .pl4 {
         padding-left: 15px;
+    }
+
+    button {
+        text-align: center;
+        font-size: 14px;
+        width: 30%;
+        float: right;
     }
 </style>

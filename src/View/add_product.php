@@ -26,28 +26,28 @@
 
 
 
-<div class="container">
+<!--<div class="container">
     <h3>Catalog</h3>
     <div class="card-deck">
-        <?php foreach ($catalog as $product): ?>
+        <?php /*foreach ($catalog as $product): */?>
         <div class="card text-center">
             <a href="#">
                 <div class="card-header">
                     Hit!
                 </div>
-                <img class="card-img-top" src="<?php echo $product['image']; ?>">
+                <img class="card-img-top" src="<?php /*echo $product['image']; */?>">
                 <div class="card-body">
                     <p class="card-text text-muted"></p>
-                    <a href="#"><h5 class="card-title"><?php echo $product['name']; ?></h5></a>
+                    <a href="#"><h5 class="card-title"><?php /*echo $product['name']; */?></h5></a>
                     <div class="card-footer">
-                        <?php echo "{$product['price']}$" ?>
+                        <?php /*echo "{$product['price']}$" */?>
                     </div>
                 </div>
             </a>
         </div>
 
     </div>
-</div>
+</div>-->
 
 <style>
     body {

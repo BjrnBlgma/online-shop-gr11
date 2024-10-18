@@ -78,7 +78,7 @@ class ProductController
                 $errors['product'] = "Поле ID товара должно содержать только цифры!";
             } elseif ($productId <= 0) {
                 $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
-            } elseif ($isCorrectIdProduct === false) {
+            } elseif ($isCorrectIdProduct['id'] === false) {
                 $errors['product'] = "Введите корректный ID товара";
             }
         } else {
