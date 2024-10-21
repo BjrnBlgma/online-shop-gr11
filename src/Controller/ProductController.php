@@ -2,16 +2,22 @@
 namespace Controller;
 use Model\UserProduct;
 use Model\Product;
+use Model\UserProductWishlist;
+use Controller\WishlistController;
 
 class ProductController
 {
     private Product $product;
     private UserProduct $userProduct;
+    private UserProductWishlist $userProductWishlist;
+    private WishlistController $wishlistController;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->userProduct = new UserProduct();
+        $this->userProductWishlist = new UserProductWishlist();
+        $this->wishlistController = new WishlistController();
     }
 
     public function getCatalog()
@@ -50,15 +56,16 @@ class ProductController
             $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
             if ($isProductInCart === false) {
                 $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
+                $this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             } else {
                 $newAmount = $amount + $isProductInCart['amount'];
                 $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
+                $this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             }
-
         }
 
         require_once "./../View/add_product.php";

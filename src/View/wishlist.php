@@ -1,6 +1,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <main id="cart" style="max-width:960px">
-    <div class="back"><a href="/catalog " >&#11178; shop</a></div>
+    <div class="back"><a href="/catalog" >&#11178; shop</a></div>
+
+    <div class="twitter"><i class="fab fa-twitter"></i><h1><a href="/cart" >&#128722;</a></h1></div>
+
+
     <h1>My Wishlist</h1>
     <div class="container-fluid">
         <div class="row align-items-start">
@@ -13,15 +17,26 @@
                         </div>
                         <div class="col-5 mb-2">
                             <h6 class=""><?php echo $product['name']; ?></h6>
+                            <label style="color: green"> <?php echo $errors['product'] ?? '';?> </label>
                             <!--<p class="pl-1 mb-0"><?php /*echo $product['id']; */?></p>-->
                             <p class="pl-1 mb-0"><?php echo $product['description']; ?></p>
                         </div>
-                        <div class="col-2">
-                            <p class="cartItemQuantity p-1 text-center"><?php echo $product['amount']; ?></p>
+                        <!--<div class="col-2">
+                            <p class="cartItemQuantity p-1 text-center"><?php /*echo $product['amount'] ?? ''; */?></p>
                         </div>
                         <div class="col-2">
-                            <p id="cartItem1Price"> <?php echo "{$product['price']}$" ?> </p>
-                        </div>
+                            <p id="cartItem1Price"> <?php /*echo "{$product['price']}$" */?> </p>
+                        </div>-->
+
+                        <form action="/add" method="POST">
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+
+                            <input type="hidden" placeholder="Введите кол-во" id="amount" name="amount" value="1" required>
+                            <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
+
+                            <button type="submit">ADD to cart</button>
+
+                        </form>
 
                         <form action="/deleteFromWishlist" method="POST">
                             <button type="submit">Удалить из Избранного
@@ -202,5 +217,15 @@
         font-size: 14px;
         width: 30%;
         float: right;
+        justify-content: space-between;
+    }
+
+    .twitter {
+        position: fixed;
+        top: 1px;
+        font-size: 19px;
+        margin: 10px 10px 3px 15px;
+
+        right: 20px;
     }
 </style>

@@ -22,23 +22,29 @@ class WishlistController
         }
         $userId = $_SESSION['user_id'];
 
-        $productId = $_POST['product_id'];
-        $amount = $_POST['amount'];
+        $errors = $this->validateProduct();
+        if (empty($errors)) {
+            $productId = $_POST['product_id'];
+            $amount = $_POST['amount'];
 
-        $price = $this->product->getByProductId($productId);
+            $price = $this->product->getByProductId($productId);
 
-        $isProductInWishlist = $this->wishlist->getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
+            $isProductInWishlist = $this->wishlist->getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
 
-        if ($isProductInWishlist === false) {
-            $this->wishlist->addProductToWishlist($userId, $productId, $amount, $price['price']); // Добавляем
-            header('Location: /wishlist');
-            exit;
-        } else{
-            $newAmount = $amount + $isProductInWishlist['amount'];
-            $this->wishlist->plusProductAmountInCart($userId, $productId, $newAmount);
-            header('Location: /wishlist');
-            exit;
+            if ($isProductInWishlist === false) {
+                $this->wishlist->addProductToWishlist($userId, $productId); // Добавляем
+                header('Location: /wishlist');
+                exit;
+            } else{
+//            $newAmount = $amount + $isProductInWishlist['amount'];
+//            $this->wishlist->plusProductAmountInCart($userId, $productId, $newAmount);
+                $errors['product'] = 'Product already in wishlist';
+                header('Location: /wishlist');
+                exit;
+            }
         }
+
+
     }
 
     public function lookWishlist()
@@ -77,11 +83,11 @@ class WishlistController
         $productsInWishlist =[];
         $product=[];
         foreach ($wishlistProducts as $elem) {
-            $product = $this->product->getByProductId($elem['product_id']);
-            if ($product){
+            $productsInWishlist[] = $this->product->getByProductId($elem['product_id']);
+            /*if ($product){
                 $product['amount'] = $elem['amount'];
                 $productsInWishlist[] = $product;
-            }
+            }*/
         }
 
 //        print_r($productsInWishlist);
@@ -105,4 +111,41 @@ class WishlistController
         }
     }
 
+
+    private function validateProduct(): array
+    {
+        $errors = [];
+
+        if (isset($_POST['product_id'])) {
+            $productId = $_POST['product_id'];
+            $isCorrectIdProduct = $this->product->getByProductId($productId);  //есть ли такой товар к продуктах
+
+            if (empty($productId)) {
+                $errors['product'] = "ID товара не должно быть пустым";
+            } elseif (!ctype_digit($productId)) {
+                $errors['product'] = "Поле ID товара должно содержать только цифры!";
+            } elseif ($productId <= 0) {
+                $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
+            } elseif ($isCorrectIdProduct['id'] === false) {
+                $errors['product'] = "Введите корректный ID товара";
+            }
+        } else {
+            $errors['product'] = 'Выберите продукт';
+        }
+
+        if (isset($_POST['amount'])) {
+            $amount = $_POST['amount'];
+            if (empty($amount)) {
+                $errors['amount'] = "Выберите количество товара";
+            } elseif (!ctype_digit($amount)) {
+                $errors['amount'] = "Поле количества товара должно содержать только цифры!";
+            } elseif ($amount <= 0) {
+                $errors['amount'] = "Количество товара не должно быть отрицательным";
+            }
+        } else {
+            $errors['amount'] = 'Выберите количество товара';
+        }
+
+        return $errors;
+    }
 }

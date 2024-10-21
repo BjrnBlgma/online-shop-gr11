@@ -13,10 +13,10 @@ class UserProductWishlist extends Model
         return $isProductInCart;
     }
 
-    public function addProductToWishlist(int $user, int $product, int $amount, int $price)
+    public function addProductToWishlist(int $user, int $product)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO user_products_wishlist (user_id, product_id, amount, price) VALUES (:userId, :productId, :amount, :price)");
-        $stmt->execute([ 'userId' => $user, 'productId' => $product, 'amount' => $amount, 'price' => $price]);
+        $stmt = $this->pdo->prepare("INSERT INTO user_products_wishlist (user_id, product_id) VALUES (:userId, :productId)");
+        $stmt->execute([ 'userId' => $user, 'productId' => $product]);
     }
 
     public function plusProductAmountInCart(int $user, int $product, int $amount)
