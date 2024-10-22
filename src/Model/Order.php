@@ -12,7 +12,7 @@ class Order extends Model
 
     public function getByUserIdToTakeOrderId($userId)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM orders WHERE user_id = :user_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM orders WHERE user_id = :user_id ORDER BY id DESC');
         $stmt->execute(['user_id' => $userId]);
         $sendOrderId = $stmt->fetch();
 
