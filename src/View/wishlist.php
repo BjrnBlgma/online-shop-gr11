@@ -13,13 +13,13 @@
                 <?php foreach($productsInWishlist as $product): ?>
                     <div class="cartItem row align-items-start">
                         <div class="col-3 mb-2">
-                            <img class="w-100" src="<?php echo $product['image']; ?>" alt="art image">
+                            <img class="w-100" src="<?php echo $product->getImage(); ?>" alt="art image">
                         </div>
                         <div class="col-5 mb-2">
-                            <h6 class=""><?php echo $product['name']; ?></h6>
+                            <h6 class=""><?php echo $product->getName(); ?></h6>
                             <label style="color: green"> <?php echo $errors['product'] ?? '';?> </label>
                             <!--<p class="pl-1 mb-0"><?php /*echo $product['id']; */?></p>-->
-                            <p class="pl-1 mb-0"><?php echo $product['description']; ?></p>
+                            <p class="pl-1 mb-0"><?php echo $product->getDescription(); ?></p>
                         </div>
                         <!--<div class="col-2">
                             <p class="cartItemQuantity p-1 text-center"><?php /*echo $product['amount'] ?? ''; */?></p>
@@ -29,7 +29,7 @@
                         </div>-->
 
                         <form action="/add" method="POST">
-                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product->getId();?>" required>
 
                             <input type="hidden" placeholder="Введите кол-во" id="amount" name="amount" value="1" required>
                             <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
@@ -40,7 +40,7 @@
 
                         <form action="/deleteFromWishlist" method="POST">
                             <button type="submit">Удалить из Избранного
-                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product->getId();?>" required>
                             </button>
                         </form>
                     </div>

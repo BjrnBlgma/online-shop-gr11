@@ -51,10 +51,12 @@ class OrderController
 
             $this->order->createOrderId($name, $family, $city, $address, $phone, $sum, $userId);
 
-            $orderId = $this->order->getByUserIdToTakeOrderId($userId);
+            $orderIdObj = $this->order->getByUserIdToTakeOrderId($userId);
+            $orderId = $orderIdObj->getId();
+
             $productsInCart = $this->userProduct->getByUserId($userId);
             foreach($productsInCart as $product){
-                $this->orderProduct->sendProductToOrder($orderId['id'], $product['product_id'], $product['user_products_amount'], $product['product_price']);
+                $this->orderProduct->sendProductToOrder($orderId, $product['product_id'], $product['user_products_amount'], $product['product_price']);
             }
 
 

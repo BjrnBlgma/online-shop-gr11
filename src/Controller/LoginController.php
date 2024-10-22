@@ -26,14 +26,13 @@ class LoginController
 
                 $data = $this->user->getByEmail($login);
 
-                if ($data === false) {
+                if (empty($data)) {
                     $errors['login'] = 'Incorrect email or password';
                 } else {
-                    $passFromDb = $data['password'];
+                    $passFromDb = $data->getPassword();
                     if (password_verify($password, $passFromDb)) {
-                        //setcookie('user_id', $data['id']);
                         session_start();
-                        $_SESSION['user_id'] = $data['id'];
+                        $_SESSION['user_id'] = $data->getId();
 
                         header('Location: /catalog');
                     } else {

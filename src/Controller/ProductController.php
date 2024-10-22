@@ -28,6 +28,7 @@ class ProductController
         }
         $catalog = $this->product->getProducts();
 
+
         require_once "./../View/catalog.php";
     }
 
@@ -77,7 +78,9 @@ class ProductController
 
         if (isset($_POST['product_id'])) {
             $productId = $_POST['product_id'];
-            $isCorrectIdProduct = $this->product->getByProductId($productId);  //есть ли такой товар к продуктах
+            $prodObj = $this->product->getByProductId($productId);  //есть ли такой товар к продуктах
+            $isCorrectIdProduct = $prodObj->getId();
+
 
             if (empty($productId)) {
                 $errors['product'] = "ID товара не должно быть пустым";
@@ -85,7 +88,7 @@ class ProductController
                 $errors['product'] = "Поле ID товара должно содержать только цифры!";
             } elseif ($productId <= 0) {
                 $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
-            } elseif ($isCorrectIdProduct['id'] === false) {
+            } elseif (empty($isCorrectIdProduct)) {
                 $errors['product'] = "Введите корректный ID товара";
             }
         } else {

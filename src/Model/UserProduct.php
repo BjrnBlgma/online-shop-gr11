@@ -3,13 +3,22 @@ namespace Model;
 
 class UserProduct extends Model
 {
-     public function getByUserIdAndProductId(int $userId, int $productId)
+    private int $id;
+    private int $userId;
+    private int $productId;
+    private int $amount;
+
+
+     public function getByUserIdAndProductId(int $userId, int $productId): self|null
     {
         $stmt = $this->pdo->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
         $isProductInCart = $stmt->fetch();
 
-        return $isProductInCart;
+        if (empty($isProductInCart)) {
+            return null;
+        }
+        return $this->hydrate($isProductInCart);
     }
 
     public function addProductToCart(int $user, int $product, int $amount)
@@ -44,5 +53,39 @@ class UserProduct extends Model
     {
         $stmt = $this->pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    public function getProductId(): int
+    {
+        return $this->productId;
+    }
+
+    public function getAmount(): int
+    {
+        return $this->amount;
+    }
+
+
+
+    private function hydrate(array $data)
+    {
+        $object = new self();
+
+        $object->id = $data['id'];
+        $object->userId = $data['userId'];
+        $object->productId = $data['productId'];
+        $object->amount = $data['amount'];
+
+        return $object;
     }
 }

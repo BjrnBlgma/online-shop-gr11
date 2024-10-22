@@ -2,16 +2,19 @@
 namespace Controller;
 use Model\Product;
 use Model\UserProductWishlist;
+use Model\UserProduct;
 
 class WishlistController
 {
     private Product $product;
     private UserProductWishlist $wishlist;
+    private UserProduct $userProduct;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->wishlist = new UserProductWishlist();
+        $this->userProduct = new UserProduct();
     }
 
     public function addProductToWishlist()
@@ -25,9 +28,9 @@ class WishlistController
         $errors = $this->validateProduct();
         if (empty($errors)) {
             $productId = $_POST['product_id'];
-            $amount = $_POST['amount'];
 
-            $price = $this->product->getByProductId($productId);
+//            $amount = $_POST['amount'];
+//            $price = $this->product->getByProductId($productId);
 
             $isProductInWishlist = $this->wishlist->getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
 
@@ -83,7 +86,10 @@ class WishlistController
         $productsInWishlist =[];
         $product=[];
         foreach ($wishlistProducts as $elem) {
-            $productsInWishlist[] = $this->product->getByProductId($elem['product_id']);
+            $wishlistObj = $this->product->getByProductId($elem['product_id']);
+
+            $productsInWishlist[] = $wishlistObj;
+
             /*if ($product){
                 $product['amount'] = $elem['amount'];
                 $productsInWishlist[] = $product;
@@ -93,6 +99,38 @@ class WishlistController
 //        print_r($productsInWishlist);
         require_once "./../View/wishlist.php";
     }
+
+
+//    public function addFromWishlistToCart()
+//    {
+//        session_start();
+//        if (!isset($_SESSION['user_id'])) {
+//            header('Location: /login');
+//        }
+//        $userId = $_SESSION['user_id'];
+//        $errors = $this->validateProduct();
+//
+//        if (empty($errors)) {
+//            $productId = $_POST['product_id'];
+//            $amount = $_POST['amount'];
+//
+//            $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
+//            if ($isProductInCart === false) {
+//                $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
+//                $this->wishlist->deleteProduct($userId, $productId);
+//                header('Location: /cart');
+//                exit;
+//            } else {
+//                $newAmount = $amount + $isProductInCart['amount'];
+//                $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
+//                $this->wishlist->deleteProduct($userId, $productId);
+//                header('Location: /cart');
+//                exit;
+//            }
+//        }
+//
+//        require_once "./../View/add_product.php";
+//    }
 
     public function deleteProductFromWishlist()
     {

@@ -16,18 +16,18 @@
             <div class="effect-1"></div>
             <div class="effect-2"></div>
             <div class="content">
-                <img class="card-img-top" src="<?php echo $product['image']; ?>">
+                <img class="card-img-top" src="<?php echo $product->getImage(); ?>">
 
                 <!--<div class="exercise"  ></div>-->
 
             </div>
             <span class="title">
-                <?php echo $product['name']; ?>
+                <?php echo $product->getName(); ?>
                 <nav>
-                <span> <?php echo "{$product['price']}$" ?> </span>
+                <span> <?php echo "{$product->getPrice()}$" ?> </span>
 
                         <form action="/add" method="POST">
-                            <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                            <input type="hidden" id="product_id" name="product_id" value="<?= $product->getId();?>" required>
 
                                 <input type="text" placeholder="Введите кол-во" id="amount" name="amount" required>
                                 <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
@@ -37,7 +37,7 @@
 
 
                 <form action="/addToWishlist" method="POST">
-                    <input type="hidden" id="product_id" name="product_id" value="<?= $product['id']?>" required>
+                    <input type="hidden" id="product_id" name="product_id" value="<?= $product->getId();?>" required>
                     <input type="hidden" id="amount" name="amount" value="1" required>
 
                     <label style="color: red"> <?php print_r($errors['amount'] ?? '');?> </label>
@@ -48,7 +48,7 @@
                             <path d="M340.8,98.4c50.7,0,91.9,41.3,91.9,92.3c0,26.2-10.9,49.8-28.3,66.6L256,407.1L105,254.6c-15.8-16.6-25.6-39.1-25.6-63.9c0-51,41.1-92.3,91.9-92.3c38.2,0,70.9,23.4,84.8,56.8C269.8,121.9,302.6,98.4,340.8,98.4 M340.8,83C307,83,276,98.8,256,124.8c-20-26-51-41.8-84.8-41.8C112.1,83,64,131.3,64,190.7c0,27.9,10.6,54.4,29.9,74.6L245.1,418l10.9,11l10.9-11l148.3-149.8c21-20.3,32.8-47.9,32.8-77.5C448,131.3,399.9,83,340.8,83L340.8,83z" stroke="#727272"/></svg>
                     </button>
                 </form>
-                    <label style="color: green"> <?php echo $errors['product'] ?? '';?> </label>
+                        <label style="color: green"> <?php echo $errors['product'] ?? '';?> </label>
                 </nav>
 
 
