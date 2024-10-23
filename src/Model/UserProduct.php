@@ -33,7 +33,7 @@ class UserProduct extends Model
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
-    /*public function getByUserIdWithJoin(int $user)
+    public function getByUserIdWithJoin(int $user)
     {
         $stmt = $this->pdo->prepare("SELECT *
             FROM user_products
@@ -46,25 +46,10 @@ class UserProduct extends Model
 
         $result = [];
         foreach ($data as $elem) {
-            $user = new User();
-            $user->setId($elem['users.id']);
-            $user->setName($elem['users.name']);
-            $user->setEmail($elem['users.email']);
-
-            $product = new Product();
-            $product->setId($elem['products.id']);
-            $product->setName($elem['products.name']);
-            $product->setPrice($elem['products.price']);
-            $product->setImage($elem['products.image']);
-
-            $obj = new self();
-            $obj->id = $elem['user_products.id'];
-            $obj->user = $user;
-            $obj->product = $product;
-            $obj->amount = $elem['user_products.amount'];
+            $result[] = $this->hydrateWithJoin($elem);
         }
         return $result;
-    }*/
+    }
 
     public function getByUserIdWithoutJoin(int $user)
     {
@@ -130,8 +115,6 @@ class UserProduct extends Model
     }
 
 
-
-
     private function hydrate(array $data)
     {
         $object = new self();
@@ -149,5 +132,28 @@ class UserProduct extends Model
         $object->amount = $data['amount'];
 
         return $object;
+    }
+
+    private function hydrateWithJoin(array $data)
+    {
+        $user = new User();
+        $user->setId($data['user_id']);
+        $user->setName($data['name']);
+        $user->setEmail($data['email']);
+
+        $product = new Product();
+        $product->setId($data['product_id']);
+        $product->setName($data['name']);
+        $product->setPrice($data['price']);
+        $product->setImage($data['image']);
+        $product->setDescription($data['description']);
+
+        $obj = new self();
+        $obj->id = $data['id'];
+        $obj->user = $user;
+        $obj->product = $product;
+        $obj->amount = $data['amount'];
+
+        return $obj;
     }
 }

@@ -54,7 +54,12 @@ class OrderController
             $orderIdObj = $this->order->getByUserIdToTakeOrderId($userId);
             $orderId = $orderIdObj->getId();
 
-            $userProducts = $this->userProduct->getByUserIdWithoutJoin($userId);
+//            $userProducts = $this->userProduct->getByUserIdWithoutJoin($userId);
+//            foreach($userProducts as $elem){
+//                $this->orderProduct->sendProductToOrder($orderId, $elem->getProduct() , $elem->getAmount() );
+//            }
+
+            $userProducts = $this->userProduct->getByUserIdWithJoin($userId);
             foreach($userProducts as $elem){
                 $this->orderProduct->sendProductToOrder($orderId, $elem->getProduct() , $elem->getAmount() );
             }

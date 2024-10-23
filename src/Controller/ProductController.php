@@ -53,7 +53,7 @@ class ProductController
             $amount = $_POST['amount'];
 
             $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
-            if ($isProductInCart === false) {
+            if (empty($isProductInCart)) {
                 $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
                 $this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');

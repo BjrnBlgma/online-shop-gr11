@@ -18,7 +18,8 @@ class CartController
         }
         $userId = $_SESSION['user_id'];
 
-        $productsInCart = $this->userProduct->getByUserIdWithoutJoin($userId);
+//        $productsInCart = $this->userProduct->getByUserIdWithoutJoin($userId);
+        $productsInCart = $this->userProduct->getByUserIdWithJoin($userId);
 
         //print_r($productsInCart);
         $allSum= $this->allSum();
