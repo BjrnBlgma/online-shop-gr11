@@ -14,10 +14,13 @@ Autoload::registrate("/var/www/html/src/");
 $app = new App();
 $app->createRoute('/login', 'GET', LoginController::class, 'getLoginForm');
 $app->createRoute('/login', 'POST', LoginController::class,'loginUser');
+
 $app->createRoute('/register', 'GET', UserController::class, 'getRegistrateForm');
 $app->createRoute('/register', 'POST', UserController::class, 'registrate');
+
 $app->createRoute('/catalog', 'GET', ProductController::class, 'getCatalog');
-$app->createRoute('/order', 'GET', ProductController::class, 'getOrderForm');
+
+$app->createRoute('/order', 'GET', OrderController::class, 'getOrderForm');
 $app->createRoute('/order', 'POST', OrderController::class, 'createOrder');
 
 $app->createRoute('/add', 'POST', ProductController::class,  'addProductToCart');

@@ -33,6 +33,37 @@ class Product extends Model
         return $catalog;
     }
 
+    public function setId(int $id): Product
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName(string $name): Product
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setPrice(int $price): Product
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    public function setDescription(?string $description): Product
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function setImage(?string $image): Product
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
     public function getId(): int
     {
         return $this->id;
@@ -59,7 +90,7 @@ class Product extends Model
     }
 
 
-    private function hydrate(array $data)
+    private function hydrate(array $data): self|null
     {
         $obj = new self();
         $obj->id = $data['id'];
@@ -67,7 +98,6 @@ class Product extends Model
         $obj->price = $data['price'];
         $obj->description = $data['description'];
         $obj->image = $data['image'];
-
         return $obj;
     }
 }

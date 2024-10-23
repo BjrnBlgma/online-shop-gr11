@@ -28,6 +28,45 @@ class User extends Model
         return $this->hydrate($data);
     }
 
+    public function getById(string $id): self|null
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+
+        $data = $stmt->fetch();
+
+        if (empty($data)){
+            return null;
+        }
+        return $this->hydrate($data);
+    }
+
+    public function setId(int $id): User
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName(string $name): User
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setEmail(string $email): User
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function setPassword(string $password): User
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+
+
     public function getPassword(): string
     {
         return $this->password;
@@ -55,7 +94,6 @@ class User extends Model
         $obj->name = $data['name'];
         $obj->email = $data['email'];
         $obj->password = $data['password'];
-
         return $obj;
     }
 }

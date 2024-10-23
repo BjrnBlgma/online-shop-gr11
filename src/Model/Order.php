@@ -82,9 +82,8 @@ class Order extends Model
         $obj->city = $data['city'];
         $obj->address = $data['address'];
         $obj->phone = $data['phone'];
-        $obj->sumTotal = $data['sumTotal'];
-        $obj->userId = $data['userId'];
-
+        $obj->sumTotal = $data['sum'];
+        $obj->userId = $data['user_id'];
         return $obj;
     }
 

@@ -10,14 +10,12 @@ class ProductController
     private Product $product;
     private UserProduct $userProduct;
     private UserProductWishlist $userProductWishlist;
-    private WishlistController $wishlistController;
 
     public function __construct()
     {
         $this->product = new Product();
         $this->userProduct = new UserProduct();
         $this->userProductWishlist = new UserProductWishlist();
-        $this->wishlistController = new WishlistController();
     }
 
     public function getCatalog()
@@ -61,7 +59,7 @@ class ProductController
                 header('Location: /cart');
                 exit;
             } else {
-                $newAmount = $amount + $isProductInCart['amount'];
+                $newAmount = $amount + $isProductInCart->getAmount();
                 $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
                 $this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');

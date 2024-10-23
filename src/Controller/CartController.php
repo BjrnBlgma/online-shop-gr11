@@ -18,8 +18,9 @@ class CartController
         }
         $userId = $_SESSION['user_id'];
 
-        $productsInCart = $this->userProduct->getByUserId($userId);
+        $productsInCart = $this->userProduct->getByUserIdWithoutJoin($userId);
 
+        //print_r($productsInCart);
         $allSum= $this->allSum();
 
         require_once "./../View/cart.php";
@@ -29,11 +30,11 @@ class CartController
     {
         $userId = $_SESSION['user_id'];
 
-        $productsInCart = $this->userProduct->getByUserId($userId);
+        $productsInCart = $this->userProduct->getByUserIdWithoutJoin($userId);
 
         $allSum=0;
         foreach($productsInCart as $product){
-            $sum = $product['product_price'] * $product['user_products_amount'];
+            $sum = $product->getProduct()->getPrice() * $product->getAmount();
             $allSum += $sum;
         }
         return $allSum;

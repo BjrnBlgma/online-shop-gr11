@@ -4,8 +4,8 @@ namespace Model;
 class UserProduct extends Model
 {
     private int $id;
-    private int $userId;
-    private int $productId;
+    private User $user;
+    private Product $product;
     private int $amount;
 
 
@@ -33,20 +33,50 @@ class UserProduct extends Model
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
-    public function getByUserId(int $user)
+    /*public function getByUserIdWithJoin(int $user)
     {
-        $stmt = $this->pdo->prepare("SELECT 
-            products.id as product_id, 
-            products.name as product_name, 
-            products.image as product_image, 
-            products.price as product_price, 
-            user_products.amount as user_products_amount 
-            FROM user_products INNER JOIN products ON products.id = user_products.product_id  WHERE user_id = :user_id
+        $stmt = $this->pdo->prepare("SELECT *
+            FROM user_products
+                INNER JOIN products ON products.id = user_products.product_id
+                INNER JOIN users ON users.id = user_products.user_id
+            WHERE user_id = :user_id
             ");
         $stmt->execute(['user_id' => $user]);
+        $data = $stmt->fetchAll();
 
-        $userID = $stmt->fetchAll();
-        return $userID;
+        $result = [];
+        foreach ($data as $elem) {
+            $user = new User();
+            $user->setId($elem['users.id']);
+            $user->setName($elem['users.name']);
+            $user->setEmail($elem['users.email']);
+
+            $product = new Product();
+            $product->setId($elem['products.id']);
+            $product->setName($elem['products.name']);
+            $product->setPrice($elem['products.price']);
+            $product->setImage($elem['products.image']);
+
+            $obj = new self();
+            $obj->id = $elem['user_products.id'];
+            $obj->user = $user;
+            $obj->product = $product;
+            $obj->amount = $elem['user_products.amount'];
+        }
+        return $result;
+    }*/
+
+    public function getByUserIdWithoutJoin(int $user)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $user]);
+        $data = $stmt->fetchAll();
+
+        $result = [];
+        foreach ($data as $elem) {
+            $result[] = $this->hydrate($elem);
+        }
+        return $result;
     }
 
     public function deleteProduct(int $user)
@@ -60,14 +90,32 @@ class UserProduct extends Model
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function setId(int $id): UserProduct
     {
-        return $this->userId;
+        $this->id = $id;
+        return $this;
     }
 
-    public function getProductId(): int
+    public function getUser(): User
     {
-        return $this->productId;
+        return $this->user;
+    }
+
+    public function setUser(User $user): UserProduct
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getProduct(): Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(Product $product): UserProduct
+    {
+        $this->product = $product;
+        return $this;
     }
 
     public function getAmount(): int
@@ -75,15 +123,29 @@ class UserProduct extends Model
         return $this->amount;
     }
 
+    public function setAmount(int $amount): UserProduct
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+
 
 
     private function hydrate(array $data)
     {
         $object = new self();
 
+        $user = new User();
+        $userFromDb = $user->getById($data['user_id']);
+
+        $product = new Product();
+        $productFromDb = $product->getByProductId($data['product_id']);
+
+
         $object->id = $data['id'];
-        $object->userId = $data['userId'];
-        $object->productId = $data['productId'];
+        $object->user = $userFromDb;
+        $object->product = $productFromDb;
         $object->amount = $data['amount'];
 
         return $object;

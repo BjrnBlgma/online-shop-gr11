@@ -164,7 +164,7 @@ class WishlistController
                 $errors['product'] = "Поле ID товара должно содержать только цифры!";
             } elseif ($productId <= 0) {
                 $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
-            } elseif ($isCorrectIdProduct['id'] === false) {
+            } elseif (empty($isCorrectIdProduct->getId())) {
                 $errors['product'] = "Введите корректный ID товара";
             }
         } else {

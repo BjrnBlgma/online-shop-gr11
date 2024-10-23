@@ -54,9 +54,9 @@ class OrderController
             $orderIdObj = $this->order->getByUserIdToTakeOrderId($userId);
             $orderId = $orderIdObj->getId();
 
-            $productsInCart = $this->userProduct->getByUserId($userId);
-            foreach($productsInCart as $product){
-                $this->orderProduct->sendProductToOrder($orderId, $product['product_id'], $product['user_products_amount'], $product['product_price']);
+            $userProducts = $this->userProduct->getByUserIdWithoutJoin($userId);
+            foreach($userProducts as $elem){
+                $this->orderProduct->sendProductToOrder($orderId, $elem->getProduct() , $elem->getAmount() );
             }
 
 
