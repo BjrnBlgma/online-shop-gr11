@@ -3,6 +3,7 @@ namespace Controller;
 use Model\Product;
 use Model\UserProductWishlist;
 use Model\UserProduct;
+use Request\WishlistRequest;
 
 class WishlistController
 {
@@ -17,7 +18,7 @@ class WishlistController
         $this->userProduct = new UserProduct();
     }
 
-    public function addProductToWishlist()
+    public function addProductToWishlist(WishlistRequest $request)
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
@@ -25,9 +26,9 @@ class WishlistController
         }
         $userId = $_SESSION['user_id'];
 
-        $errors = $this->validateProduct();
+        $errors = $request->validate();
         if (empty($errors)) {
-            $productId = $_POST['product_id'];
+            $productId = $request->getProductId();
 
 //            $amount = $_POST['amount'];
 //            $price = $this->product->getByProductId($productId);
@@ -147,43 +148,5 @@ class WishlistController
             header('Location: /wishlist');
             exit;
         }
-    }
-
-
-    private function validateProduct(): array
-    {
-        $errors = [];
-
-        if (isset($_POST['product_id'])) {
-            $productId = $_POST['product_id'];
-            $isCorrectIdProduct = $this->product->getByProductId($productId);  //есть ли такой товар к продуктах
-
-            if (empty($productId)) {
-                $errors['product'] = "ID товара не должно быть пустым";
-            } elseif (!ctype_digit($productId)) {
-                $errors['product'] = "Поле ID товара должно содержать только цифры!";
-            } elseif ($productId <= 0) {
-                $errors['product'] = "Поле ID товара не должно содержать отрицательные значения";
-            } elseif (empty($isCorrectIdProduct->getId())) {
-                $errors['product'] = "Введите корректный ID товара";
-            }
-        } else {
-            $errors['product'] = 'Выберите продукт';
-        }
-
-        if (isset($_POST['amount'])) {
-            $amount = $_POST['amount'];
-            if (empty($amount)) {
-                $errors['amount'] = "Выберите количество товара";
-            } elseif (!ctype_digit($amount)) {
-                $errors['amount'] = "Поле количества товара должно содержать только цифры!";
-            } elseif ($amount <= 0) {
-                $errors['amount'] = "Количество товара не должно быть отрицательным";
-            }
-        } else {
-            $errors['amount'] = 'Выберите количество товара';
-        }
-
-        return $errors;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use http\Client\Request;
+
 class App
 {
     private array $routes = [];
@@ -18,7 +20,10 @@ class App
                 $method = $route[$requestMethod]['method'];
 
                 $class = new $controllerClassName();
-                return $class->$method();
+
+                $request = new Request($requestUri, $requestMethod, $_POST);
+
+                return $class->$method($request);
             } else {
                 echo "$requestMethod не поддерживается для $requestUri";
             }

@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 use Model\User;
+use Request\LoginRequest;
 
 class LoginController
 {
@@ -14,14 +15,14 @@ class LoginController
     {
         require_once "./../View/login.php";
     }
-    public function loginUser()
+    public function loginUser(LoginRequest $request)
     {
-        $errors = $this->validateLogin();
+        $errors = $request->validate();
 
         if  (empty($errors)) {
             try {
-                $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
-                $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+                $login = $request->getLogin();
+                $password = $request->getPassword();
 
 
                 $data = $this->user->getByEmail($login);
@@ -55,23 +56,5 @@ class LoginController
         session_destroy();
         header('Location: /login');
         exit;
-    }
-
-    private function validateLogin(): array
-    {
-        $errors = [];
-        if (isset($_POST['login'])) {
-            $login = htmlspecialchars($_POST['login'], ENT_QUOTES, 'UTF-8');
-        } else {
-            $errors['login'] = 'Incorrect email or password';
-        }
-
-        if (isset($_POST['password'])) {
-            $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
-        } else {
-            $errors['login'] = 'Incorrect email or password';
-        }
-
-        return $errors;
     }
 }
