@@ -9,15 +9,9 @@ use Request\OrderRequest;
 
 class OrderController
 {
-    private UserProduct $userProduct;
-    private Order $order;
-    private OrderProduct $orderProduct;
     private CartController $cartController;
     public function __construct()
     {
-        $this->userProduct = new UserProduct();
-        $this->order = new Order();
-        $this->orderProduct = new OrderProduct();
         $this->cartController = new CartController();
     }
 
@@ -50,9 +44,9 @@ class OrderController
             $phone = $request->getPhone();
             $sum = $request->getTotalSum();
 
-            $this->order->createOrderId($name, $family, $city, $address, $phone, $sum, $userId);
+            Order::createOrderId($name, $family, $city, $address, $phone, $sum, $userId);
 
-            $orderIdObj = $this->order->getByUserIdToTakeOrderId($userId);
+            $orderIdObj = Order::getByUserIdToTakeOrderId($userId);
             $orderId = $orderIdObj->getId();
 
 //            $userProducts = $this->userProduct->getByUserIdWithoutJoin($userId);
@@ -60,13 +54,13 @@ class OrderController
 //                $this->orderProduct->sendProductToOrder($orderId, $elem->getProduct() , $elem->getAmount() );
 //            }
 
-            $userProducts = $this->userProduct->getByUserIdWithJoin($userId);
+            $userProducts = UserProduct::getByUserIdWithJoin($userId);
             foreach ($userProducts as $elem) {
-                $this->orderProduct->sendProductToOrder($orderId, $elem->getProduct(), $elem->getAmount());
+                OrderProduct::sendProductToOrder($orderId, $elem->getProduct(), $elem->getAmount());
             }
 
 
-            $this->userProduct->deleteProduct($userId); // Удаляем товар из корзины, п.ч. сделали заказ
+            UserProduct::deleteProduct($userId); // Удаляем товар из корзины, п.ч. сделали заказ
             header('Location: /cart');
 
         }

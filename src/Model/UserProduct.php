@@ -9,33 +9,33 @@ class UserProduct extends Model
     private int $amount;
 
 
-     public function getByUserIdAndProductId(int $userId, int $productId): self|null
+     public static function getByUserIdAndProductId(int $userId, int $productId): self|null
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
+        $stmt = self::getPdo()->prepare('SELECT * FROM user_products WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
         $isProductInCart = $stmt->fetch();
 
         if (empty($isProductInCart)) {
             return null;
         }
-        return $this->hydrate($isProductInCart);
+        return self::hydrate($isProductInCart);
     }
 
-    public function addProductToCart(int $user, int $product, int $amount)
+    public static function addProductToCart(int $user, int $product, int $amount)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO user_products (user_id, product_id, amount) VALUES (:user_id, :product_id, :amount)");
+        $stmt = self::getPdo()->prepare("INSERT INTO user_products (user_id, product_id, amount) VALUES (:user_id, :product_id, :amount)");
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
-    public function plusProductAmountInCart(int $user, int $product, int $amount)
+    public static function plusProductAmountInCart(int $user, int $product, int $amount)
     {
-        $stmt = $this->pdo->prepare("UPDATE user_products SET amount = :amount WHERE user_id = :user_id AND product_id = :product_id");
+        $stmt = self::getPdo()->prepare("UPDATE user_products SET amount = :amount WHERE user_id = :user_id AND product_id = :product_id");
         $stmt->execute(['user_id' => $user, 'product_id' => $product, 'amount' => $amount]);
     }
 
-    public function getByUserIdWithJoin(int $user)
+    public static function getByUserIdWithJoin(int $user)
     {
-        $stmt = $this->pdo->prepare("SELECT *
+        $stmt = self::getPdo()->prepare("SELECT *
             FROM user_products
                 INNER JOIN products ON products.id = user_products.product_id
                 INNER JOIN users ON users.id = user_products.user_id
@@ -46,27 +46,27 @@ class UserProduct extends Model
 
         $result = [];
         foreach ($data as $elem) {
-            $result[] = $this->hydrateWithJoin($elem);
+            $result[] = self::hydrateWithJoin($elem);
         }
         return $result;
     }
 
-    public function getByUserIdWithoutJoin(int $user)
+    public static function getByUserIdWithoutJoin(int $user)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
+        $stmt = self::getPdo()->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
         $data = $stmt->fetchAll();
 
         $result = [];
         foreach ($data as $elem) {
-            $result[] = $this->hydrate($elem);
+            $result[] = self::hydrate($elem);
         }
         return $result;
     }
 
-    public function deleteProduct(int $user)
+    public static function deleteProduct(int $user)
     {
-        $stmt = $this->pdo->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
+        $stmt = self::getPdo()->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
     }
 
@@ -115,7 +115,7 @@ class UserProduct extends Model
     }
 
 
-    private function hydrate(array $data)
+    private static function hydrate(array $data)
     {
         $object = new self();
 
@@ -134,7 +134,7 @@ class UserProduct extends Model
         return $object;
     }
 
-    private function hydrateWithJoin(array $data)
+    private static function hydrateWithJoin(array $data)
     {
         $user = new User();
         $user->setId($data['user_id']);

@@ -4,12 +4,6 @@ use Model\User;
 
 class RegistrateRequest extends Request
 {
-    private User $user;
-    public function __construct(string $uri, string $method, array $data = [])
-    {
-        parent::__construct($uri, $method, $data = []);
-        $this->user = new User();
-    }
     public function getName(): ?string
     {
         return $this->data['name'] ?? null;
@@ -47,7 +41,7 @@ class RegistrateRequest extends Request
         if (isset($dataVal['email'])) {
             $email = htmlspecialchars($dataVal['email'], ENT_QUOTES, 'UTF-8');
 
-            $isCorrectEmail = $this->user->getByEmail($email); //свободна ли почта или уже занята
+            $isCorrectEmail = User::getByEmail($email); //свободна ли почта или уже занята
             if (empty($email)) {
                 $errors ['email'] = "Почта не должна быть пустой";
             }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

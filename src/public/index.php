@@ -29,7 +29,7 @@ $app->createRoute('/catalog', 'GET', ProductController::class, 'getCatalog');
 $app->createRoute('/order', 'GET', OrderController::class, 'getOrderForm');
 $app->postRoute('/order', OrderController::class, 'createOrder', OrderRequest::class);
 
-$app->postRoute('/add', ProductController::class,  'addProductToCart', ProductRequest::class);
+$app->postRoute('/add', CartController::class,  'addProductToCart', ProductRequest::class);
 $app->createRoute('/logout', 'GET', LoginController::class,  'logoutUser');
 $app->createRoute('/cart', 'GET', CartController::class, 'lookCart');
 

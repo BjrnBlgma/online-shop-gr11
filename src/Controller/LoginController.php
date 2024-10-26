@@ -5,12 +5,6 @@ use Request\LoginRequest;
 
 class LoginController
 {
-    private User $user;
-
-    public function __construct()
-    {
-        $this->user = new User();
-    }
     public function getLoginForm()
     {
         require_once "./../View/login.php";
@@ -25,7 +19,7 @@ class LoginController
                 $password = $request->getPassword();
 
 
-                $data = $this->user->getByEmail($login);
+                $data = User::getByEmail($login);
 
                 if (empty($data)) {
                     $errors['login'] = 'Incorrect email or password';

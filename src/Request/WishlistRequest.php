@@ -21,8 +21,7 @@ class WishlistRequest extends Request
         if (isset($this->data['product_id'])) {
             $productId = $this->data['product_id'];
 
-            $product = new Product();
-            $isCorrectIdProduct = $product->getByProductId($productId);  //есть ли такой товар к продуктах
+            $isCorrectIdProduct = Product::getByProductId($productId);  //есть ли такой товар к продуктах
 
             if (empty($productId)) {
                 $errors['product'] = "ID товара не должно быть пустым";

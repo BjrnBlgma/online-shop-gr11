@@ -3,8 +3,8 @@
         <h2>Оформление заказа</h2>
         <form action="/order" method="POST">
 
-            <input type="text" placeholder="Введите Имя" id="firstName" name="firstName" required>
-            <label style="color: red"> <?php echo $errors['firstName'] ?? '';?> </label>
+            <input type="text" placeholder="Введите Имя" id="name" name="name" required>
+            <label style="color: red"> <?php echo $errors['name'] ?? '';?> </label>
 
             <input type="text" placeholder="Введите Фамилию" id="family" name="family" required>
             <label style="color: red"> <?php echo $errors['family'] ?? '';?> </label>

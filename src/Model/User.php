@@ -9,15 +9,15 @@ class User extends Model
     private string $password;
 
 
-    public function createUser(string $name, string $email, string $hash)
+    public static function createUser(string $name, string $email, string $hash)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+        $stmt = self::getPdo()->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         $stmt->execute(['name' => $name, 'email' => $email, 'password' => $hash]);
     }
 
-    public function getByEmail(string $login): self|null
+    public static function getByEmail(string $login): self|null
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE email = :email');
+        $stmt = self::getPdo()->prepare('SELECT * FROM users WHERE email = :email');
         $stmt->execute(['email' => $login]);
 
         $data = $stmt->fetch();
@@ -25,12 +25,12 @@ class User extends Model
         if (empty($data)){
             return null;
         }
-        return $this->hydrate($data);
+        return self::hydrate($data);
     }
 
-    public function getById(string $id): self|null
+    public static function getById(string $id): self|null
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE id = :id');
+        $stmt = self::getPdo()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->execute(['id' => $id]);
 
         $data = $stmt->fetch();
@@ -38,7 +38,7 @@ class User extends Model
         if (empty($data)){
             return null;
         }
-        return $this->hydrate($data);
+        return self::hydrate($data);
     }
 
     public function setId(int $id): User
@@ -87,7 +87,7 @@ class User extends Model
         return $this->id;
     }
 
-    private function hydrate(array $data): self
+    private static function hydrate(array $data): self
     {
         $obj = new self();
         $obj->id = $data['id'];

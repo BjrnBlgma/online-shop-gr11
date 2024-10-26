@@ -23,9 +23,9 @@ class ProductRequest extends Request
         if (isset($this->data['product_id'])) {
             $productId = $this->data['product_id'];
 
-            $product = new Product();
-            $prodObj = $product->getByProductId($productId);  //есть ли такой товар к продуктах
-            $isCorrectIdProduct = $prodObj->getId();
+
+            $product = Product::getByProductId($productId);  //есть ли такой товар к продуктах
+            $isCorrectIdProduct = $product->getId();
 
             if (empty($productId)) {
                 $errors['product'] = "ID товара не должно быть пустым";
@@ -40,7 +40,7 @@ class ProductRequest extends Request
             $errors['product'] = 'Выберите продукт';
         }
 
-        if (isset($this->data['amount'])) {
+        if (isset($this->data['amount'])){
             $amount = $this->data['amount'];
             if (empty($amount)) {
                 $errors['amount'] = "Выберите количество товара";

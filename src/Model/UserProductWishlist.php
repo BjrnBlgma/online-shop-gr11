@@ -4,39 +4,39 @@ namespace Model;
 
 class UserProductWishlist extends Model
 {
-    public function getByUserIdAndProductId(int $userId, int $productId)
+    public static function getByUserIdAndProductId(int $userId, int $productId)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM user_products_wishlist WHERE user_id = :user_id AND product_id = :product_id');
+        $stmt = self::getPdo()->prepare('SELECT * FROM user_products_wishlist WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
         $isProductInCart = $stmt->fetch();
 
         return $isProductInCart;
     }
 
-    public function addProductToWishlist(int $user, int $product)
+    public static function addProductToWishlist(int $user, int $product)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO user_products_wishlist (user_id, product_id) VALUES (:userId, :productId)");
+        $stmt = self::getPdo()->prepare("INSERT INTO user_products_wishlist (user_id, product_id) VALUES (:userId, :productId)");
         $stmt->execute([ 'userId' => $user, 'productId' => $product]);
     }
 
-    public function plusProductAmountInCart(int $user, int $product, int $amount)
+    public static function plusProductAmountInCart(int $user, int $product, int $amount)
     {
-        $stmt = $this->pdo->prepare("UPDATE user_products_wishlist SET amount = :amount WHERE user_id = :userId AND product_id = :productId");
+        $stmt = self::getPdo()->prepare("UPDATE user_products_wishlist SET amount = :amount WHERE user_id = :userId AND product_id = :productId");
         $stmt->execute(['userId' => $user, 'productId' => $product, 'amount' => $amount]);
     }
 
-    public function getWishlistByUserId(int $user)
+    public static function getWishlistByUserId(int $user)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM user_products_wishlist WHERE user_id = :user_id");
+        $stmt = self::getPdo()->prepare("SELECT * FROM user_products_wishlist WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);
 
         $res = $stmt->fetchAll();
         return $res;
     }
 
-    public function deleteProduct(int $user, int $product)
+    public static function deleteProduct(int $user, int $product)
     {
-        $stmt = $this->pdo->prepare( "DELETE FROM user_products_wishlist WHERE user_id = :user_id AND product_id = :product");
+        $stmt = self::getPdo()->prepare( "DELETE FROM user_products_wishlist WHERE user_id = :user_id AND product_id = :product");
         $stmt->execute(['user_id' => $user, 'product' => $product]);
     }
 }

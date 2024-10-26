@@ -9,26 +9,26 @@ class Product extends Model
     private string|null $description;
     private string|null $image;
 
-    public function getByProductId(int $productId): self|null
+    public static function getByProductId(int $productId): self|null
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM products WHERE id = :product_id');
+        $stmt = self::getPdo()->prepare('SELECT * FROM products WHERE id = :product_id');
         $stmt->execute(['product_id' => $productId]);
         $data = $stmt->fetch();
         if (empty($data)) {
             return null;
         }
-        return $this->hydrate($data);
+        return self::hydrate($data);
     }
 
-    public function getProducts()
+    public static function getProducts()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM products");
+        $stmt = self::getPdo()->prepare("SELECT * FROM products");
         $stmt->execute();
         $products = $stmt->fetchAll();
 
         $catalog = [];
         foreach ($products as $product) {
-            $catalog[] = $this->hydrate($product);
+            $catalog[] = self::hydrate($product);
         }
         return $catalog;
     }
@@ -90,7 +90,7 @@ class Product extends Model
     }
 
 
-    private function hydrate(array $data): self|null
+    private static function hydrate(array $data): self|null
     {
         $obj = new self();
         $obj->id = $data['id'];

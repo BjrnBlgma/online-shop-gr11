@@ -7,17 +7,6 @@ use Request\WishlistRequest;
 
 class WishlistController
 {
-    private Product $product;
-    private UserProductWishlist $wishlist;
-    private UserProduct $userProduct;
-
-    public function __construct()
-    {
-        $this->product = new Product();
-        $this->wishlist = new UserProductWishlist();
-        $this->userProduct = new UserProduct();
-    }
-
     public function addProductToWishlist(WishlistRequest $request)
     {
         session_start();
@@ -33,10 +22,10 @@ class WishlistController
 //            $amount = $_POST['amount'];
 //            $price = $this->product->getByProductId($productId);
 
-            $isProductInWishlist = $this->wishlist->getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
+            $isProductInWishlist = UserProductWishlist::getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
 
             if ($isProductInWishlist === false) {
-                $this->wishlist->addProductToWishlist($userId, $productId); // Добавляем
+                UserProductWishlist::addProductToWishlist($userId, $productId); // Добавляем
                 header('Location: /wishlist');
                 exit;
             } else{
@@ -59,7 +48,7 @@ class WishlistController
         }
         $userId = $_SESSION['user_id'];
 
-        $wishlistProducts = $this->wishlist->getWishlistByUserId($userId);
+        $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
         //попробовать сократить код
 
@@ -71,7 +60,7 @@ class WishlistController
 //
 //        $products = [];
 //        foreach ($productIds as $prodId) {
-//            $products [] = $this->product->getByProductId($prodId);
+//            $products [] = Product::getByProductId($prodId);
 //        }
 //
 //        foreach ($products as $product) {
@@ -87,7 +76,7 @@ class WishlistController
         $productsInWishlist =[];
         $product=[];
         foreach ($wishlistProducts as $elem) {
-            $wishlistObj = $this->product->getByProductId($elem['product_id']);
+            $wishlistObj = Product::getByProductId($elem['product_id']);
 
             $productsInWishlist[] = $wishlistObj;
 
@@ -115,16 +104,16 @@ class WishlistController
             $productId = $request->getProductId();
             $amount = $request->getAmount();
 
-            $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
+            $isProductInCart = UserProduct::getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
             if (empty($isProductInCart)) {
-                $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
-                $this->wishlist->deleteProduct($userId, $productId);
+                UserProduct::addProductToCart($userId, $productId, $amount); // Добавляем товар
+                UserProductWishlist::deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             } else {
                 $newAmount = $amount + $isProductInCart->getAmount();
-                $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
-                $this->wishlist->deleteProduct($userId, $productId);
+                UserProduct::plusProductAmountInCart($userId, $productId, $newAmount);
+                UserProductWishlist::deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             }
@@ -142,9 +131,9 @@ class WishlistController
         $userId = $_SESSION['user_id'];
         $productId = $_POST['product_id'];
 
-        $isProductInWishlist = $this->wishlist->getByUserIdAndProductId($userId, $productId);
+        $isProductInWishlist = UserProductWishlist::getByUserIdAndProductId($userId, $productId);
         if ($isProductInWishlist) {
-            $this->wishlist->deleteProduct($userId, $productId);
+            UserProductWishlist::deleteProduct($userId, $productId);
             header('Location: /wishlist');
             exit;
         }

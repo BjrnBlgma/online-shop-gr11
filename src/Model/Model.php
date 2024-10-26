@@ -4,10 +4,11 @@ use PDO;
 
 class Model
 {
-    protected PDO $pdo;
+    private static PDO $pdo;
 
-    public function __construct()
+    public static function getPdo(): PDO
     {
-        $this->pdo =  new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+        self::$pdo =  new PDO('pgsql:host=postgres_db;port=5432;dbname=mydb', 'user', 'pass');
+        return self::$pdo;
     }
 }

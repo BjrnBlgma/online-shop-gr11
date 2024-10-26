@@ -40,17 +40,17 @@ class OrderRequest extends Request
         $dataVal = $this->data;
         $errors = [];
 
-        if (isset($dataVal['firstName'])) {
-            $name = htmlspecialchars($dataVal['firstName'], ENT_QUOTES, 'UTF-8');
+        if (isset($dataVal['name'])) {
+            $name = htmlspecialchars($dataVal['name'], ENT_QUOTES, 'UTF-8');
             if (empty($name)){
-                $errors['firstName'] = "Имя не должно быть пустым";
+                $errors['name'] = "Имя не должно быть пустым";
             } elseif (strlen($name) < 3 || strlen($name) > 20) {
-                $errors['firstName'] = "Имя должно содержать не меньше 3 символов и не больше 20 символов";
+                $errors['name'] = "Имя должно содержать не меньше 3 символов и не больше 20 символов";
             } elseif (!preg_match("/^[a-zA-Zа-яА-Я]+$/u", $name)) {
-                $errors['firstName'] = "Имя может содержать только буквы";
+                $errors['name'] = "Имя может содержать только буквы";
             }
         }else{
-            $errors ['firstName'] = "Поле name должно быть заполнено";
+            $errors ['name'] = "Поле name должно быть заполнено";
         }
 
 

@@ -5,12 +5,6 @@ use Request\Request;
 
 class UserController
 {
-    private User $user;
-    public function __construct()
-    {
-        $this->user = new User();
-    }
-
     public function getRegistrateForm()
     {
         require_once "./../View/registrate.php";
@@ -27,7 +21,7 @@ class UserController
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             try {
-                $this->user->createUser($name, $email, $hash);
+                User::createUser($name, $email, $hash);
 
                 header('Location: /login');
             } catch (PDOException $e) {
