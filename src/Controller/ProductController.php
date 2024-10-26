@@ -12,7 +12,6 @@ class ProductController
         }
         $catalog = Product::getProducts();
 
-
         require_once "./../View/catalog.php";
     }
 

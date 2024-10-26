@@ -2,6 +2,7 @@
 namespace Controller;
 use Model\UserProduct;
 use Request\ProductRequest;
+use Service\CartService;
 
 class CartController
 {
@@ -16,8 +17,7 @@ class CartController
 //        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
 
-        //print_r($productsInCart);
-        $allSum= $this->allSum();
+        $allSum= CartService::totalSum($userId);
 
         require_once "./../View/cart.php";
     }
@@ -35,35 +35,11 @@ class CartController
             $productId = $request->getProductId();
             $amount = $request->getAmount();
 
-            $isProductInCart = UserProduct::getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
-            if (empty($isProductInCart)) {
-                UserProduct::addProductToCart($userId, $productId, $amount); // Добавляем товар
-                //$this->userProductWishlist->deleteProduct($userId, $productId);
-                header('Location: /cart');
-                exit;
-            } else {
-                $newAmount = $amount + $isProductInCart->getAmount();
-                UserProduct::plusProductAmountInCart($userId, $productId, $newAmount);
-                //$this->userProductWishlist->deleteProduct($userId, $productId);
-                header('Location: /cart');
-                exit;
-            }
+            CartService::checkProductInCart($userId, $productId, $amount);
+            header('Location: /cart');
+            exit;
         }
 
         require_once "./../View/add_product.php";
-    }
-
-    public function allSum()
-    {
-        $userId = $_SESSION['user_id'];
-
-        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
-
-        $allSum=0;
-        foreach($productsInCart as $product){
-            $sum = $product->getProduct()->getPrice() * $product->getAmount();
-            $allSum += $sum;
-        }
-        return $allSum;
     }
 }

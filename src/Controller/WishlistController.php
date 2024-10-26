@@ -5,6 +5,9 @@ use Model\UserProductWishlist;
 use Model\UserProduct;
 use Request\WishlistRequest;
 
+use Service\WishlistService;
+use Service\CartService;
+
 class WishlistController
 {
     public function addProductToWishlist(WishlistRequest $request)
@@ -22,22 +25,8 @@ class WishlistController
 //            $amount = $_POST['amount'];
 //            $price = $this->product->getByProductId($productId);
 
-            $isProductInWishlist = UserProductWishlist::getByUserIdAndProductId($userId, $productId); //есть ли продукт или нет
-
-            if ($isProductInWishlist === false) {
-                UserProductWishlist::addProductToWishlist($userId, $productId); // Добавляем
-                header('Location: /wishlist');
-                exit;
-            } else{
-//            $newAmount = $amount + $isProductInWishlist['amount'];
-//            $this->wishlist->plusProductAmountInCart($userId, $productId, $newAmount);
-                $errors['product'] = 'Product already in wishlist';
-                header('Location: /wishlist');
-                exit;
-            }
+            WishlistService::checkProductInWishlist($userId, $productId);
         }
-
-
     }
 
     public function lookWishlist()
@@ -51,13 +40,12 @@ class WishlistController
         $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
         //попробовать сократить код
-
 //        $productsInWishlist =[];
 //        $productIds = [];
 //        foreach ($wishlistProducts as $elem) {
 //            $productIds[] = $elem['product_id'];
 //        }
-//
+
 //        $products = [];
 //        foreach ($productIds as $prodId) {
 //            $products [] = Product::getByProductId($prodId);
@@ -72,24 +60,15 @@ class WishlistController
 //            }
 //        }
 
-
         $productsInWishlist =[];
         $product=[];
         foreach ($wishlistProducts as $elem) {
             $wishlistObj = Product::getByProductId($elem['product_id']);
 
             $productsInWishlist[] = $wishlistObj;
-
-            /*if ($product){
-                $product['amount'] = $elem['amount'];
-                $productsInWishlist[] = $product;
-            }*/
         }
-
-//        print_r($productsInWishlist);
         require_once "./../View/wishlist.php";
     }
-
 
     public function addFromWishlistToCart(WishlistRequest $request)
     {
@@ -104,38 +83,26 @@ class WishlistController
             $productId = $request->getProductId();
             $amount = $request->getAmount();
 
-            $isProductInCart = UserProduct::getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
-            if (empty($isProductInCart)) {
-                UserProduct::addProductToCart($userId, $productId, $amount); // Добавляем товар
-                UserProductWishlist::deleteProduct($userId, $productId);
-                header('Location: /cart');
-                exit;
-            } else {
-                $newAmount = $amount + $isProductInCart->getAmount();
-                UserProduct::plusProductAmountInCart($userId, $productId, $newAmount);
-                UserProductWishlist::deleteProduct($userId, $productId);
-                header('Location: /cart');
-                exit;
-            }
+            CartService::checkProductInCart($userId, $productId, $amount);
+            WishlistService::deleteProductFromWishlist($userId, $productId);
+            header('Location: /cart');
+            exit;
         }
 
         require_once "./../View/add_product.php";
     }
 
-    public function deleteProductFromWishlist()
+    public function deleteProductFromWishlist(WishlistRequest $request)
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         }
         $userId = $_SESSION['user_id'];
-        $productId = $_POST['product_id'];
+        $productId = $request->getProductId();
 
-        $isProductInWishlist = UserProductWishlist::getByUserIdAndProductId($userId, $productId);
-        if ($isProductInWishlist) {
-            UserProductWishlist::deleteProduct($userId, $productId);
-            header('Location: /wishlist');
-            exit;
-        }
+        WishlistService::deleteProductFromWishlist($userId, $productId);
+        header('Location: /wishlist');
+        exit;
     }
 }

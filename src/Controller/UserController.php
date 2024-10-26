@@ -1,7 +1,6 @@
 <?php
 namespace Controller;
 use Request\RegistrateRequest;
-use Request\Request;
 
 class UserController
 {
