@@ -18,10 +18,11 @@ class App
             if (isset($route[$requestMethod])) {
                 $controllerClassName = $route[$requestMethod]['class'];
                 $method = $route[$requestMethod]['method'];
+                $request = $route[$requestMethod][' $request'];
 
                 $class = new $controllerClassName();
 
-                $request = new Request($requestUri, $requestMethod, $_POST);
+                //$request = new Request($requestUri, $requestMethod, $_POST);
 
                 return $class->$method($request);
             } else {
