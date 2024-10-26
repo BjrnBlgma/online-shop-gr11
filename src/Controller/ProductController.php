@@ -56,13 +56,13 @@ class ProductController
             $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
             if (empty($isProductInCart)) {
                 $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
-                $this->userProductWishlist->deleteProduct($userId, $productId);
+                //$this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             } else {
                 $newAmount = $amount + $isProductInCart->getAmount();
                 $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
-                $this->userProductWishlist->deleteProduct($userId, $productId);
+                //$this->userProductWishlist->deleteProduct($userId, $productId);
                 header('Location: /cart');
                 exit;
             }

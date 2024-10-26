@@ -28,7 +28,7 @@
                             <p id="cartItem1Price"> <?php /*echo "{$product['price']}$" */?> </p>
                         </div>-->
 
-                        <form action="/add" method="POST">
+                        <form action="/addFromWishlist" method="POST">
                             <input type="hidden" id="product_id" name="product_id" value="<?= $product->getId();?>" required>
 
                             <input type="hidden" placeholder="Введите кол-во" id="amount" name="amount" value="1" required>

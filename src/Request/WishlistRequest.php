@@ -9,6 +9,11 @@ class WishlistRequest extends Request
         return $this->data['product_id'];
     }
 
+    public function getAmount(): ?int
+    {
+        return $this->data['amount'];
+    }
+
     public function validate(): array
     {
         $errors = [];
@@ -32,18 +37,18 @@ class WishlistRequest extends Request
             $errors['product'] = 'Выберите продукт';
         }
 
-//        if (isset($this->data['amount'])) {
-//            $amount = $this->data['amount'];
-//            if (empty($amount)) {
-//                $errors['amount'] = "Выберите количество товара";
-//            } elseif (!ctype_digit($amount)) {
-//                $errors['amount'] = "Поле количества товара должно содержать только цифры!";
-//            } elseif ($amount <= 0) {
-//                $errors['amount'] = "Количество товара не должно быть отрицательным";
-//            }
-//        } else {
-//            $errors['amount'] = 'Выберите количество товара';
-//        }
+        if (isset($this->data['amount'])) {
+            $amount = $this->data['amount'];
+            if (empty($amount)) {
+                $errors['amount'] = "Выберите количество товара";
+            } elseif (!ctype_digit($amount)) {
+                $errors['amount'] = "Поле количества товара должно содержать только цифры!";
+            } elseif ($amount <= 0) {
+                $errors['amount'] = "Количество товара не должно быть отрицательным";
+            }
+        } else {
+            $errors['amount'] = 'Выберите количество товара';
+        }
 
         return $errors;
     }

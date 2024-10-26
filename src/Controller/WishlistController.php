@@ -102,36 +102,36 @@ class WishlistController
     }
 
 
-//    public function addFromWishlistToCart()
-//    {
-//        session_start();
-//        if (!isset($_SESSION['user_id'])) {
-//            header('Location: /login');
-//        }
-//        $userId = $_SESSION['user_id'];
-//        $errors = $this->validateProduct();
-//
-//        if (empty($errors)) {
-//            $productId = $_POST['product_id'];
-//            $amount = $_POST['amount'];
-//
-//            $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
-//            if ($isProductInCart === false) {
-//                $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
-//                $this->wishlist->deleteProduct($userId, $productId);
-//                header('Location: /cart');
-//                exit;
-//            } else {
-//                $newAmount = $amount + $isProductInCart['amount'];
-//                $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
-//                $this->wishlist->deleteProduct($userId, $productId);
-//                header('Location: /cart');
-//                exit;
-//            }
-//        }
-//
-//        require_once "./../View/add_product.php";
-//    }
+    public function addFromWishlistToCart(WishlistRequest $request)
+    {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+        }
+        $userId = $_SESSION['user_id'];
+        $errors = $request->validate();
+
+        if (empty($errors)) {
+            $productId = $request->getProductId();
+            $amount = $request->getAmount();
+
+            $isProductInCart = $this->userProduct->getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
+            if (empty($isProductInCart)) {
+                $this->userProduct->addProductToCart($userId, $productId, $amount); // Добавляем товар
+                $this->wishlist->deleteProduct($userId, $productId);
+                header('Location: /cart');
+                exit;
+            } else {
+                $newAmount = $amount + $isProductInCart->getAmount();
+                $this->userProduct->plusProductAmountInCart($userId, $productId, $newAmount);
+                $this->wishlist->deleteProduct($userId, $productId);
+                header('Location: /cart');
+                exit;
+            }
+        }
+
+        require_once "./../View/add_product.php";
+    }
 
     public function deleteProductFromWishlist()
     {
