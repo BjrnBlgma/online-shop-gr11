@@ -3,7 +3,7 @@ namespace Controller;
 use Model\UserProduct;
 use Request\ProductRequest;
 use Service\CartService;
-use Session\Session;
+use Service\Session;
 
 class CartController
 {

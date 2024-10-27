@@ -2,12 +2,10 @@
 namespace Controller;
 use Model\Product;
 use Model\UserProductWishlist;
-use Model\UserProduct;
 use Request\WishlistRequest;
-
-use Service\WishlistService;
 use Service\CartService;
-use Session\Session;
+use Service\Session;
+use Service\WishlistService;
 
 class WishlistController
 {

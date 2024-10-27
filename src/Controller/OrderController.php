@@ -2,12 +2,10 @@
 namespace Controller;
 
 use Model\Order;
-
 use Request\OrderRequest;
 use Service\CartService;
 use Service\OrderService;
-
-use Session\Session;
+use Service\Session;
 
 class OrderController
 {

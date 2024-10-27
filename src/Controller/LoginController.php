@@ -2,7 +2,7 @@
 namespace Controller;
 use Model\User;
 use Request\LoginRequest;
-use Session\Session;
+use Service\Session;
 
 class LoginController
 {

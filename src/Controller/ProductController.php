@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
 use Model\Product;
-use Session\Session;
+use Service\Session;
 
 class ProductController
 {
