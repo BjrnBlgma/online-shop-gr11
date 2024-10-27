@@ -2,7 +2,7 @@
 namespace Controller;
 use Model\User;
 use Request\LoginRequest;
-use Service\Session;
+use Service\Authentication;
 
 class LoginController
 {
@@ -27,9 +27,9 @@ class LoginController
                 } else {
                     $passFromDb = $data->getPassword();
                     if (password_verify($password, $passFromDb)) {
-                        Session::start();
+                        Authentication::start();
                         $userSession = $data->getId();
-                        Session::setSessionUser($userSession);
+                        Authentication::setSessionUser($userSession);
 
                         header('Location: /catalog');
                     } else {
@@ -47,9 +47,9 @@ class LoginController
 
     public function logoutUser()
     {
-        Session::start();
-        Session::logout();
-        Session::destroySession();
+        Authentication::start();
+        Authentication::logout();
+        Authentication::destroySession();
         header('Location: /login');
         exit;
     }

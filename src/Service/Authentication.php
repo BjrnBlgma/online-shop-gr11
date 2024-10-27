@@ -1,7 +1,7 @@
 <?php
 namespace Service;
 
-class Session
+class Authentication
 {
     public static function start()
     {

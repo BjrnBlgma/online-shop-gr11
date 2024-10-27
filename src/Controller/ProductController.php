@@ -1,14 +1,14 @@
 <?php
 namespace Controller;
 use Model\Product;
-use Service\Session;
+use Service\Authentication;
 
 class ProductController
 {
     public function getCatalog()
     {
-        Session::start();
-        Session::checkSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
         $catalog = Product::getProducts();
 
         require_once "./../View/catalog.php";
@@ -16,8 +16,8 @@ class ProductController
 
     public function getAddProductForm()
     {
-        Session::start();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        $userId = Authentication::getSessionUser();
         if (!isset($userId)) {
             header('Location: /login');
         } else{

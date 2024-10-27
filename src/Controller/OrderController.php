@@ -5,14 +5,14 @@ use Model\Order;
 use Request\OrderRequest;
 use Service\CartService;
 use Service\OrderService;
-use Service\Session;
+use Service\Authentication;
 
 class OrderController
 {
     public function getOrderForm()
     {
-        Session::start();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        $userId = Authentication::getSessionUser();
         if (!isset($userId)) {
             header('Location: /login');
         } else{
@@ -23,9 +23,9 @@ class OrderController
 
     public function createOrder(OrderRequest $request)
     {
-        Session::start();
-        Session::checkSessionUser();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
+        $userId = Authentication::getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {

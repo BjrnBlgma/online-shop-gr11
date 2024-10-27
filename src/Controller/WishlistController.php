@@ -4,16 +4,16 @@ use Model\Product;
 use Model\UserProductWishlist;
 use Request\WishlistRequest;
 use Service\CartService;
-use Service\Session;
+use Service\Authentication;
 use Service\WishlistService;
 
 class WishlistController
 {
     public function addProductToWishlist(WishlistRequest $request)
     {
-        Session::start();
-        Session::checkSessionUser();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
+        $userId = Authentication::getSessionUser();
 
         $errors = $request->validate();
         if (empty($errors)) {
@@ -28,9 +28,9 @@ class WishlistController
 
     public function lookWishlist()
     {
-        Session::start();
-        Session::checkSessionUser();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
+        $userId = Authentication::getSessionUser();
 
         $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
@@ -67,9 +67,9 @@ class WishlistController
 
     public function addFromWishlistToCart(WishlistRequest $request)
     {
-        Session::start();
-        Session::checkSessionUser();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
+        $userId = Authentication::getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
@@ -87,9 +87,9 @@ class WishlistController
 
     public function deleteProductFromWishlist(WishlistRequest $request)
     {
-        Session::start();
-        Session::checkSessionUser();
-        $userId = Session::getSessionUser();
+        Authentication::start();
+        Authentication::checkSessionUser();
+        $userId = Authentication::getSessionUser();
         $productId = $request->getProductId();
 
         WishlistService::deleteProductFromWishlist($userId, $productId);
