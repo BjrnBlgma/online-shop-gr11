@@ -16,7 +16,10 @@ class OrderController
         if (!isset($userId)) {
             header('Location: /login');
         } else{
-            $allSum = CartService::totalSum($userId);
+            $allSum = CartService::totalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
+            if (empty($allSum)) {
+                header('Location: /catalog');
+            }
             require_once "./../View/order.php";
         }
     }

@@ -27,7 +27,15 @@ class App
                 $requestClass = $route[$requestMethod]['request'];
 
                 $class = new $controllerClassName();
-                $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
+
+                if (empty($requestClass)){
+                    return $class->$method();
+                }else{
+                    $request = new $requestClass($requestUri, $requestMethod, $_POST);
+                    return $class->$method($request);
+                }
+                //$request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
+                //return $class->$method($request);
 //                if ($requestUri === '/register') {
 //                    $request = new RegistrateRequest($requestUri, $requestMethod, $_POST);
 //                }elseif ($requestUri === '/login') {
@@ -39,8 +47,6 @@ class App
 //                }elseif ($requestUri === '/wishlist'){
 //                    $request = new WishlistRequest($requestUri, $requestMethod, $_POST);
 //                }
-
-                return $class->$method($request);
             } else {
                 echo "$requestMethod не поддерживается для $requestUri";
             }
