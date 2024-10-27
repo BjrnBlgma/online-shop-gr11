@@ -7,14 +7,15 @@ use Request\OrderRequest;
 use Service\CartService;
 use Service\OrderService;
 
+use Session\Session;
 
 class OrderController
 {
     public function getOrderForm()
     {
-        session_start();
-        $userId = $_SESSION['user_id'];
-        if (!isset($_SESSION['user_id'])) {
+        Session::start();
+        $userId = Session::getSessionUser();
+        if (!isset($userId)) {
             header('Location: /login');
         } else{
             $allSum = CartService::totalSum($userId);
@@ -24,11 +25,9 @@ class OrderController
 
     public function createOrder(OrderRequest $request)
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {

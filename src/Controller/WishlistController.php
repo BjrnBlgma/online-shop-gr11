@@ -7,16 +7,15 @@ use Request\WishlistRequest;
 
 use Service\WishlistService;
 use Service\CartService;
+use Session\Session;
 
 class WishlistController
 {
     public function addProductToWishlist(WishlistRequest $request)
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
 
         $errors = $request->validate();
         if (empty($errors)) {
@@ -31,11 +30,9 @@ class WishlistController
 
     public function lookWishlist()
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
 
         $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
@@ -72,11 +69,9 @@ class WishlistController
 
     public function addFromWishlistToCart(WishlistRequest $request)
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
@@ -94,11 +89,9 @@ class WishlistController
 
     public function deleteProductFromWishlist(WishlistRequest $request)
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
         $productId = $request->getProductId();
 
         WishlistService::deleteProductFromWishlist($userId, $productId);

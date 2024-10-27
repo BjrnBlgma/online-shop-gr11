@@ -2,6 +2,7 @@
 namespace Controller;
 use Model\User;
 use Request\LoginRequest;
+use Session\Session;
 
 class LoginController
 {
@@ -26,8 +27,9 @@ class LoginController
                 } else {
                     $passFromDb = $data->getPassword();
                     if (password_verify($password, $passFromDb)) {
-                        session_start();
-                        $_SESSION['user_id'] = $data->getId();
+                        Session::start();
+                        $userSession = $data->getId();
+                        Session::setSessionUser($userSession);
 
                         header('Location: /catalog');
                     } else {
@@ -45,9 +47,9 @@ class LoginController
 
     public function logoutUser()
     {
-        session_start();
-        session_unset();
-        session_destroy();
+        Session::start();
+        Session::logout();
+        Session::destroySession();
         header('Location: /login');
         exit;
     }

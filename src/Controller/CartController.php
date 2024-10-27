@@ -3,16 +3,15 @@ namespace Controller;
 use Model\UserProduct;
 use Request\ProductRequest;
 use Service\CartService;
+use Session\Session;
 
 class CartController
 {
     public function lookCart()
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
 
 //        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
@@ -24,11 +23,9 @@ class CartController
 
     public function addProductToCart(ProductRequest $request)
     {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
-        $userId = $_SESSION['user_id'];
+        Session::start();
+        Session::checkSessionUser();
+        $userId = Session::getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
