@@ -29,7 +29,7 @@ class OrderController
         if (!isset($userId)) {
             header('Location: /login');
         } else{
-            $allSum = $this->cartService->totalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
+            $allSum = $this->cartService->getTotalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
             if (empty($allSum)) {
                 header('Location: /catalog');
             }
@@ -57,7 +57,7 @@ class OrderController
 
             header('Location: /cart');
         }
-        $allSum = $this->cartService->totalSum($userId);
+        $allSum = $this->cartService->getTotalSum($userId);
         require_once "./../View/order.php";
     }
 }

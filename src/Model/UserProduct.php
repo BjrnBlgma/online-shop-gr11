@@ -64,7 +64,7 @@ class UserProduct extends Model
         return $result;
     }
 
-    public static function deleteProduct(int $user)
+    public static function cleaneCart(int $user)
     {
         $stmt = self::getPdo()->prepare( "DELETE FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $user]);

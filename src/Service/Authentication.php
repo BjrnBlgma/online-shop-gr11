@@ -13,10 +13,8 @@ class Authentication
         $_SESSION['user_id'] = $name;
     }
 
-    public function getSessionUser() {
-        if (isset($_SESSION['user_id'])) {
-            return $_SESSION['user_id'];
-        }
+    public function getSessionUser()
+    {
         return $_SESSION['user_id'];
     }
 

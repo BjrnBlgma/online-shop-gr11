@@ -27,26 +27,24 @@ class App
                 $requestClass = $route[$requestMethod]['request'];
 
                 $class = new $controllerClassName();
+                $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
 
-                if (empty($requestClass)){
-                    return $class->$method();
-                }else{
-                    $request = new $requestClass($requestUri, $requestMethod, $_POST);
+                try {
                     return $class->$method($request);
+                } catch(\Throwable $exception) {
+                    date_default_timezone_set('Asia/Irkutsk');
+                    $errors = [
+                        'message' => $exception->getMessage(),
+                        'file' => $exception->getFile(),
+                        'line' => $exception->getLine(),
+                        'datetime' => 'Дата: '  . date('d.m.Y H:i:s') . "\n" .  "\n"
+                    ];
+                    $file = './../Storage/Log/errors.txt';
+                    file_put_contents($file, implode("\n", $errors), FILE_APPEND | LOCK_EX);
+
+                    http_response_code(500);
+                    require_once "./../View/500.php";
                 }
-                //$request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
-                //return $class->$method($request);
-//                if ($requestUri === '/register') {
-//                    $request = new RegistrateRequest($requestUri, $requestMethod, $_POST);
-//                }elseif ($requestUri === '/login') {
-//                    $request = new LoginRequest($requestUri, $requestMethod, $_POST);
-//                }elseif ($requestUri === '/order'){
-//                    $request = new OrderRequest($requestUri, $requestMethod, $_POST);
-//                }elseif ($requestUri === '/add'){
-//                    $request = new ProductRequest($requestUri, $requestMethod, $_POST);
-//                }elseif ($requestUri === '/wishlist'){
-//                    $request = new WishlistRequest($requestUri, $requestMethod, $_POST);
-//                }
             } else {
                 echo "$requestMethod не поддерживается для $requestUri";
             }

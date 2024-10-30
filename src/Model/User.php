@@ -28,7 +28,7 @@ class User extends Model
         return self::hydrate($data);
     }
 
-    public static function getById(string $id): self|null
+    public static function getById(int $id): self|null
     {
         $stmt = self::getPdo()->prepare('SELECT * FROM users WHERE id = :id');
         $stmt->execute(['id' => $id]);

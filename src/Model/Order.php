@@ -12,7 +12,15 @@ class Order extends Model
     private int|float $sumTotal;
     private int $userId;
 
-    public static function createOrderId($name, $family, $city, $address, $phone, $sum, $userId) //добавить переменные для добавления информации в табицу Order
+    public static function createOrderId(
+        string $name,
+        string $family,
+        string $city,
+        string $address,
+        string $phone,
+        int|float $sum,
+        int $userId
+    )
     {
         $stmt = self::getPdo()->prepare("INSERT INTO orders (name, family, city, address, phone, sum, user_id) VALUES (:name, :family, :city, :address, :phone, :sum, :user_id)"); //добавить переменные для добавления информации в табицу Order
         $stmt->execute(['name' => $name, 'family' => $family, 'city'=> $city, 'address'=> $address, 'phone'=> $phone, 'sum' => $sum, 'user_id'=> $userId]);

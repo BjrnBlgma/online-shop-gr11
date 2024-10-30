@@ -35,6 +35,7 @@
                     <td><?php echo $allSum . '$'; ?></td>
                 </tr>
             <h3>
+                <label style="color: red" > <?php echo $errors['all_sum'] ?? '';?> </label>
 
             <button type="submit">Оформить заказ</button>
             <div class="links">
@@ -108,6 +109,7 @@
 
     label {
         margin-bottom: 10px;
+        font-size: 15px;
     }
 
     input {

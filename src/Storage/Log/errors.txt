@@ -1,0 +1,10 @@
+Call to undefined method Service\Authentication::startstart()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 19:23:43
+
+Call to undefined method Service\Authentication::startstart()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 19:23:46
+

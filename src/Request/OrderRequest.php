@@ -29,7 +29,7 @@ class OrderRequest extends Request
         return $this->data['phone'];
     }
 
-    public function getTotalSum(): ?int
+    public function getTotalSum(): int|float|null
     {
         return $this->data['all_sum'];
     }
@@ -37,11 +37,10 @@ class OrderRequest extends Request
 
     public function validate(): array //переделать валидацию, после создания таблицы в бд
     {
-        $dataVal = $this->data;
         $errors = [];
 
-        if (isset($dataVal['name'])) {
-            $name = htmlspecialchars($dataVal['name'], ENT_QUOTES, 'UTF-8');
+        if (isset($this->data['name'])) {
+            $name = htmlspecialchars($this->data['name'], ENT_QUOTES, 'UTF-8');
             if (empty($name)){
                 $errors['name'] = "Имя не должно быть пустым";
             } elseif (strlen($name) < 3 || strlen($name) > 20) {
@@ -54,8 +53,8 @@ class OrderRequest extends Request
         }
 
 
-        if (isset($dataVal['family'])) {
-            $family = htmlspecialchars($dataVal['family'], ENT_QUOTES, 'UTF-8');
+        if (isset($this->data['family'])) {
+            $family = htmlspecialchars($this->data['family'], ENT_QUOTES, 'UTF-8');
             if (empty($family)){
                 $errors['family'] = "Поле должно быть заполнено";
             } elseif (strlen($family) < 3 || strlen($family) > 20) {
@@ -68,8 +67,8 @@ class OrderRequest extends Request
         }
 
 
-        if (isset($dataVal['address'])) {
-            $address = htmlspecialchars($dataVal['address'], ENT_QUOTES, 'UTF-8');
+        if (isset($this->data['address'])) {
+            $address = htmlspecialchars($this->data['address'], ENT_QUOTES, 'UTF-8');
             if (empty($address)){
                 $errors['address'] = "Поле должно быть заполнено";
             } elseif (strlen($address) < 3 || strlen($address) > 60) {
@@ -82,8 +81,8 @@ class OrderRequest extends Request
         }
 
 
-        if (isset($dataVal['city'])) {
-            $city = htmlspecialchars($dataVal['city'], ENT_QUOTES, 'UTF-8');
+        if (isset($this->data['city'])) {
+            $city = htmlspecialchars($this->data['city'], ENT_QUOTES, 'UTF-8');
             if (empty($city)){
                 $errors['city'] = "Поле должно быть заполнено";
             } elseif (strlen($city) < 3 || strlen($city) > 20) {
@@ -96,8 +95,8 @@ class OrderRequest extends Request
         }
 
 
-        if (isset($dataVal['phone'])) {
-            $phone = htmlspecialchars($dataVal['phone'], ENT_QUOTES, 'UTF-8');
+        if (isset($this->data['phone'])) {
+            $phone = htmlspecialchars($this->data['phone'], ENT_QUOTES, 'UTF-8');
             if (empty($phone)){
                 $errors['phone'] = "Поле должно быть заполнено";
                 // "/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/"
@@ -111,6 +110,26 @@ class OrderRequest extends Request
             }
         }else {
             $errors ['phone'] = "Поле должно быть заполнено";
+        }
+
+
+        if (isset($this->data['all_sum'])) {
+            $totalSum = htmlspecialchars($this->data['all_sum'], ENT_QUOTES, 'UTF-8');
+            $maxSum = 100000;
+
+            if (empty($totalSum)){
+                $errors['all_sum'] = "Поле должно быть заполнено";
+            } elseif (is_int($totalSum) || is_float($totalSum)) {
+                $errors['all_sum'] = "Сумма должна быть числом!";
+            } elseif (is_null($totalSum)) {
+                $errors['all_sum'] = "Сумма не может быть равна 0";
+            }elseif ($totalSum <0) {
+                $errors['all_sum'] = "Сумма не может быть отрицательной";
+            } elseif ($totalSum > $maxSum) {
+                $errors['all_sum'] = 'Сумма превышает максимальный лимит';
+            }
+        }else {
+            $errors ['all_sum'] = "Поле должно быть заполнено";
         }
 
 

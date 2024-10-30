@@ -4,7 +4,7 @@ use Model\UserProduct;
 
 class CartService
 {
-    public function totalSum($userId)
+    public function getTotalSum(int $userId)
     {
         $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
 
@@ -15,7 +15,7 @@ class CartService
         }
         return $allSum;
     }
-    public function addProductToCart($userId, $productId, $amount)
+    public function addProductToCart(int $userId, int $productId, int $amount)
     {
         $isProductInCart = UserProduct::getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
         if (empty($isProductInCart)) {

@@ -22,7 +22,7 @@ class CartController
 //        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
 
-        $allSum= $this->cartService->totalSum($userId);
+        $allSum= $this->cartService->getTotalSum($userId);
 
         require_once "./../View/cart.php";
     }

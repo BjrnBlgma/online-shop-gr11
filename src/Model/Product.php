@@ -5,7 +5,7 @@ class Product extends Model
 {
     private int $id;
     private string $name;
-    private int $price;
+    private int|float $price;
     private string|null $description;
     private string|null $image;
 
@@ -74,7 +74,7 @@ class Product extends Model
         return $this->name;
     }
 
-    public function getPrice(): int
+    public function getPrice(): int|float
     {
         return $this->price;
     }
