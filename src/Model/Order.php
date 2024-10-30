@@ -22,12 +22,12 @@ class Order extends Model
         int $userId
     )
     {
-        $stmt = self::getPdo()->prepare("INSERT INTO orders (name, family, city, address, phone, sum, user_id) VALUES (:name, :family, :city, :address, :phone, :sum, :user_id)"); //добавить переменные для добавления информации в табицу Order
+        $stmt = self::getPdo()->prepare("INSERT INTO orders (name, family, city, address, phone, sum, user_id) VALUES (:name, :family, :city, :address, :phone, :sum, :user_id)");
         $stmt->execute(['name' => $name, 'family' => $family, 'city'=> $city, 'address'=> $address, 'phone'=> $phone, 'sum' => $sum, 'user_id'=> $userId]);
     }
 
 
-    public static function getByUserIdToTakeOrderId($userId): self|null
+    public static function getByUserIdToTakeOrderId(int $userId): self|null
     {
         $stmt = self::getPdo()->prepare('SELECT * FROM orders WHERE user_id = :user_id ORDER BY id DESC');
         $stmt->execute(['user_id' => $userId]);

@@ -8,3 +8,33 @@ Call to undefined method Service\Authentication::startstart()
 32
 Дата: 30.10.2024 19:23:46
 
+Non-static method Service\Authentication::start() cannot be called statically
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 19:52:15
+
+Call to undefined method Service\Authentication::startstart()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 19:52:53
+
+Call to undefined method Service\Authentication::startstar()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 22:40:38
+
+Call to undefined method Service\Authentication::startstar()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 22:41:18
+
+Call to undefined method Service\Authentication::startstar()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 22:41:27
+
+Call to undefined method Service\Authentication::startstar()
+/var/www/html/src/Controller/CartController.php
+32
+Дата: 30.10.2024 22:41:44
+
