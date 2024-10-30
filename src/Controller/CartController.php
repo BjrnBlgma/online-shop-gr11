@@ -7,32 +7,38 @@ use Service\Authentication;
 
 class CartController
 {
+    private Authentication $authentication;
+    private CartService $cartService;
+    public function __construct(){
+        $this->authentication = new Authentication();
+        $this->cartService = new CartService();
+    }
     public function lookCart()
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
 
 //        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
 
-        $allSum= CartService::totalSum($userId);
+        $allSum= $this->cartService->totalSum($userId);
 
         require_once "./../View/cart.php";
     }
 
     public function addProductToCart(ProductRequest $request)
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
             $productId = $request->getProductId();
             $amount = $request->getAmount();
 
-            CartService::checkProductInCart($userId, $productId, $amount);
+            $this->cartService->addProductToCart($userId, $productId, $amount);
             header('Location: /cart');
             exit;
         }

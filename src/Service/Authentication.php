@@ -3,36 +3,36 @@ namespace Service;
 
 class Authentication
 {
-    public static function start()
+    public function start()
     {
         session_start();
     }
 
-    public static function setSessionUser($name)
+    public function setSessionUser($name)
     {
         $_SESSION['user_id'] = $name;
     }
 
-    public static function getSessionUser() {
+    public function getSessionUser() {
         if (isset($_SESSION['user_id'])) {
             return $_SESSION['user_id'];
         }
         return $_SESSION['user_id'];
     }
 
-    public static function checkSessionUser()
+    public function checkSessionUser()
     {
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
         }
     }
 
-    public static function logout()
+    public function logout()
     {
         unset($_SESSION['user_id']);
     }
 
-    public static function destroySession()
+    public function destroySession()
     {
         session_destroy();
     }

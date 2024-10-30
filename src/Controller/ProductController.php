@@ -5,10 +5,15 @@ use Service\Authentication;
 
 class ProductController
 {
+    private Authentication $authentication;
+    public function __construct(){
+        $this->authentication = new Authentication();
+    }
+
     public function getCatalog()
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
         $catalog = Product::getProducts();
 
         require_once "./../View/catalog.php";
@@ -16,8 +21,8 @@ class ProductController
 
     public function getAddProductForm()
     {
-        Authentication::start();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $userId = $this->authentication->getSessionUser();
         if (!isset($userId)) {
             header('Location: /login');
         } else{

@@ -1,36 +1,46 @@
 <?php
 namespace Controller;
+
 use Model\Product;
 use Model\UserProductWishlist;
+
 use Request\WishlistRequest;
+
 use Service\CartService;
 use Service\Authentication;
 use Service\WishlistService;
 
 class WishlistController
 {
+    private Authentication $authentication;
+    private CartService $cartService;
+    private WishlistService $wishlistService;
+    public function __construct(){
+        $this->authentication = new Authentication();
+        $this->cartService = new CartService();
+        $this->wishlistService = new WishlistService();
+    }
+
     public function addProductToWishlist(WishlistRequest $request)
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
 
         $errors = $request->validate();
         if (empty($errors)) {
             $productId = $request->getProductId();
 
-//            $amount = $_POST['amount'];
-//            $price = $this->product->getByProductId($productId);
-
-            WishlistService::checkProductInWishlist($userId, $productId);
+            $this->wishlistService->addProductToWishlist($userId, $productId);
+            header('Location: /wishlist');
         }
     }
 
     public function lookWishlist()
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
 
         $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
@@ -67,17 +77,17 @@ class WishlistController
 
     public function addFromWishlistToCart(WishlistRequest $request)
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
             $productId = $request->getProductId();
             $amount = $request->getAmount();
 
-            CartService::checkProductInCart($userId, $productId, $amount);
-            WishlistService::deleteProductFromWishlist($userId, $productId);
+            $this->cartService->addProductToCart($userId, $productId, $amount);
+            $this->wishlistService->deleteProductFromWishlist($userId, $productId);
             header('Location: /cart');
             exit;
         }
@@ -87,12 +97,12 @@ class WishlistController
 
     public function deleteProductFromWishlist(WishlistRequest $request)
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
         $productId = $request->getProductId();
 
-        WishlistService::deleteProductFromWishlist($userId, $productId);
+        $this->wishlistService->deleteProductFromWishlist($userId, $productId);
         header('Location: /wishlist');
         exit;
     }

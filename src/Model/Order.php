@@ -8,8 +8,8 @@ class Order extends Model
     private string $family;
     private string $city;
     private string $address;
-    private int $phone;
-    private int $sumTotal;
+    private string $phone;
+    private int|float $sumTotal;
     private int $userId;
 
     public static function createOrderId($name, $family, $city, $address, $phone, $sum, $userId) //добавить переменные для добавления информации в табицу Order
@@ -56,12 +56,12 @@ class Order extends Model
         return $this->address;
     }
 
-    public function getPhone(): int
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    public function getSumTotal(): int
+    public function getSumTotal(): int|float
     {
         return $this->sumTotal;
     }

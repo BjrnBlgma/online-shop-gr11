@@ -1,22 +1,35 @@
 <?php
 namespace Controller;
 
+use DTO\CreateOrderDTO;
 use Model\Order;
 use Request\OrderRequest;
 use Service\CartService;
+
 use Service\OrderService;
+
 use Service\Authentication;
 
 class OrderController
 {
+    private Authentication $authentication;
+    private CartService $cartService;
+    private OrderService $orderService;
+    public function __construct(){
+        $this->authentication = new Authentication();
+        $this->cartService = new CartService();
+        $this->orderService = new OrderService();
+    }
+
+
     public function getOrderForm()
     {
-        Authentication::start();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $userId = $this->authentication->getSessionUser();
         if (!isset($userId)) {
             header('Location: /login');
         } else{
-            $allSum = CartService::totalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
+            $allSum = $this->cartService->totalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
             if (empty($allSum)) {
                 header('Location: /catalog');
             }
@@ -26,9 +39,9 @@ class OrderController
 
     public function createOrder(OrderRequest $request)
     {
-        Authentication::start();
-        Authentication::checkSessionUser();
-        $userId = Authentication::getSessionUser();
+        $this->authentication->start();
+        $this->authentication->checkSessionUser();
+        $userId = $this->authentication->getSessionUser();
         $errors = $request->validate();
 
         if (empty($errors)) {
@@ -39,11 +52,12 @@ class OrderController
             $phone = $request->getPhone();
             $sum = $request->getTotalSum();
 
-            Order::createOrderId($name, $family, $city, $address, $phone, $sum, $userId);
+            $dto = new CreateOrderDTO($name, $family, $city, $address, $phone, $sum, $userId);
+            $this->orderService->create($dto);
 
-            OrderService::addProductsToOrderByUserId($userId);
+            header('Location: /cart');
         }
-        $allSum = CartService::totalSum($userId);
+        $allSum = $this->cartService->totalSum($userId);
         require_once "./../View/order.php";
     }
 }

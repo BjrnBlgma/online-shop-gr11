@@ -6,6 +6,10 @@ use Service\Authentication;
 
 class LoginController
 {
+    private Authentication $authentication;
+    public function __construct(){
+        $this->authentication = new Authentication();
+    }
     public function getLoginForm()
     {
         require_once "./../View/login.php";
@@ -27,9 +31,9 @@ class LoginController
                 } else {
                     $passFromDb = $data->getPassword();
                     if (password_verify($password, $passFromDb)) {
-                        Authentication::start();
+                        $this->authentication->start();
                         $userSession = $data->getId();
-                        Authentication::setSessionUser($userSession);
+                        $this->authentication->setSessionUser($userSession);
 
                         header('Location: /catalog');
                     } else {
@@ -47,9 +51,9 @@ class LoginController
 
     public function logoutUser()
     {
-        Authentication::start();
-        Authentication::logout();
-        Authentication::destroySession();
+        $this->authentication->start();
+        $this->authentication->logout();
+        $this->authentication->destroySession();
         header('Location: /login');
         exit;
     }

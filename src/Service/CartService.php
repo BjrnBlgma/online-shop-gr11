@@ -1,9 +1,10 @@
 <?php
 namespace Service;
 use Model\UserProduct;
+
 class CartService
 {
-    public static function totalSum($userId)
+    public function totalSum($userId)
     {
         $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
 
@@ -14,7 +15,7 @@ class CartService
         }
         return $allSum;
     }
-    public static function checkProductInCart($userId, $productId, $amount)
+    public function addProductToCart($userId, $productId, $amount)
     {
         $isProductInCart = UserProduct::getByUserIdAndProductId($userId, $productId); //есть ли продукт в козрине или нет
         if (empty($isProductInCart)) {
