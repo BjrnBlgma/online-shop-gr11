@@ -1,37 +1,57 @@
 <?php
 namespace Service;
+use Model\User;
 
 class Authentication
 {
-    public function start()
+    public function login(string $login, string $password): bool
     {
-        session_start();
+//        $_SESSION['user_id'] = $name;
+        $data = User::getByEmail($login);
+        if (empty($data) and !password_verify($password, $data->getPassword())) {
+            return false;
+//            $userSession = $data->getId();
+//            $this->authentication->login($userSession);
+        }
+        return true;
     }
 
-    public function setSessionUser($name)
+    public function setSessionUser(int $name): void
     {
+        $this->sessionStart();
         $_SESSION['user_id'] = $name;
     }
 
-    public function getSessionUser()
+    public function getCurrentUser(): ?User
     {
-        return $_SESSION['user_id'];
+        if (!$this->checkSessionUser()) {
+            return null;
+        }
+        // можно было чутка подумать и додуматься до этого..а я даже не утруждалась...
+        // и сделала попроще...лишь бы сделать, да?
+        // да и до возвращения объекта тоже можно было додуматься, если бы поднапрягла мозги...
+        $this->sessionStart();
+        $userId = $_SESSION['user_id'];
+        return User::getById($userId);
     }
 
-    public function checkSessionUser()
+    public function checkSessionUser(): bool
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /login');
-        }
+        $this->sessionStart();
+        return isset($_SESSION['user_id']);
     }
 
     public function logout()
     {
+        $this->sessionStart();
         unset($_SESSION['user_id']);
+        session_destroy();
     }
 
-    public function destroySession()
+    private function sessionStart()
     {
-        session_destroy();
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
     }
 }

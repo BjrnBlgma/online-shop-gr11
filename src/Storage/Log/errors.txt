@@ -38,3 +38,43 @@ Call to undefined method Service\Authentication::startstar()
 32
 Дата: 30.10.2024 22:41:44
 
+Typed static property Model\Model::$pdo must not be accessed before initialization
+/var/www/html/src/Model/Model.php
+11
+Дата: 03.11.2024 11:58:15
+
+Typed static property Model\Model::$pdo must not be accessed before initialization
+/var/www/html/src/Model/Model.php
+11
+Дата: 03.11.2024 11:58:18
+
+Typed static property Model\Model::$pdo must not be accessed before initialization
+/var/www/html/src/Model/Model.php
+11
+Дата: 03.11.2024 12:16:16
+
+Typed static property Model\Model::$pdo must not be accessed before initialization
+/var/www/html/src/Model/Model.php
+11
+Дата: 03.11.2024 12:17:20
+
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+21
+Дата: 03.11.2024 12:28:00
+
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+21
+Дата: 03.11.2024 12:28:17
+
+Model\User::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Service/Authentication.php on line 35
+/var/www/html/src/Model/User.php
+31
+Дата: 03.11.2024 12:29:11
+
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+24
+Дата: 03.11.2024 12:41:39
+

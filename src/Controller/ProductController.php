@@ -12,8 +12,9 @@ class ProductController
 
     public function getCatalog()
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
         $catalog = Product::getProducts();
 
         require_once "./../View/catalog.php";
@@ -21,8 +22,7 @@ class ProductController
 
     public function getAddProductForm()
     {
-        $this->authentication->start();
-        $userId = $this->authentication->getSessionUser();
+        $userId = $this->authentication->getCurrentUser()->getId();
         if (!isset($userId)) {
             header('Location: /login');
         } else{

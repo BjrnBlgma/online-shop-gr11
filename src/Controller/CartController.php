@@ -15,9 +15,10 @@ class CartController
     }
     public function lookCart()
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
+        $userId = $this->authentication->getCurrentUser()->getId();
 
 //        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
@@ -29,9 +30,10 @@ class CartController
 
     public function addProductToCart(ProductRequest $request)
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
+        $userId = $this->authentication->getCurrentUser()->getId();
         $errors = $request->validate();
 
         if (empty($errors)) {

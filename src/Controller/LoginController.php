@@ -19,41 +19,25 @@ class LoginController
         $errors = $request->validate();
 
         if  (empty($errors)) {
-            try {
-                $login = $request->getLogin();
-                $password = $request->getPassword();
+            $login = $request->getLogin();
+            $password = $request->getPassword();
 
+            $data = User::getByEmail($login);
+            if ($this->authentication->login($login, $password)) {
+                $userSession = $data->getId();
+                $this->authentication->setSessionUser($userSession);
 
-                $data = User::getByEmail($login);
-
-                if (empty($data)) {
+                header('Location: /catalog');
+            } else {
                     $errors['login'] = 'Incorrect email or password';
-                } else {
-                    $passFromDb = $data->getPassword();
-                    if (password_verify($password, $passFromDb)) {
-                        $this->authentication->start();
-                        $userSession = $data->getId();
-                        $this->authentication->setSessionUser($userSession);
-
-                        header('Location: /catalog');
-                    } else {
-                        $errors['login'] = 'Incorrect email or password';
-                    }
-                }
-            } catch (PDOException $e) {
-                print "Error!: " . $e->getMessage();
-                //die();
             }
         }
-
         require_once "./../View/login.php";
     }
 
     public function logoutUser()
     {
-        $this->authentication->start();
         $this->authentication->logout();
-        $this->authentication->destroySession();
         header('Location: /login');
         exit;
     }

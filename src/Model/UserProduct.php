@@ -119,12 +119,9 @@ class UserProduct extends Model
     {
         $object = new self();
 
-        $user = new User();
-        $userFromDb = $user->getById($data['user_id']);
+        $userFromDb = User::getById($data['user_id']);
 
-        $product = new Product();
-        $productFromDb = $product->getByProductId($data['product_id']);
-
+        $productFromDb = Product::getByProductId($data['product_id']);
 
         $object->id = $data['id'];
         $object->user = $userFromDb;

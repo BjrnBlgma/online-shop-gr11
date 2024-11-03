@@ -23,9 +23,8 @@ class WishlistController
 
     public function addProductToWishlist(WishlistRequest $request)
     {
-        $this->authentication->start();
         $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        $userId = $this->authentication->getCurrentUser()->getId();
 
         $errors = $request->validate();
         if (empty($errors)) {
@@ -38,9 +37,8 @@ class WishlistController
 
     public function lookWishlist()
     {
-        $this->authentication->start();
         $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        $userId = $this->authentication->getCurrentUser()->getId();
 
         $wishlistProducts = UserProductWishlist::getWishlistByUserId($userId);
 
@@ -77,9 +75,10 @@ class WishlistController
 
     public function addFromWishlistToCart(WishlistRequest $request)
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
+        $userId = $this->authentication->getCurrentUser()->getId();
         $errors = $request->validate();
 
         if (empty($errors)) {
@@ -97,9 +96,10 @@ class WishlistController
 
     public function deleteProductFromWishlist(WishlistRequest $request)
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
+        $userId = $this->authentication->getCurrentUser()->getId();
         $productId = $request->getProductId();
 
         $this->wishlistService->deleteProductFromWishlist($userId, $productId);

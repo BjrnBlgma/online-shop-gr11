@@ -24,11 +24,10 @@ class OrderController
 
     public function getOrderForm()
     {
-        $this->authentication->start();
-        $userId = $this->authentication->getSessionUser();
-        if (!isset($userId)) {
+        if (!$this->authentication->checkSessionUser()) {
             header('Location: /login');
         } else{
+            $userId = $this->authentication->getCurrentUser()->getId();
             $allSum = $this->cartService->getTotalSum($userId); //если пустая корзина при оформлении заказа, то перенаправить в каталог
             if (empty($allSum)) {
                 header('Location: /catalog');
@@ -39,9 +38,10 @@ class OrderController
 
     public function createOrder(OrderRequest $request)
     {
-        $this->authentication->start();
-        $this->authentication->checkSessionUser();
-        $userId = $this->authentication->getSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
+        $userId = $this->authentication->getCurrentUser()->getId();
         $errors = $request->validate();
 
         if (empty($errors)) {
