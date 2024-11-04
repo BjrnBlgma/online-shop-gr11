@@ -1,23 +1,27 @@
 <?php
 require_once "./../Core/Autoload.php";
+
+use Controller\CartController;
+use Controller\LoginController;
+use Controller\OrderController;
+use Controller\ProductController;
+use Controller\UserController;
+use Controller\WishlistController;
 use Core\App;
 use Core\Autoload;
-use Controller\LoginController;
-use Controller\UserController;
-use Controller\ProductController;
-use Controller\CartController;
-use Controller\OrderController;
-use Controller\WishlistController;
 use Request\LoginRequest;
+use Request\OrderRequest;
 use Request\ProductRequest;
 use Request\RegistrateRequest;
-use Request\OrderRequest;
 use Request\WishlistRequest;
+use Service\Logger\LoggerFileService;
 
 
 Autoload::registrate("/var/www/html/src/");
 
-$app = new App();
+$loggerService = new LoggerFileService();
+$app = new App($loggerService);
+
 $app->createRoute('/login', 'GET', LoginController::class, 'getLoginForm');
 $app->postRoute('/login', LoginController::class,'loginUser', LoginRequest::class);
 

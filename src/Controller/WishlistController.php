@@ -3,20 +3,18 @@ namespace Controller;
 
 use Model\Product;
 use Model\UserProductWishlist;
-
 use Request\WishlistRequest;
-
+use Service\Authentication\AuthSessionService;
 use Service\CartService;
-use Service\Authentication;
 use Service\WishlistService;
 
 class WishlistController
 {
-    private Authentication $authentication;
+    private AuthSessionService $authentication;
     private CartService $cartService;
     private WishlistService $wishlistService;
     public function __construct(){
-        $this->authentication = new Authentication();
+        $this->authentication = new AuthSessionService();
         $this->cartService = new CartService();
         $this->wishlistService = new WishlistService();
     }

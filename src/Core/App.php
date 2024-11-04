@@ -1,17 +1,17 @@
 <?php
 namespace Core;
 
-use Controller\LoginController;
-use http\Client\Request;
-use Request\LoginRequest;
-use Request\OrderRequest;
-use Request\ProductRequest;
-use Request\RegistrateRequest;
-use Request\WishlistRequest;
+use Service\Logger\LoggerFileService;
+use Service\Logger\LoggerServiceInterface;
 
 class App
 {
     private array $routes = [];
+    private LoggerServiceInterface $log;
+    public function __construct(LoggerServiceInterface $loggerService)
+    {
+        $this->log = $loggerService;
+    }
 
     public function run()
     {
@@ -23,24 +23,25 @@ class App
 
             if (isset($route[$requestMethod])) {
                 $controllerClassName = $route[$requestMethod]['class'];
-                $method = $route[$requestMethod]['method'];
+                $methodName = $route[$requestMethod]['method'];
                 $requestClass = $route[$requestMethod]['request'];
 
                 $class = new $controllerClassName();
+                // сделать общий контроллер с конструктором??? где остальные контроллеры будут просто наследовать?
+
+
                 $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
 
                 try {
-                    return $class->$method($request);
+                    return $class->$methodName($request);
                 } catch(\Throwable $exception) {
-                    date_default_timezone_set('Asia/Irkutsk');
-                    $errors = [
-                        'message' => $exception->getMessage(),
-                        'file' => $exception->getFile(),
-                        'line' => $exception->getLine(),
-                        'datetime' => 'Дата: '  . date('d.m.Y H:i:s') . "\n" .  "\n"
-                    ];
-                    $file = './../Storage/Log/errors.txt';
-                    file_put_contents($file, implode("\n", $errors), FILE_APPEND | LOCK_EX);
+                    $this->log->error(
+                        'Произошла ошибка при обработке', [
+                            'message' => $exception->getMessage(),
+                            'file' => $exception->getFile(),
+                            'line' => $exception->getLine()
+                        ]
+                    );
 
                     http_response_code(500);
                     require_once "./../View/500.php";
@@ -60,7 +61,8 @@ class App
         string $method,
         string $className,
         string $methodName,
-        string $requestClass = null)
+        string $requestClass = null
+    )
     {
         $this->routes[$route][$method] = [
             'class' => $className,
@@ -72,15 +74,6 @@ class App
     public function postRoute(string $route, string $className, string $methodName, string $requestClass = null)
     {
         $this->routes[$route]['POST'] = [
-            'class' => $className,
-            'method' => $methodName,
-            'request' => $requestClass
-        ];
-    }
-
-    public function getRoute(string $route, string $className, string $methodName, string $requestClass = null)
-    {
-        $this->routes[$route]['GET'] = [
             'class' => $className,
             'method' => $methodName,
             'request' => $requestClass

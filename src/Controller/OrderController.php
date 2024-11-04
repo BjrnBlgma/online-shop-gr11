@@ -2,21 +2,18 @@
 namespace Controller;
 
 use DTO\CreateOrderDTO;
-use Model\Order;
 use Request\OrderRequest;
+use Service\Authentication\AuthSessionService;
 use Service\CartService;
-
 use Service\OrderService;
-
-use Service\Authentication;
 
 class OrderController
 {
-    private Authentication $authentication;
+    private AuthSessionService $authentication;
     private CartService $cartService;
     private OrderService $orderService;
     public function __construct(){
-        $this->authentication = new Authentication();
+        $this->authentication = new AuthSessionService();
         $this->cartService = new CartService();
         $this->orderService = new OrderService();
     }

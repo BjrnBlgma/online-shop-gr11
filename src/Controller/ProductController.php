@@ -1,13 +1,13 @@
 <?php
 namespace Controller;
 use Model\Product;
-use Service\Authentication;
+use Service\Authentication\AuthSessionService;
 
 class ProductController
 {
-    private Authentication $authentication;
+    private AuthSessionService $authentication;
     public function __construct(){
-        $this->authentication = new Authentication();
+        $this->authentication = new AuthSessionService();
     }
 
     public function getCatalog()

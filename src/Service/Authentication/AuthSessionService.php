@@ -1,25 +1,18 @@
 <?php
-namespace Service;
+namespace Service\Authentication;
 use Model\User;
 
-class Authentication
+class AuthSessionService implements AuthServiceInterface
 {
     public function login(string $login, string $password): bool
     {
-//        $_SESSION['user_id'] = $name;
         $data = User::getByEmail($login);
         if (empty($data) and !password_verify($password, $data->getPassword())) {
             return false;
-//            $userSession = $data->getId();
-//            $this->authentication->login($userSession);
         }
-        return true;
-    }
-
-    public function setSessionUser(int $name): void
-    {
         $this->sessionStart();
-        $_SESSION['user_id'] = $name;
+        $_SESSION['user_id'] = $data->getId();
+        return true;
     }
 
     public function getCurrentUser(): ?User

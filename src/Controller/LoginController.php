@@ -1,14 +1,13 @@
 <?php
 namespace Controller;
-use Model\User;
 use Request\LoginRequest;
-use Service\Authentication;
+use Service\Authentication\AuthSessionService;
 
 class LoginController
 {
-    private Authentication $authentication;
+    private AuthSessionService $authentication;
     public function __construct(){
-        $this->authentication = new Authentication();
+        $this->authentication = new AuthSessionService();
     }
     public function getLoginForm()
     {
@@ -22,11 +21,7 @@ class LoginController
             $login = $request->getLogin();
             $password = $request->getPassword();
 
-            $data = User::getByEmail($login);
             if ($this->authentication->login($login, $password)) {
-                $userSession = $data->getId();
-                $this->authentication->setSessionUser($userSession);
-
                 header('Location: /catalog');
             } else {
                     $errors['login'] = 'Incorrect email or password';

@@ -78,3 +78,33 @@ Call to a member function getId() on null
 24
 Дата: 03.11.2024 12:41:39
 
+test
+/var/www/html/src/Model/OrderProduct.php
+8
+Дата: 04.11.2024 11:02:04
+
+Call to undefined method Service\AuthenticationService::ccheckSessionUser()
+/var/www/html/src/Controller/ProductController.php
+15
+Дата: 04.11.2024 11:21:49
+
+Call to undefined method Service\AuthenticationService::checkSessionUseruser()
+/var/www/html/src/Controller/ProductController.php
+15
+Дата: 04.11.2024 12:30:16
+
+Class "Controller\PProduct" not found
+/var/www/html/src/Controller/ProductController.php
+18
+Дата: 04.11.2024 12:30:58
+
+message: Call to undefined method Model\Product::getProduct()
+file: /var/www/html/src/Controller/ProductController.php
+line: 18
+Дата: 04.11.2024 12:33:46
+
+message: Call to undefined method Model\Product::getProduct()
+file: /var/www/html/src/Controller/ProductController.php
+line: 18
+Дата: 04.11.2024 12:34:01
+
