@@ -128,3 +128,33 @@ file: /var/www/html/src/Service/OrderService.php
 line: 27
 Дата: 07.11.2024 16:52:29
 
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, array given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 07.11.2024 21:42:14
+
+message: Too few arguments to function Controller\WishlistController::__construct(), 0 passed in /var/www/html/src/Core/App.php on line 37 and exactly 3 expected
+file: /var/www/html/src/Controller/WishlistController.php
+line: 17
+Дата: 07.11.2024 21:46:39
+
+message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/WishlistController.php
+line: 17
+Дата: 07.11.2024 21:50:08
+
+message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/WishlistController.php
+line: 17
+Дата: 07.11.2024 21:50:24
+
+message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/WishlistController.php
+line: 17
+Дата: 07.11.2024 21:50:28
+
+message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/WishlistController.php
+line: 17
+Дата: 07.11.2024 21:53:20
+

@@ -3,18 +3,18 @@ namespace Controller;
 
 use DTO\CreateOrderDTO;
 use Request\OrderRequest;
-use Service\Authentication\AuthSessionService;
+use Service\Authentication\AuthServiceInterface;
 use Service\CartService;
 use Service\OrderService;
 
 class OrderController
 {
-    private AuthSessionService $authentication;
+    private AuthServiceInterface $authentication;
     private CartService $cartService;
     private OrderService $orderService;
 
     public function __construct(
-        AuthSessionService $authentication,
+        AuthServiceInterface $authentication,
         CartService $cartService,
         OrderService $orderService
     )

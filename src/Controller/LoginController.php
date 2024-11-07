@@ -1,13 +1,13 @@
 <?php
 namespace Controller;
 use Request\LoginRequest;
-use Service\Authentication\AuthSessionService;
+use Service\Authentication\AuthServiceInterface;
 
 class LoginController
 {
-    private AuthSessionService $authentication;
+    private AuthServiceInterface $authentication;
 
-    public function __construct(AuthSessionService $authentication)
+    public function __construct(AuthServiceInterface $authentication)
     {
         $this->authentication = $authentication;
     }

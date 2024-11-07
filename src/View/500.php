@@ -9,7 +9,7 @@
         <p>Please contact your administrator
     </aside>
 </article>
-<script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script> //не хватало библиотеки для анимации
+<script src="https://cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
 </body>
 
 <script>

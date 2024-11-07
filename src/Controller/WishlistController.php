@@ -4,18 +4,18 @@ namespace Controller;
 use Model\Product;
 use Model\UserProductWishlist;
 use Request\WishlistRequest;
-use Service\Authentication\AuthSessionService;
+use Service\Authentication\AuthServiceInterface;
 use Service\CartService;
 use Service\WishlistService;
 
 class WishlistController
 {
-    private AuthSessionService $authentication;
+    private AuthServiceInterface $authentication;
     private CartService $cartService;
     private WishlistService $wishlistService;
 
     public function __construct(
-        AuthSessionService $authentication,
+        AuthServiceInterface $authentication,
         CartService $cartService,
         WishlistService $wishlistService
     )
@@ -26,7 +26,9 @@ class WishlistController
     }
     public function addProductToWishlist(WishlistRequest $request)
     {
-        $this->authentication->checkSessionUser();
+        if (!$this->authentication->checkSessionUser()){
+            header('Location: /login');
+        }
         $userId = $this->authentication->getCurrentUser()->getId();
 
         $errors = $request->validate();

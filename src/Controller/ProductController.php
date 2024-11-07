@@ -1,13 +1,13 @@
 <?php
 namespace Controller;
 use Model\Product;
-use Service\Authentication\AuthSessionService;
+use Service\Authentication\AuthServiceInterface;
 
 class ProductController
 {
-    private AuthSessionService $authentication;
+    private AuthServiceInterface $authentication;
 
-    public function __construct(AuthSessionService $authentication)
+    public function __construct(AuthServiceInterface $authentication)
     {
         $this->authentication = $authentication;
     }
