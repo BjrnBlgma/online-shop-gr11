@@ -24,6 +24,7 @@ class OrderService
             );
             $orderIdObj = Order::getByUserIdToTakeOrderId($orderDTO->getUserId());
             $orderId = $orderIdObj->getId();
+            //throw new \Exception();
 
             $userProducts = UserProduct::getByUserIdWithJoin($orderDTO->getUserId());
             foreach ($userProducts as $elem) {

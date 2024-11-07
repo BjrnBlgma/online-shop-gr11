@@ -14,7 +14,11 @@ use Request\OrderRequest;
 use Request\ProductRequest;
 use Request\RegistrateRequest;
 use Request\WishlistRequest;
+use Service\Authentication\AuthSessionService;
+use Service\CartService;
 use Service\Logger\LoggerFileService;
+use Service\OrderService;
+use Service\WishlistService;
 
 
 Autoload::registrate("/var/www/html/src/");
@@ -22,26 +26,54 @@ Autoload::registrate("/var/www/html/src/");
 $loggerService = new LoggerFileService();
 $app = new App($loggerService);
 
-$app->createRoute('/login', 'GET', LoginController::class, 'getLoginForm');
-$app->postRoute('/login', LoginController::class,'loginUser', LoginRequest::class);
+$app->createRoute('/login', 'GET', LoginController::class, 'getLoginForm', null, [AuthSessionService::class]);
+$app->postRoute('/login', LoginController::class,'loginUser', LoginRequest::class, [AuthSessionService::class]);
 
 $app->createRoute('/register', 'GET', UserController::class, 'getRegistrateForm');
 $app->postRoute('/register', UserController::class, 'registrate', RegistrateRequest::class);
 
-$app->createRoute('/catalog', 'GET', ProductController::class, 'getCatalog');
+$app->createRoute('/catalog', 'GET', ProductController::class, 'getCatalog', null, [AuthSessionService::class]);
 
-$app->createRoute('/order', 'GET', OrderController::class, 'getOrderForm');
-$app->postRoute('/order', OrderController::class, 'createOrder', OrderRequest::class);
+$app->getRoute('/order', OrderController::class, 'getOrderForm', [AuthSessionService::class, CartService::class, OrderService::class]);
+$app->postRoute('/order', OrderController::class, 'createOrder', OrderRequest::class, [AuthSessionService::class, CartService::class, OrderService::class]);
 
-$app->postRoute('/add', CartController::class,  'addProductToCart', ProductRequest::class);
-$app->createRoute('/logout', 'GET', LoginController::class,  'logoutUser');
-$app->createRoute('/cart', 'GET', CartController::class, 'lookCart');
+$app->postRoute(
+    '/add',
+    CartController::class,
+    'addProductToCart',
+    ProductRequest::class,
+    [AuthSessionService::class, CartService::class]
+);
+$app->createRoute('/cart', 'GET',CartController::class, 'lookCart', null, [AuthSessionService::class, CartService::class]);
+
+$app->createRoute('/logout', 'GET', LoginController::class,  'logoutUser', null, [AuthSessionService::class]);
+//$app->createRoute('/cart', 'GET', CartController::class, 'lookCart', null,[AuthSessionService::class, CartService::class]);
 
 $app->postRoute('/addToWishlist',WishlistController::class, 'addProductToWishlist', WishlistRequest::class);
 
-$app->postRoute('/addFromWishlist', '\Controller\WishlistController', 'addFromWishlistToCart', WishlistRequest::class);
-$app->createRoute('/wishlist', 'GET', WishlistController::class, 'lookWishlist');
-$app->createRoute('/deleteFromWishlist', 'POST', WishlistController::class,'deleteProductFromWishlist');
+$app->postRoute(
+    '/addFromWishlist',
+    WishlistController::class,
+    'addFromWishlistToCart',
+    WishlistRequest::class,
+    [AuthSessionService::class, CartService::class, WishlistService::class]
+);
+
+$app->createRoute(
+    '/wishlist',
+    'GET',
+    WishlistController::class,
+    'lookWishlist',
+    null,
+    [AuthSessionService::class, CartService::class, WishlistService::class]
+);
+
+$app->createRoute(
+    '/deleteFromWishlist',
+    'POST', WishlistController::class,
+    'deleteProductFromWishlist',
+    null,
+    [AuthSessionService::class, CartService::class, WishlistService::class]
+);
 
 $app->run();
-

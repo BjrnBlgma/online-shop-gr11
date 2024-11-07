@@ -6,9 +6,12 @@ use Service\Authentication\AuthSessionService;
 class LoginController
 {
     private AuthSessionService $authentication;
-    public function __construct(){
-        $this->authentication = new AuthSessionService();
+
+    public function __construct(AuthSessionService $authentication)
+    {
+        $this->authentication = $authentication;
     }
+
     public function getLoginForm()
     {
         require_once "./../View/login.php";

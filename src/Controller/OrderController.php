@@ -12,12 +12,17 @@ class OrderController
     private AuthSessionService $authentication;
     private CartService $cartService;
     private OrderService $orderService;
-    public function __construct(){
-        $this->authentication = new AuthSessionService();
-        $this->cartService = new CartService();
-        $this->orderService = new OrderService();
-    }
 
+    public function __construct(
+        AuthSessionService $authentication,
+        CartService $cartService,
+        OrderService $orderService
+    )
+    {
+        $this->authentication = $authentication;
+        $this->cartService = $cartService;
+        $this->orderService = $orderService;
+    }
 
     public function getOrderForm()
     {

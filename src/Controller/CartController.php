@@ -9,10 +9,17 @@ class CartController
 {
     private AuthSessionService $authentication;
     private CartService $cartService;
-    public function __construct(){
-        $this->authentication = new AuthSessionService();
-        $this->cartService = new CartService();
+
+    public function __construct(
+        AuthSessionService $authentication,
+        CartService $cartService
+    )
+    {
+        $this->authentication = $authentication;
+        $this->cartService = $cartService;
     }
+
+
     public function lookCart()
     {
         if (!$this->authentication->checkSessionUser()){

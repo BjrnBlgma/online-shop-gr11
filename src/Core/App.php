@@ -25,10 +25,16 @@ class App
                 $controllerClassName = $route[$requestMethod]['class'];
                 $methodName = $route[$requestMethod]['method'];
                 $requestClass = $route[$requestMethod]['request'];
+                $methodToUseInClass = $route[$requestMethod]['methodToUseInClass'];
 
-                $class = new $controllerClassName();
                 // сделать общий контроллер с конструктором??? где остальные контроллеры будут просто наследовать?
+                $methodInClass = [];
+                foreach ($methodToUseInClass as $elem) {
+                    $methodInClass[] = new $elem();
+                }
 
+//                $methodInClass = $methodToUseInClass ? new $methodToUseInClass() : null;
+                $class = new $controllerClassName(...$methodInClass);
 
                 $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
 
@@ -61,21 +67,46 @@ class App
         string $method,
         string $className,
         string $methodName,
-        string $requestClass = null
+        string $requestClass = null,
+        array $methodToUseInClass = null
     )
     {
         $this->routes[$route][$method] = [
             'class' => $className,
             'method' => $methodName,
-            'request' => $requestClass
+            'request' => $requestClass,
+            'methodToUseInClass' => $methodToUseInClass
         ];
     }
 
-    public function postRoute(string $route, string $className, string $methodName, string $requestClass = null)
+    public function postRoute(
+        string $route,
+        string $className,
+        string $methodName,
+        string $requestClass = null,
+        array|string $methodToUseInClass = null
+    )
     {
         $this->routes[$route]['POST'] = [
             'class' => $className,
             'method' => $methodName,
+            'request' => $requestClass,
+            'methodToUseInClass' => $methodToUseInClass
+        ];
+    }
+
+    public function getRoute(
+        string $route,
+        string $className,
+        string $methodName,
+        array|string $methodToUseInClass = null,
+        string $requestClass = null,
+    )
+    {
+        $this->routes[$route]['GET'] = [
+            'class' => $className,
+            'method' => $methodName,
+            'methodToUseInClass' => $methodToUseInClass,
             'request' => $requestClass
         ];
     }

@@ -108,3 +108,23 @@ file: /var/www/html/src/Controller/ProductController.php
 line: 18
 Дата: 04.11.2024 12:34:01
 
+message: Call to a member function lookWishlist() on null
+file: /var/www/html/src/Core/App.php
+line: 41
+Дата: 07.11.2024 15:31:28
+
+message: Call to a member function getLoginForm() on null
+file: /var/www/html/src/Core/App.php
+line: 41
+Дата: 07.11.2024 15:31:33
+
+message: 
+file: /var/www/html/src/Service/OrderService.php
+line: 27
+Дата: 07.11.2024 16:52:05
+
+message: 
+file: /var/www/html/src/Service/OrderService.php
+line: 27
+Дата: 07.11.2024 16:52:29
+

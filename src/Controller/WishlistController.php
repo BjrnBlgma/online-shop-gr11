@@ -13,12 +13,17 @@ class WishlistController
     private AuthSessionService $authentication;
     private CartService $cartService;
     private WishlistService $wishlistService;
-    public function __construct(){
-        $this->authentication = new AuthSessionService();
-        $this->cartService = new CartService();
-        $this->wishlistService = new WishlistService();
-    }
 
+    public function __construct(
+        AuthSessionService $authentication,
+        CartService $cartService,
+        WishlistService $wishlistService
+    )
+    {
+        $this->authentication = $authentication;
+        $this->cartService = $cartService;
+        $this->wishlistService = $wishlistService;
+    }
     public function addProductToWishlist(WishlistRequest $request)
     {
         $this->authentication->checkSessionUser();
