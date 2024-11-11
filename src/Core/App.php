@@ -29,13 +29,8 @@ class App
                 $controllerClassName = $route[$requestMethod]['class'];
                 $methodName = $route[$requestMethod]['method'];
                 $requestClass = $route[$requestMethod]['request'];
-//                $classContainer = $route[$requestMethod]['container'];
 
                 $object = $this->container->get($controllerClassName);
-
-
-//                $methodInClass = $methodToUseInClass ? new $methodToUseInClass() : null;
-//                $class = new $controllerClassName($object);
 
                 $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
 
@@ -69,15 +64,13 @@ class App
         string $method,
         string $className,
         string $methodName,
-        string $requestClass = null,
-        $container = null
+        string $requestClass = null
     )
     {
         $this->routes[$route][$method] = [
             'class' => $className,
             'method' => $methodName,
-            'request' => $requestClass,
-            'container' => $container
+            'request' => $requestClass
         ];
     }
 
@@ -85,15 +78,13 @@ class App
         string $route,
         string $className,
         string $methodName,
-        string $requestClass = null,
-//        $container = null
+        string $requestClass = null
     )
     {
         $this->routes[$route]['POST'] = [
             'class' => $className,
             'method' => $methodName,
-            'request' => $requestClass,
-//            'container' => $container
+            'request' => $requestClass
         ];
     }
 
@@ -101,15 +92,13 @@ class App
         string $route,
         string $className,
         string $methodName,
-        string $requestClass = null,
-//        $container = null
+        string $requestClass = null
     )
     {
         $this->routes[$route]['GET'] = [
             'class' => $className,
             'method' => $methodName,
-            'request' => $requestClass,
-//            'container' => $container
+            'request' => $requestClass
         ];
     }
 }
