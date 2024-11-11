@@ -9,6 +9,7 @@ class LoggerFileService implements LoggerServiceInterface
         date_default_timezone_set('Asia/Irkutsk');
         $time = 'Дата: '  . date('d.m.Y H:i:s') . "\n";
 
+        file_put_contents($file, $message . "\n", FILE_APPEND);
         foreach ($data as $key => $value) {
             file_put_contents($file, "{$key}: {$value}\n", FILE_APPEND);
         }

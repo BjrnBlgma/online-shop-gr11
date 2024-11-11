@@ -1,160 +1,42 @@
-Call to undefined method Service\Authentication::startstart()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 19:23:43
-
-Call to undefined method Service\Authentication::startstart()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 19:23:46
-
-Non-static method Service\Authentication::start() cannot be called statically
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 19:52:15
-
-Call to undefined method Service\Authentication::startstart()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 19:52:53
-
-Call to undefined method Service\Authentication::startstar()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 22:40:38
-
-Call to undefined method Service\Authentication::startstar()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 22:41:18
-
-Call to undefined method Service\Authentication::startstar()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 22:41:27
-
-Call to undefined method Service\Authentication::startstar()
-/var/www/html/src/Controller/CartController.php
-32
-Дата: 30.10.2024 22:41:44
-
-Typed static property Model\Model::$pdo must not be accessed before initialization
-/var/www/html/src/Model/Model.php
-11
-Дата: 03.11.2024 11:58:15
-
-Typed static property Model\Model::$pdo must not be accessed before initialization
-/var/www/html/src/Model/Model.php
-11
-Дата: 03.11.2024 11:58:18
-
-Typed static property Model\Model::$pdo must not be accessed before initialization
-/var/www/html/src/Model/Model.php
-11
-Дата: 03.11.2024 12:16:16
-
-Typed static property Model\Model::$pdo must not be accessed before initialization
-/var/www/html/src/Model/Model.php
-11
-Дата: 03.11.2024 12:17:20
-
-Call to a member function getId() on null
-/var/www/html/src/Controller/CartController.php
-21
-Дата: 03.11.2024 12:28:00
-
-Call to a member function getId() on null
-/var/www/html/src/Controller/CartController.php
-21
-Дата: 03.11.2024 12:28:17
-
-Model\User::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Service/Authentication.php on line 35
-/var/www/html/src/Model/User.php
-31
-Дата: 03.11.2024 12:29:11
-
-Call to a member function getId() on null
-/var/www/html/src/Controller/CartController.php
-24
-Дата: 03.11.2024 12:41:39
-
-test
-/var/www/html/src/Model/OrderProduct.php
-8
-Дата: 04.11.2024 11:02:04
-
-Call to undefined method Service\AuthenticationService::ccheckSessionUser()
-/var/www/html/src/Controller/ProductController.php
-15
-Дата: 04.11.2024 11:21:49
-
-Call to undefined method Service\AuthenticationService::checkSessionUseruser()
-/var/www/html/src/Controller/ProductController.php
-15
-Дата: 04.11.2024 12:30:16
-
-Class "Controller\PProduct" not found
-/var/www/html/src/Controller/ProductController.php
-18
-Дата: 04.11.2024 12:30:58
-
-message: Call to undefined method Model\Product::getProduct()
-file: /var/www/html/src/Controller/ProductController.php
-line: 18
-Дата: 04.11.2024 12:33:46
-
-message: Call to undefined method Model\Product::getProduct()
-file: /var/www/html/src/Controller/ProductController.php
-line: 18
-Дата: 04.11.2024 12:34:01
-
-message: Call to a member function lookWishlist() on null
-file: /var/www/html/src/Core/App.php
-line: 41
-Дата: 07.11.2024 15:31:28
-
-message: Call to a member function getLoginForm() on null
-file: /var/www/html/src/Core/App.php
-line: 41
-Дата: 07.11.2024 15:31:33
-
-message: 
-file: /var/www/html/src/Service/OrderService.php
-line: 27
-Дата: 07.11.2024 16:52:05
-
-message: 
-file: /var/www/html/src/Service/OrderService.php
-line: 27
-Дата: 07.11.2024 16:52:29
-
-message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, array given, called in /var/www/html/src/Core/App.php on line 37
+Произошла ошибка при обработке
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, Controller\ProductController given, called in /var/www/html/src/Core/App.php on line 37
 file: /var/www/html/src/Controller/ProductController.php
 line: 10
-Дата: 07.11.2024 21:42:14
+Дата: 11.11.2024 20:24:01
 
-message: Too few arguments to function Controller\WishlistController::__construct(), 0 passed in /var/www/html/src/Core/App.php on line 37 and exactly 3 expected
-file: /var/www/html/src/Controller/WishlistController.php
-line: 17
-Дата: 07.11.2024 21:46:39
+Произошла ошибка при обработке
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, Controller\ProductController given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 11.11.2024 20:30:26
 
-message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
-file: /var/www/html/src/Controller/WishlistController.php
-line: 17
-Дата: 07.11.2024 21:50:08
+Произошла ошибка при обработке
+message: Too few arguments to function {closure}(), 0 passed in /var/www/html/src/Core/Container.php on line 14 and exactly 1 expected
+file: /var/www/html/src/public/index.php
+line: 38
+Дата: 11.11.2024 20:34:25
 
-message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
-file: /var/www/html/src/Controller/WishlistController.php
-line: 17
-Дата: 07.11.2024 21:50:24
+Произошла ошибка при обработке
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, Controller\ProductController given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 11.11.2024 20:34:46
 
-message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
-file: /var/www/html/src/Controller/WishlistController.php
-line: 17
-Дата: 07.11.2024 21:50:28
+Произошла ошибка при обработке
+message: Too few arguments to function Controller\ProductController::__construct(), 0 passed in /var/www/html/src/Core/App.php on line 37 and exactly 1 expected
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 11.11.2024 20:36:46
 
-message: Controller\WishlistController::__construct(): Argument #2 ($cartService) must be of type Service\CartService, Service\WishlistService given, called in /var/www/html/src/Core/App.php on line 37
-file: /var/www/html/src/Controller/WishlistController.php
-line: 17
-Дата: 07.11.2024 21:53:20
+Произошла ошибка при обработке
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, Controller\ProductController given, called in /var/www/html/src/Core/App.php on line 37
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 11.11.2024 20:37:56
+
+Произошла ошибка при обработке
+message: Controller\ProductController::__construct(): Argument #1 ($authentication) must be of type Service\Authentication\AuthServiceInterface, Controller\ProductController given, called in /var/www/html/src/Core/App.php on line 38
+file: /var/www/html/src/Controller/ProductController.php
+line: 10
+Дата: 11.11.2024 20:38:53
 

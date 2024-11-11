@@ -3,14 +3,18 @@ namespace Core;
 
 use Service\Logger\LoggerFileService;
 use Service\Logger\LoggerServiceInterface;
+use Service\Authentication\AuthServiceInterface;
+use Core\Container;
 
 class App
 {
     private array $routes = [];
+    private Container $container;
     private LoggerServiceInterface $log;
-    public function __construct(LoggerServiceInterface $loggerService)
+    public function __construct(LoggerServiceInterface $loggerService, Container $container)
     {
         $this->log = $loggerService;
+        $this->container = $container;
     }
 
     public function run()
@@ -25,24 +29,22 @@ class App
                 $controllerClassName = $route[$requestMethod]['class'];
                 $methodName = $route[$requestMethod]['method'];
                 $requestClass = $route[$requestMethod]['request'];
-                $methodToUseInClass = $route[$requestMethod]['methodToUseInClass'];
+//                $classContainer = $route[$requestMethod]['container'];
 
-                // сделать общий контроллер с конструктором??? где остальные контроллеры будут просто наследовать?
-                $methodInClass = [];
-                foreach ($methodToUseInClass as $elem) {
-                    $methodInClass[] = new $elem();
-                }
+                $object = $this->container->get($controllerClassName);
+
 
 //                $methodInClass = $methodToUseInClass ? new $methodToUseInClass() : null;
-                $class = new $controllerClassName(...$methodInClass);
+//                $class = new $controllerClassName($object);
 
                 $request = $requestClass ? new $requestClass($requestUri, $requestMethod, $_POST): null;
 
                 try {
-                    return $class->$methodName($request);
+                    return $object->$methodName($request); // вот я тупая тупость...только после нескольких перепросмотров доперла, что у меня за ошибка:O
                 } catch(\Throwable $exception) {
                     $this->log->error(
-                        'Произошла ошибка при обработке', [
+                        'Произошла ошибка при обработке' ,
+                        [
                             'message' => $exception->getMessage(),
                             'file' => $exception->getFile(),
                             'line' => $exception->getLine()
@@ -68,14 +70,14 @@ class App
         string $className,
         string $methodName,
         string $requestClass = null,
-        array $methodToUseInClass = null
+        $container = null
     )
     {
         $this->routes[$route][$method] = [
             'class' => $className,
             'method' => $methodName,
             'request' => $requestClass,
-            'methodToUseInClass' => $methodToUseInClass
+            'container' => $container
         ];
     }
 
@@ -84,14 +86,14 @@ class App
         string $className,
         string $methodName,
         string $requestClass = null,
-        array|string $methodToUseInClass = null
+//        $container = null
     )
     {
         $this->routes[$route]['POST'] = [
             'class' => $className,
             'method' => $methodName,
             'request' => $requestClass,
-            'methodToUseInClass' => $methodToUseInClass
+//            'container' => $container
         ];
     }
 
@@ -99,15 +101,15 @@ class App
         string $route,
         string $className,
         string $methodName,
-        array|string $methodToUseInClass = null,
         string $requestClass = null,
+//        $container = null
     )
     {
         $this->routes[$route]['GET'] = [
             'class' => $className,
             'method' => $methodName,
-            'methodToUseInClass' => $methodToUseInClass,
-            'request' => $requestClass
+            'request' => $requestClass,
+//            'container' => $container
         ];
     }
 }
