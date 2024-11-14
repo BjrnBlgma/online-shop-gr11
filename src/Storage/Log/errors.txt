@@ -40,3 +40,279 @@ file: /var/www/html/src/Controller/ProductController.php
 line: 10
 Дата: 11.11.2024 20:38:53
 
+Произошла ошибка при обработке
+message: Call to undefined method Controller\ProductController::createProduct()
+file: /var/www/html/src/Core/App.php
+line: 38
+Дата: 11.11.2024 22:17:00
+
+Произошла ошибка при обработке
+message: Call to undefined method Controller\ProductController::openProduct()
+file: /var/www/html/src/Core/App.php
+line: 38
+Дата: 11.11.2024 22:19:04
+
+Произошла ошибка при обработке
+message: Controller\ProductController::openProduct(): Argument #1 ($request) must be of type Request\ProductCard, null given, called in /var/www/html/src/Core/App.php on line 38
+file: /var/www/html/src/Controller/ProductController.php
+line: 36
+Дата: 11.11.2024 23:41:08
+
+Произошла ошибка при обработке
+message: Call to a member function getId() on null
+file: /var/www/html/src/View/product.php
+line: 24
+Дата: 12.11.2024 00:00:40
+
+Произошла ошибка при обработке
+message: Call to a member function getId() on null
+file: /var/www/html/src/View/product.php
+line: 24
+Дата: 12.11.2024 00:00:57
+
+Произошла ошибка при обработке
+message: Call to a member function getId() on null
+file: /var/www/html/src/View/product.php
+line: 21
+Дата: 12.11.2024 00:09:20
+
+Произошла ошибка при обработке
+message: Call to undefined method Model\Product::product()
+file: /var/www/html/src/View/cart.php
+line: 21
+Дата: 12.11.2024 00:46:24
+
+Произошла ошибка при обработке
+message: Call to a member function getName() on null
+file: /var/www/html/src/View/cart.php
+line: 21
+Дата: 12.11.2024 00:46:34
+
+Произошла ошибка при обработке
+message: Call to undefined method Model\UserProduct::getProducts()
+file: /var/www/html/src/View/cart.php
+line: 21
+Дата: 12.11.2024 00:48:17
+
+Произошла ошибка при обработке
+message: Call to undefined method Model\UserProduct::getImage()
+file: /var/www/html/src/View/cart.php
+line: 18
+Дата: 12.11.2024 00:55:14
+
+Произошла ошибка при обработке
+message: count(): Argument #1 ($value) must be of type Countable|array, null given
+file: /var/www/html/src/Controller/ProductController.php
+line: 48
+Дата: 12.11.2024 18:28:57
+
+Произошла ошибка при обработке
+message: count(): Argument #1 ($value) must be of type Countable|array, null given
+file: /var/www/html/src/Controller/ProductController.php
+line: 48
+Дата: 12.11.2024 18:29:01
+
+Произошла ошибка при обработке
+message: count(): Argument #1 ($value) must be of type Countable|array, null given
+file: /var/www/html/src/Controller/ProductController.php
+line: 49
+Дата: 12.11.2024 18:30:06
+
+Произошла ошибка при обработке
+message: Division by zero
+file: /var/www/html/src/Controller/ProductController.php
+line: 65
+Дата: 12.11.2024 18:40:25
+
+Произошла ошибка при обработке
+message: Controller\ProductController::calculateAverage(): Argument #1 ($array) must be of type Model\ProductReview, null given, called in /var/www/html/src/Controller/ProductController.php on line 49
+file: /var/www/html/src/Controller/ProductController.php
+line: 54
+Дата: 12.11.2024 18:43:32
+
+Произошла ошибка при обработке
+message: Controller\ProductController::calculateAverage(): Argument #1 ($array) must be of type object, null given, called in /var/www/html/src/Controller/ProductController.php on line 49
+file: /var/www/html/src/Controller/ProductController.php
+line: 54
+Дата: 12.11.2024 18:44:36
+
+Произошла ошибка при обработке
+message: Division by zero
+file: /var/www/html/src/Controller/ProductController.php
+line: 62
+Дата: 12.11.2024 18:44:56
+
+Произошла ошибка при обработке
+message: Model\Review::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Model/ProductReview.php on line 54
+file: /var/www/html/src/Model/Review.php
+line: 28
+Дата: 12.11.2024 18:54:39
+
+Произошла ошибка при обработке
+message: Model\Review::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Model/ProductReview.php on line 54
+file: /var/www/html/src/Model/Review.php
+line: 28
+Дата: 12.11.2024 18:56:31
+
+Произошла ошибка при обработке
+message: Model\Review::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Model/ProductReview.php on line 54
+file: /var/www/html/src/Model/Review.php
+line: 28
+Дата: 12.11.2024 18:58:18
+
+Произошла ошибка при обработке
+message: Model\Review::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Model/ProductReview.php on line 54
+file: /var/www/html/src/Model/Review.php
+line: 28
+Дата: 12.11.2024 19:01:48
+
+Произошла ошибка при обработке
+message: Model\Review::getById(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Model/ProductReview.php on line 78
+file: /var/www/html/src/Model/Review.php
+line: 28
+Дата: 12.11.2024 19:14:28
+
+Произошла ошибка при обработке
+message: Model\ProductReview::getByProductId(): Return value must be of type ?Model\ProductReview, array returned
+file: /var/www/html/src/Model/ProductReview.php
+line: 26
+Дата: 12.11.2024 19:19:24
+
+Произошла ошибка при обработке
+message: Call to undefined method Model\Review::getRating()
+file: /var/www/html/src/View/product_card.php
+line: 61
+Дата: 12.11.2024 23:24:30
+
+Произошла ошибка при обработке
+message: Call to a member function getImage() on null
+file: /var/www/html/src/View/reviews_block.php
+line: 17
+Дата: 12.11.2024 23:52:58
+
+Произошла ошибка при обработке
+message: Class "Controller\OrderProduct" not found
+file: /var/www/html/src/Controller/ReviewController.php
+line: 31
+Дата: 13.11.2024 01:07:28
+
+Произошла ошибка при обработке
+message: SQLSTATE[HY093]: Invalid parameter number: :user_id
+file: /var/www/html/src/Model/OrderProduct.php
+line: 32
+Дата: 13.11.2024 01:15:59
+
+Произошла ошибка при обработке
+message: SQLSTATE[42703]: Undefined column: 7 ERROR:  column "orders_user_id" does not exist
+LINE 11:             WHERE orders_user_id = $1 and order_products_pro...
+                           ^
+file: /var/www/html/src/Model/OrderProduct.php
+line: 32
+Дата: 13.11.2024 01:16:46
+
+Произошла ошибка при обработке
+message: Non-static method Model\OrderProduct::hydrateWithJoin() cannot be called statically
+file: /var/www/html/src/Model/OrderProduct.php
+line: 37
+Дата: 13.11.2024 01:22:24
+
+Произошла ошибка при обработке
+message: syntax error, unexpected token "require_once"
+file: /var/www/html/src/Controller/ReviewController.php
+line: 47
+Дата: 13.11.2024 03:03:50
+
+Произошла ошибка при обработке
+message: Model\ProductReview::addReview(): Argument #2 ($product) must be of type Model\Product, int given, called in /var/www/html/src/Controller/ReviewController.php on line 83
+file: /var/www/html/src/Model/ProductReview.php
+line: 10
+Дата: 14.11.2024 00:12:43
+
+Произошла ошибка при обработке
+message: Call to a member function getId() on int
+file: /var/www/html/src/Model/ProductReview.php
+line: 13
+Дата: 14.11.2024 00:13:34
+
+Произошла ошибка при обработке
+message: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "review_name"
+DETAIL:  Key (review_id, product_id)=(2, 1) already exists.
+file: /var/www/html/src/Model/ProductReview.php
+line: 13
+Дата: 14.11.2024 00:14:38
+
+Произошла ошибка при обработке
+message: SQLSTATE[23505]: Unique violation: 7 ERROR:  duplicate key value violates unique constraint "review_name"
+DETAIL:  Key (review_id, product_id)=(2, 1) already exists.
+file: /var/www/html/src/Model/ProductReview.php
+line: 13
+Дата: 14.11.2024 00:17:28
+
+Произошла ошибка при обработке
+message: Model\ProductReview::addReview(): Argument #1 ($reviewId) must be of type Model\Review, null given, called in /var/www/html/src/Controller/ReviewController.php on line 83
+file: /var/www/html/src/Model/ProductReview.php
+line: 10
+Дата: 14.11.2024 00:18:31
+
+Произошла ошибка при обработке
+message: SQLSTATE[42P01]: Undefined table: 7 ERROR:  missing FROM-clause entry for table "products_reviews"
+LINE 6:              products_reviews.id as product_review_id,
+                     ^
+file: /var/www/html/src/Model/ProductReview.php
+line: 32
+Дата: 14.11.2024 01:00:56
+
+Произошла ошибка при обработке
+message: Cannot assign null to property Model\ProductReview::$id of type int
+file: /var/www/html/src/Model/ProductReview.php
+line: 100
+Дата: 14.11.2024 01:02:26
+
+Произошла ошибка при обработке
+message: Cannot assign null to property Model\ProductReview::$rating of type int|float
+file: /var/www/html/src/Model/ProductReview.php
+line: 103
+Дата: 14.11.2024 01:03:32
+
+Произошла ошибка при обработке
+message: Call to undefined method Model\Review::getText()
+file: /var/www/html/src/View/product_card.php
+line: 61
+Дата: 14.11.2024 01:06:06
+
+Произошла ошибка при обработке
+message: Call to a member function getReview() on array
+file: /var/www/html/src/Controller/ProductController.php
+line: 50
+Дата: 14.11.2024 01:07:46
+
+Произошла ошибка при обработке
+message: Division by zero
+file: /var/www/html/src/Controller/ProductController.php
+line: 65
+Дата: 14.11.2024 19:52:37
+
+Произошла ошибка при обработке
+message: Division by zero
+file: /var/www/html/src/Controller/ProductController.php
+line: 65
+Дата: 14.11.2024 19:53:31
+
+Произошла ошибка при обработке
+message: Call to a member function getReview() on string
+file: /var/www/html/src/View/product_card.php
+line: 61
+Дата: 14.11.2024 19:55:40
+
+Произошла ошибка при обработке
+message: Too few arguments to function Controller\ProductController::__construct(), 1 passed in /var/www/html/src/public/index.php on line 43 and exactly 2 expected
+file: /var/www/html/src/Controller/ProductController.php
+line: 15
+Дата: 14.11.2024 20:43:43
+
+Произошла ошибка при обработке
+message: Model\Review::createReview(): Argument #4 ($userId) must be of type Model\User, int given, called in /var/www/html/src/Controller/ReviewController.php on line 60
+file: /var/www/html/src/Model/Review.php
+line: 14
+Дата: 14.11.2024 21:01:34
+

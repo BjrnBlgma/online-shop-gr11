@@ -35,7 +35,17 @@ class UserProduct extends Model
 
     public static function getByUserIdWithJoin(int $user)
     {
-        $stmt = self::getPdo()->prepare("SELECT *
+        $stmt = self::getPdo()->prepare("SELECT 
+            users.id as user_id,
+            users.name as user_name,
+            users.email as user_email,
+            products.id as product_id,
+            products.name as product_name,
+            products.price as product_price,
+            products.image as product_image,
+            products.description as product_description,
+            user_products.id as user_product_id,
+            user_products.amount as user_product_amount
             FROM user_products
                 INNER JOIN products ON products.id = user_products.product_id
                 INNER JOIN users ON users.id = user_products.user_id
@@ -118,9 +128,7 @@ class UserProduct extends Model
     private static function hydrate(array $data)
     {
         $object = new self();
-
         $userFromDb = User::getById($data['user_id']);
-
         $productFromDb = Product::getByProductId($data['product_id']);
 
         $object->id = $data['id'];
@@ -135,21 +143,21 @@ class UserProduct extends Model
     {
         $user = new User();
         $user->setId($data['user_id']);
-        $user->setName($data['name']);
-        $user->setEmail($data['email']);
+        $user->setName($data['user_name']);
+        $user->setEmail($data['user_email']);
 
         $product = new Product();
         $product->setId($data['product_id']);
-        $product->setName($data['name']);
-        $product->setPrice($data['price']);
-        $product->setImage($data['image']);
-        $product->setDescription($data['description']);
+        $product->setName($data['product_name']);
+        $product->setPrice($data['product_price']);
+        $product->setImage($data['product_image']);
+        $product->setDescription($data['product_description']);
 
         $obj = new self();
-        $obj->id = $data['id'];
+        $obj->id = $data['user_product_id'];
         $obj->user = $user;
         $obj->product = $product;
-        $obj->amount = $data['amount'];
+        $obj->amount = $data['user_product_amount'];
 
         return $obj;
     }

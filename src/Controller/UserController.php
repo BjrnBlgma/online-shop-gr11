@@ -20,14 +20,8 @@ class UserController
             $password = $request->getPassword();
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            try {
-                User::createUser($name, $email, $hash);
-
-                header('Location: /login');
-            } catch (PDOException $e) {
-                print "Error!: " . $e->getMessage();
-                //die();
-            }
+            User::createUser($name, $email, $hash);
+            header('Location: /login');
         }
 
         require_once "./../View/registrate.php";

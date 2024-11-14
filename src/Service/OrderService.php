@@ -25,8 +25,7 @@ class OrderService
             $orderIdObj = Order::getByUserIdToTakeOrderId($orderDTO->getUserId());
             $orderId = $orderIdObj->getId();
             //throw new \Exception();
-
-            $userProducts = UserProduct::getByUserIdWithJoin($orderDTO->getUserId());
+            $userProducts = UserProduct::getByUserIdWithoutJoin($orderDTO->getUserId()); //проверить, так как переделала на безджоин
             foreach ($userProducts as $elem) {
                 OrderProduct::sendProductToOrder($orderId, $elem->getProduct(), $elem->getAmount());
             }

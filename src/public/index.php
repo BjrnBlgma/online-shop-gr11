@@ -5,6 +5,7 @@ use Controller\CartController;
 use Controller\LoginController;
 use Controller\OrderController;
 use Controller\ProductController;
+use Controller\ReviewController;
 use Controller\UserController;
 use Controller\WishlistController;
 use Core\App;
@@ -12,8 +13,10 @@ use Core\Autoload;
 use Core\Container;
 use Request\LoginRequest;
 use Request\OrderRequest;
+use Request\ProductCardRequest;
 use Request\ProductRequest;
 use Request\RegistrateRequest;
+use Request\ReviewRequest;
 use Request\WishlistRequest;
 use Service\Authentication\AuthSessionService;
 use Service\Authentication\AuthServiceInterface;
@@ -23,6 +26,7 @@ use Service\Logger\LoggerFileService;
 use Service\Logger\LoggerDbService;
 use Service\Logger\LoggerServiceInterface;
 use Service\OrderService;
+use Service\ReviewService;
 use Service\WishlistService;
 
 try{
@@ -37,7 +41,8 @@ try{
 
     $container->set(ProductController::class, function (Container $container) {
         $authService = $container->get(AuthServiceInterface::class);
-        return new ProductController($authService);
+        $reviewService = $container->get(ReviewService::class);
+        return new ProductController($authService, $reviewService);
     });
 
     $container->set(OrderController::class, function (Container $container) {
@@ -58,6 +63,11 @@ try{
         $cartService = new CartService();
         $wishlistService = new WishlistService();
         return new WishlistController($authService, $cartService, $wishlistService);
+    });
+
+    $container->set(\Controller\ReviewController::class, function (Container $container) {
+        $authService = $container->get(AuthServiceInterface::class);
+        return new ReviewController($authService);
     });
 
     $container->set(LoggerServiceInterface::class, function () {
@@ -91,6 +101,10 @@ try{
     $app->createRoute('/wishlist', 'GET', WishlistController::class, 'lookWishlist');
     $app->createRoute('/deleteFromWishlist', 'POST', WishlistController::class, 'deleteProductFromWishlist');
 
+    $app->postRoute('/product', ProductController::class, 'openProduct', ProductCardRequest::class);
+
+    $app->postRoute('/review', \Controller\ReviewController::class, 'getReviewForm', ProductCardRequest::class);
+    $app->postRoute('/add-review', \Controller\ReviewController::class, 'createReview', ReviewRequest::class);
     $app->run();
 } catch (\Error $exception){
     http_response_code(500);

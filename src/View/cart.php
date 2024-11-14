@@ -19,8 +19,8 @@
                         </div>
                         <div class="col-5 mb-2">
                             <h6 class=""><?php echo $product->getProduct()->getName(); ?></h6>
-<!--                            <p class="pl-1 mb-0">20 x 24</p>-->
-                            <!--<p class="pl-1 mb-0">Matte Print</p>-->
+                            <p class="pl-1 mb-0"><?php echo $product->getProduct()->getDescription();?></p>
+                            <p class="pl-1 mb-0"> </p>
                         </div>
                         <div class="col-2">
                             <p class="cartItemQuantity p-1 text-center"><?php echo $product->getAmount(); ?></p>
@@ -46,7 +46,7 @@
                         <p id="total"> <?php echo $allSum . "$";?> </p>
                     </div>
                 </div>
-                <a href="order"><button id="btn-checkout" class="shopnow"><span>Оформить</span></button></a>
+                <a href="/order"><button id="btn-checkout" class="shopnow"><span>Оформить</span></button></a>
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@ class CartController
         }
         $userId = $this->authentication->getCurrentUser()->getId();
 
-//        $productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
+        //$productsInCart = UserProduct::getByUserIdWithoutJoin($userId);
         $productsInCart = UserProduct::getByUserIdWithJoin($userId);
 
         $allSum= $this->cartService->getTotalSum($userId);

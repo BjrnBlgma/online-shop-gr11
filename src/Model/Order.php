@@ -39,6 +39,18 @@ class Order extends Model
         return self::hydrate($sendOrderId);
     }
 
+    public static function getById(int $orderId): self|null
+    {
+        $stmt = self::getPdo()->prepare('SELECT * FROM orders WHERE id = :id');
+        $stmt->execute(['id' => $orderId]);
+        $sendOrderId = $stmt->fetch();
+
+        if (empty($sendOrderId)) {
+            return null;
+        }
+        return self::hydrate($sendOrderId);
+    }
+
     public function getId(): int
     {
         return $this->id;
@@ -77,6 +89,54 @@ class Order extends Model
     public function getUserId(): int
     {
         return $this->userId;
+    }
+
+    public function setId(int $id): Order
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function setName(string $name): Order
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setFamily(string $family): Order
+    {
+        $this->family = $family;
+        return $this;
+    }
+
+    public function setCity(string $city): Order
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    public function setAddress(string $address): Order
+    {
+        $this->address = $address;
+        return $this;
+    }
+
+    public function setPhone(string $phone): Order
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    public function setSumTotal(float|int $sumTotal): Order
+    {
+        $this->sumTotal = $sumTotal;
+        return $this;
+    }
+
+    public function setUserId(int $userId): Order
+    {
+        $this->userId = $userId;
+        return $this;
     }
 
 
