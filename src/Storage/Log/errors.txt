@@ -316,3 +316,9 @@ file: /var/www/html/src/Model/Review.php
 line: 14
 Дата: 14.11.2024 21:01:34
 
+Произошла ошибка при обработке
+message: syntax error, unexpected token "{"
+file: /var/www/html/src/View/product_card.php
+line: 47
+Дата: 18.11.2024 02:25:00
+

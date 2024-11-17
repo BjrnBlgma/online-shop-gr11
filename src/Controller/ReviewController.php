@@ -31,9 +31,7 @@ class ReviewController
                 $isOrderProduct = OrderProduct::getByUserIdandProductId($userId, $productId);
                 if (empty($isOrderProduct)) {
                     header('Location: /cart');
-                    //добавить новый роут, где будет высвечиваться ошибка
-                    //если пользователь не заказывал товар, то перенаправить в спец.страницу с ошибкой
-                    //где юзер может добавить товар в корзину и заказать его
+                    //добавила условие для видимости кнопки "review":)
                 }
                 $reviews = Review::getByProductId($productId);
                 if (count($reviews) >= count($isOrderProduct)) {

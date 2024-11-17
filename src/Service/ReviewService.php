@@ -23,7 +23,11 @@ class ReviewService
     {
         $reviews = Review::getByProductId($productId);
         $average = $this->calculateAverage($reviews);
-        return $average;
+        if (empty($average)){
+            return null;
+        }
+        $averageRating = round($average, 1);
+        return $averageRating;
     }
 
     private function calculateAverage($array = []): float|int|null

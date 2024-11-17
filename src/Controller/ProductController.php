@@ -1,5 +1,6 @@
 <?php
 namespace Controller;
+use Model\OrderProduct;
 use Model\Product;
 use Model\Review;
 use Request\ProductCardRequest;
@@ -42,6 +43,7 @@ class ProductController
         if (!$this->authentication->checkSessionUser()){
             header('Location: /login');
         }
+        $userId = $this->authentication->getCurrentUser()->getId();
         $errors = $request->validate();
         if (empty($errors)) {
             $productId = $request->getProductId();
@@ -49,6 +51,9 @@ class ProductController
 
             $reviews = Review::getByProductId($productId);
             $averageRating = $this->reviewService->getAverageRating($productId);
+
+            $isOrderProduct = OrderProduct::getByUserIdandProductId($userId, $productId);
+
         }
         require_once "./../View/product_card.php";
     }

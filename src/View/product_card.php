@@ -44,7 +44,7 @@
         <form action="/review" method="POST">
             <input type="hidden" id="product_id" name="product_id" value="<?= $productCard->getId();?>" required>
             <label style="color: green"> <?php echo $errors['product'] ?? '';?> </label>
-            <button>Add review</button>
+            <?php if(!empty($isOrderProduct)): ?><button>Add review</button> <?php endif; ?>
         </form>
         </div>
     </div>
