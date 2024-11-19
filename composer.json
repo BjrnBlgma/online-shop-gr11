@@ -1,0 +1,14 @@
+{
+    "require": {
+        "ariana-97/my-core": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "./vendor/ariana-97/my-core/src",
+            "Model\\": "vendor/ariana-97/my-core/src",
+            "Request\\": "vendor/ariana-97/my-core/src",
+            "Service\\Authentication\\": "vendor/ariana-97/my-core/src/Authentication",
+            "Service\\Logger\\": "vendor/ariana-97/my-core/src/Logger"
+        }
+    }
+}

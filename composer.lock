@@ -1,0 +1,52 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "b7da3fa4bd668f1ddb261d0e756d613f",
+    "packages": [
+        {
+            "name": "ariana-97/my-core",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BjrnBlgma/MyCore.git",
+                "reference": "72ee29b8144c21d7ed87ab3ddca817dd53ac1798"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BjrnBlgma/MyCore/zipball/72ee29b8144c21d7ed87ab3ddca817dd53ac1798",
+                "reference": "72ee29b8144c21d7ed87ab3ddca817dd53ac1798",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ariana97\\MyCore\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Ariana",
+                    "email": "dondupova1997@mail.ru"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/BjrnBlgma/MyCore/issues",
+                "source": "https://github.com/BjrnBlgma/MyCore/tree/v1.0.0"
+            },
+            "time": "2024-11-18T15:11:52+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}

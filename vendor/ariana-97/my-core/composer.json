@@ -1,0 +1,15 @@
+{
+    "name": "ariana-97/my-core",
+    "autoload": {
+        "psr-4": {
+            "Ariana97\\MyCore\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ariana",
+            "email": "dondupova1997@mail.ru"
+        }
+    ],
+    "require": {}
+}

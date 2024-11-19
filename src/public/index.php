@@ -1,5 +1,5 @@
 <?php
-require_once "./../Core/Autoload.php";
+require_once "./../../vendor/autoload.php";
 
 use Controller\CartController;
 use Controller\LoginController;
@@ -31,6 +31,7 @@ use Service\WishlistService;
 
 try{
     Autoload::registrate("/var/www/html/src/");
+
 
     $container = new Container();
 
@@ -97,9 +98,9 @@ try{
     $app->createRoute('/cart', 'GET',CartController::class, 'lookCart');
 
     $app->postRoute('/addToWishlist', WishlistController::class, 'addProductToWishlist', WishlistRequest::class);
-    $app->postRoute('/addFromWishlist', WishlistController::class, 'addFromWishlistToCart', WishlistRequest::class,);
+    $app->postRoute('/addFromWishlist', WishlistController::class, 'addFromWishlistToCart', WishlistRequest::class);
     $app->createRoute('/wishlist', 'GET', WishlistController::class, 'lookWishlist');
-    $app->createRoute('/deleteFromWishlist', 'POST', WishlistController::class, 'deleteProductFromWishlist');
+    $app->createRoute('/deleteFromWishlist', 'POST', WishlistController::class, 'deleteProductFromWishlist', WishlistRequest::class,);
 
     $app->postRoute('/product', ProductController::class, 'openProduct', ProductCardRequest::class);
 
@@ -107,6 +108,10 @@ try{
     $app->postRoute('/add-review', \Controller\ReviewController::class, 'createReview', ReviewRequest::class);
     $app->run();
 } catch (\Error $exception){
+//    print_r($exception->getMessage() . "\n");
+//    print_r($exception->getFile() . "\n");
+//    print_r($exception->getLine() . "\n");
+//    exit();
     http_response_code(500);
     require_once "./../View/500.php";
 

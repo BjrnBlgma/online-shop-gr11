@@ -322,3 +322,9 @@ file: /var/www/html/src/View/product_card.php
 line: 47
 Дата: 18.11.2024 02:25:00
 
+Произошла ошибка при обработке
+message: Controller\WishlistController::deleteProductFromWishlist(): Argument #1 ($request) must be of type Request\WishlistRequest, null given, called in /var/www/html/vendor/ariana-97/my-core/src/App.php on line 38
+file: /var/www/html/src/Controller/WishlistController.php
+line: 102
+Дата: 19.11.2024 20:04:01
+
