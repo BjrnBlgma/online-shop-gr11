@@ -1,7 +1,7 @@
 <?php
-namespace Controller;
-use Request\RegistrateRequest;
-use Model\User;
+namespace Ariana\FirstProject\Controller;
+use Ariana\FirstProject\Request\RegistrateRequest;
+use Ariana\FirstProject\Model\User;
 
 class UserController
 {

@@ -1,6 +1,7 @@
 <?php
-namespace Service\Authentication;
-use Model\User;
+namespace Ariana\FirstProject\Service\Authentication;
+use Ariana\FirstProject\Model\User;
+use Core\Authentication\AuthServiceInterface;
 
 class AuthSessionService implements AuthServiceInterface
 {

@@ -1,6 +1,6 @@
 <?php
-namespace Service;
-use Model\UserProductWishlist;
+namespace Ariana\FirstProject\Service;
+use Ariana\FirstProject\Model\UserProductWishlist;
 
 class WishlistService
 {

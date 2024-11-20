@@ -1,5 +1,6 @@
 <?php
-namespace Service\Logger;
+namespace Ariana\FirstProject\Service\Logger;
+use Core\Logger\LoggerServiceInterface;
 
 class LoggerFileService implements LoggerServiceInterface
 {

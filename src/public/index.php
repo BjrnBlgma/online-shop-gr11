@@ -1,33 +1,38 @@
 <?php
 require_once "./../../vendor/autoload.php";
 
-use Controller\CartController;
-use Controller\LoginController;
-use Controller\OrderController;
-use Controller\ProductController;
-use Controller\ReviewController;
-use Controller\UserController;
-use Controller\WishlistController;
+use Ariana\FirstProject\Controller\CartController;
+use Ariana\FirstProject\Controller\LoginController;
+use Ariana\FirstProject\Controller\OrderController;
+use Ariana\FirstProject\Controller\ProductController;
+use Ariana\FirstProject\Controller\ReviewController;
+use Ariana\FirstProject\Controller\UserController;
+use Ariana\FirstProject\Controller\WishlistController;
+
 use Core\App;
 use Core\Autoload;
 use Core\Container;
-use Request\LoginRequest;
-use Request\OrderRequest;
-use Request\ProductCardRequest;
-use Request\ProductRequest;
-use Request\RegistrateRequest;
-use Request\ReviewRequest;
-use Request\WishlistRequest;
-use Service\Authentication\AuthSessionService;
-use Service\Authentication\AuthServiceInterface;
-use Service\Authentication\AuthCookieService;
-use Service\CartService;
-use Service\Logger\LoggerFileService;
-use Service\Logger\LoggerDbService;
-use Service\Logger\LoggerServiceInterface;
-use Service\OrderService;
-use Service\ReviewService;
-use Service\WishlistService;
+use Ariana\FirstProject\Request\LoginRequest;
+use Ariana\FirstProject\Request\OrderRequest;
+use Ariana\FirstProject\Request\ProductCardRequest;
+use Ariana\FirstProject\Request\ProductRequest;
+use Ariana\FirstProject\Request\RegistrateRequest;
+use Ariana\FirstProject\Request\ReviewRequest;
+use Ariana\FirstProject\Request\WishlistRequest;
+
+use Ariana\FirstProject\Service\Authentication\AuthSessionService;
+use Core\Authentication\AuthServiceInterface;
+use Ariana\FirstProject\Service\Authentication\AuthCookieService;
+
+use Ariana\FirstProject\Service\CartService;
+
+use Ariana\FirstProject\Service\Logger\LoggerFileService;
+use Ariana\FirstProject\Service\Logger\LoggerDbService;
+use Core\Logger\LoggerServiceInterface;
+
+use Ariana\FirstProject\Service\OrderService;
+use Ariana\FirstProject\Service\ReviewService;
+use Ariana\FirstProject\Service\WishlistService;
 
 try{
     Autoload::registrate("/var/www/html/src/");
@@ -66,7 +71,7 @@ try{
         return new WishlistController($authService, $cartService, $wishlistService);
     });
 
-    $container->set(\Controller\ReviewController::class, function (Container $container) {
+    $container->set(ReviewController::class, function (Container $container) {
         $authService = $container->get(AuthServiceInterface::class);
         return new ReviewController($authService);
     });
@@ -104,8 +109,8 @@ try{
 
     $app->postRoute('/product', ProductController::class, 'openProduct', ProductCardRequest::class);
 
-    $app->postRoute('/review', \Controller\ReviewController::class, 'getReviewForm', ProductCardRequest::class);
-    $app->postRoute('/add-review', \Controller\ReviewController::class, 'createReview', ReviewRequest::class);
+    $app->postRoute('/review', ReviewController::class, 'getReviewForm', ProductCardRequest::class);
+    $app->postRoute('/add-review', ReviewController::class, 'createReview', ReviewRequest::class);
     $app->run();
 } catch (\Error $exception){
 //    print_r($exception->getMessage() . "\n");

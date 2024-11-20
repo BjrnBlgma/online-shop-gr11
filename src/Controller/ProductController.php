@@ -1,11 +1,11 @@
 <?php
-namespace Controller;
-use Model\OrderProduct;
-use Model\Product;
-use Model\Review;
-use Request\ProductCardRequest;
-use Service\Authentication\AuthServiceInterface;
-use Service\ReviewService;
+namespace Ariana\FirstProject\Controller;
+use Ariana\FirstProject\Model\OrderProduct;
+use Ariana\FirstProject\Model\Product;
+use Ariana\FirstProject\Model\Review;
+use Ariana\FirstProject\Request\ProductCardRequest;
+use Core\Authentication\AuthServiceInterface;
+use Ariana\FirstProject\Service\ReviewService;
 
 class ProductController
 {

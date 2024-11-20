@@ -1,6 +1,6 @@
 <?php
-
-namespace Request;
+namespace Ariana\FirstProject\Request;
+use Core\Request;
 
 class OrderRequest extends Request
 {

@@ -2,25 +2,25 @@
     "packages": [
         {
             "name": "ariana-97/my-core",
-            "version": "v1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v1.0.1",
+            "version_normalized": "1.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BjrnBlgma/MyCore.git",
-                "reference": "72ee29b8144c21d7ed87ab3ddca817dd53ac1798"
+                "reference": "30ad4f8e3fd2cb3bd3b5999be00339a1679f931a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BjrnBlgma/MyCore/zipball/72ee29b8144c21d7ed87ab3ddca817dd53ac1798",
-                "reference": "72ee29b8144c21d7ed87ab3ddca817dd53ac1798",
+                "url": "https://api.github.com/repos/BjrnBlgma/MyCore/zipball/30ad4f8e3fd2cb3bd3b5999be00339a1679f931a",
+                "reference": "30ad4f8e3fd2cb3bd3b5999be00339a1679f931a",
                 "shasum": ""
             },
-            "time": "2024-11-18T15:11:52+00:00",
+            "time": "2024-11-19T14:16:41+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Ariana97\\MyCore\\": "src/"
+                    "Core\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -32,7 +32,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BjrnBlgma/MyCore/issues",
-                "source": "https://github.com/BjrnBlgma/MyCore/tree/v1.0.0"
+                "source": "https://github.com/BjrnBlgma/MyCore/tree/v1.0.1"
             },
             "install-path": "../ariana-97/my-core"
         }

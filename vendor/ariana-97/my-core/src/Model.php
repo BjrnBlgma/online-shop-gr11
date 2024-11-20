@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace Core;
 use PDO;
 
 class Model

@@ -1,8 +1,8 @@
 <?php
+namespace Ariana\FirstProject\Request;
+use Core\Request;
 
-namespace Request;
-
-use Model\Product;
+use Ariana\FirstProject\Model\Product;
 
 class ProductRequest extends Request
 {

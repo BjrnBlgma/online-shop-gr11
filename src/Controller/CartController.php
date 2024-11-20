@@ -1,9 +1,9 @@
 <?php
-namespace Controller;
-use Model\UserProduct;
-use Request\ProductRequest;
-use Service\Authentication\AuthServiceInterface;
-use Service\CartService;
+namespace Ariana\FirstProject\Controller;
+use Ariana\FirstProject\Model\UserProduct;
+use Ariana\FirstProject\Request\ProductRequest;
+use Core\Authentication\AuthServiceInterface;
+use Ariana\FirstProject\Service\CartService;
 
 class CartController
 {

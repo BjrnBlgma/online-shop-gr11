@@ -1,6 +1,8 @@
 <?php
-namespace Request;
-use Model\User;
+namespace Ariana\FirstProject\Request;
+use Core\Request;
+
+use Ariana\FirstProject\Model\User;
 
 class RegistrateRequest extends Request
 {

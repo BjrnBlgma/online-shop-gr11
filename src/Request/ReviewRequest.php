@@ -1,7 +1,8 @@
 <?php
-namespace Request;
+namespace Ariana\FirstProject\Request;
+use Core\Request;
 
-use Model\Product;
+use Ariana\FirstProject\Model\Product;
 
 class ReviewRequest extends Request
 {

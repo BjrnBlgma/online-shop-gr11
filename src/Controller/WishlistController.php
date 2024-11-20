@@ -1,12 +1,12 @@
 <?php
-namespace Controller;
+namespace Ariana\FirstProject\Controller;
 
-use Model\Product;
-use Model\UserProductWishlist;
-use Request\WishlistRequest;
-use Service\Authentication\AuthServiceInterface;
-use Service\CartService;
-use Service\WishlistService;
+use Ariana\FirstProject\Model\Product;
+use Ariana\FirstProject\Model\UserProductWishlist;
+use Ariana\FirstProject\Request\WishlistRequest;
+use Core\Authentication\AuthServiceInterface;
+use Ariana\FirstProject\Service\CartService;
+use Ariana\FirstProject\Service\WishlistService;
 
 class WishlistController
 {

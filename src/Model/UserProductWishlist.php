@@ -1,6 +1,6 @@
 <?php
-
-namespace Model;
+namespace Ariana\FirstProject\Model;
+use Core\Model;
 
 class UserProductWishlist extends Model
 {

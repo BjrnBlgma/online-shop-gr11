@@ -1,8 +1,8 @@
 <?php
+namespace Ariana\FirstProject\Service\Logger;
+use Core\Logger\LoggerServiceInterface;
 
-namespace Service\Logger;
-
-use Model\Logger;
+use Ariana\FirstProject\Model\Logger;
 
 class LoggerDbService implements LoggerServiceInterface
 {

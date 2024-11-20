@@ -1,7 +1,7 @@
 <?php
-namespace Controller;
-use Request\LoginRequest;
-use Service\Authentication\AuthServiceInterface;
+namespace Ariana\FirstProject\Controller;
+use Ariana\FirstProject\Request\LoginRequest;
+use Core\Authentication\AuthServiceInterface;
 
 class LoginController
 {

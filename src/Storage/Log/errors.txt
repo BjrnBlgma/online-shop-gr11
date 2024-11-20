@@ -328,3 +328,171 @@ file: /var/www/html/src/Controller/WishlistController.php
 line: 102
 Дата: 19.11.2024 20:04:01
 
+Произошла ошибка при обработке
+message: Class "Service\Authentication\User" not found
+file: /var/www/html/vendor/ariana-97/my-core/src/Authentication/AuthSessionService.php
+line: 9
+Дата: 19.11.2024 22:08:49
+
+Произошла ошибка при обработке
+message: Core\App::__construct(): Argument #1 ($loggerService) must be of type Service\Logger\LoggerServiceInterface, Core\Logger\LoggerFileService given, called in /var/www/html/src/public/index.php on line 87
+file: /var/www/html/vendor/ariana-97/my-core/src/App.php
+line: 14
+Дата: 19.11.2024 22:41:01
+
+Произошла ошибка при обработке
+message: Core\App::__construct(): Argument #1 ($loggerService) must be of type Service\Logger\LoggerServiceInterface, Core\Logger\LoggerFileService given, called in /var/www/html/src/public/index.php on line 87
+file: /var/www/html/vendor/ariana-97/my-core/src/App.php
+line: 14
+Дата: 19.11.2024 22:43:17
+
+Произошла ошибка при обработке
+message: Core\App::__construct(): Argument #1 ($loggerService) must be of type Service\Logger\LoggerServiceInterface, Core\Logger\LoggerFileService given, called in /var/www/html/src/public/index.php on line 88
+file: /var/www/html/vendor/ariana-97/my-core/src/App.php
+line: 14
+Дата: 19.11.2024 22:47:08
+
+Произошла ошибка при обработке
+message: Core\App::__construct(): Argument #1 ($loggerService) must be of type Service\Logger\LoggerServiceInterface, Core\Logger\LoggerFileService given, called in /var/www/html/src/public/index.php on line 88
+file: /var/www/html/vendor/ariana-97/my-core/src/App.php
+line: 14
+Дата: 19.11.2024 22:49:56
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:51:02
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:54:30
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:57:05
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:58:37
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:58:56
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 22:59:40
+
+Произошла ошибка при обработке
+message: Class "Core\Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 23:00:10
+
+Произошла ошибка при обработке
+message: Class "Model\Product" not found
+file: /var/www/html/src/Controller/ProductController.php
+line: 26
+Дата: 19.11.2024 23:00:41
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Controller\ProductController" not found
+file: /var/www/html/src/public/index.php
+line: 51
+Дата: 19.11.2024 23:01:34
+
+Произошла ошибка при обработке
+message: Class "Model\Product" not found
+file: /var/www/html/src/Controller/ProductController.php
+line: 26
+Дата: 19.11.2024 23:01:56
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 23:04:06
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 23:05:34
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 19.11.2024 23:06:10
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 20.11.2024 16:22:10
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Controller\ProductController" not found
+file: /var/www/html/src/public/index.php
+line: 51
+Дата: 20.11.2024 16:22:45
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Controller\ProductController" not found
+file: /var/www/html/src/public/index.php
+line: 51
+Дата: 20.11.2024 16:22:49
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 20.11.2024 16:25:11
+
+Произошла ошибка при обработке
+message: Class "Ariana\FirstProject\Controller\ProductController" not found
+file: /var/www/html/src/public/index.php
+line: 51
+Дата: 20.11.2024 16:27:41
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 4
+Дата: 20.11.2024 16:28:36
+
+Произошла ошибка при обработке
+message: Class "Core\Product" not found
+file: /var/www/html/src/Controller/ProductController.php
+line: 26
+Дата: 20.11.2024 17:10:45
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 5
+Дата: 20.11.2024 17:16:00
+
+Произошла ошибка при обработке
+message: Class "Model\User" not found
+file: /var/www/html/vendor/ariana-97/my-core/src/Authentication/AuthSessionService.php
+line: 28
+Дата: 20.11.2024 17:30:32
+
+Произошла ошибка при обработке
+message: Class "Model\Model" not found
+file: /var/www/html/src/Model/Product.php
+line: 5
+Дата: 20.11.2024 17:51:28
+

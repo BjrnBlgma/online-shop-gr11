@@ -1,11 +1,11 @@
 <?php
-namespace Controller;
+namespace Ariana\FirstProject\Controller;
 
 use DTO\CreateOrderDTO;
-use Request\OrderRequest;
-use Service\Authentication\AuthServiceInterface;
-use Service\CartService;
-use Service\OrderService;
+use Ariana\FirstProject\Request\OrderRequest;
+use Core\Authentication\AuthServiceInterface;
+use Ariana\FirstProject\Service\CartService;
+use Ariana\FirstProject\Service\OrderService;
 
 class OrderController
 {

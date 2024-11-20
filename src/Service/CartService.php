@@ -1,6 +1,6 @@
 <?php
-namespace Service;
-use Model\UserProduct;
+namespace Ariana\FirstProject\Service;
+use Ariana\FirstProject\Model\UserProduct;
 
 class CartService
 {

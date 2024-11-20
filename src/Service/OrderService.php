@@ -1,11 +1,11 @@
 <?php
-namespace Service;
+namespace Ariana\FirstProject\Service;
 
 use DTO\CreateOrderDTO;
-use Model\Order;
-use Model\UserProduct;
-use Model\OrderProduct;
-use Model\Model;
+use Ariana\FirstProject\Model\Order;
+use Ariana\FirstProject\Model\UserProduct;
+use Ariana\FirstProject\Model\OrderProduct;
+use Core\Model;
 
 class OrderService
 {

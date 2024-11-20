@@ -6,10 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Service\\Logger\\' => array($vendorDir . '/ariana-97/my-core/src/Logger'),
-    'Service\\Authentication\\' => array($vendorDir . '/ariana-97/my-core/src/Authentication'),
-    'Request\\' => array($vendorDir . '/ariana-97/my-core/src'),
-    'Model\\' => array($vendorDir . '/ariana-97/my-core/src'),
     'Core\\' => array($vendorDir . '/ariana-97/my-core/src'),
-    'Ariana97\\MyCore\\' => array($vendorDir . '/ariana-97/my-core/src'),
+    'Ariana\\FirstProject\\' => array($baseDir . '/src'),
 );

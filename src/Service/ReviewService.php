@@ -1,24 +1,11 @@
 <?php
-namespace Service;
+namespace Ariana\FirstProject\Service;
 
-use Model\Model;
-use Model\Product;
-use Model\Review;
+use Ariana\FirstProject\Model\Product;
+use Ariana\FirstProject\Model\Review;
 
 class ReviewService
 {
-//    public function createReview()
-//    {
-//        Model::getPdo()->beginTransaction();
-//        try {
-//            Review::createReview($review, $rating, $productId, $userId);
-//
-//        } catch (\PDOException $exception) {
-//            Model::getPdo()->rollBack();
-//            throw $exception;
-//        }
-//        Model::getPdo()->commit();
-//    }
     public function getAverageRating(int $productId)
     {
         $reviews = Review::getByProductId($productId);

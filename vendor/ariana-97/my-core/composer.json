@@ -2,7 +2,7 @@
     "name": "ariana-97/my-core",
     "autoload": {
         "psr-4": {
-            "Ariana97\\MyCore\\": "src/"
+            "Core\\": "src/"
         }
     },
     "authors": [

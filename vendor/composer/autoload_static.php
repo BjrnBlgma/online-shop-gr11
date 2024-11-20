@@ -7,53 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInitd36582267fd218828d5986e9f9eb294b
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Service\\Logger\\' => 15,
-            'Service\\Authentication\\' => 23,
-        ),
-        'R' => 
-        array (
-            'Request\\' => 8,
-        ),
-        'M' => 
-        array (
-            'Model\\' => 6,
-        ),
         'C' => 
         array (
             'Core\\' => 5,
         ),
         'A' => 
         array (
-            'Ariana97\\MyCore\\' => 16,
+            'Ariana\\FirstProject\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Service\\Logger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ariana-97/my-core/src/Logger',
-        ),
-        'Service\\Authentication\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ariana-97/my-core/src/Authentication',
-        ),
-        'Request\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ariana-97/my-core/src',
-        ),
-        'Model\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ariana-97/my-core/src',
-        ),
         'Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/ariana-97/my-core/src',
         ),
-        'Ariana97\\MyCore\\' => 
+        'Ariana\\FirstProject\\' => 
         array (
-            0 => __DIR__ . '/..' . '/ariana-97/my-core/src',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
